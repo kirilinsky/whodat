@@ -1,5 +1,5 @@
-import { css } from "../../../../styled-system/css";
-import { styled, HStack, Flex } from "../../../../styled-system/jsx";
+import { css } from "@/styled-system/css";
+import { styled, HStack, Flex } from "@/styled-system/jsx";
 import {
   ClerkProvider,
   SignInButton,
@@ -71,7 +71,7 @@ export const Header = () => {
           </Flex>
           <SignedOut>
             <Flex direction="column" gap="1">
-              <styled.button
+              <styled.div
                 px="4"
                 py="1"
                 border="1px solid"
@@ -84,8 +84,8 @@ export const Header = () => {
                 _hover={{ bg: "dip.green", color: "black" }}
               >
                 <SignInButton />
-              </styled.button>
-              <styled.button
+              </styled.div>
+              <styled.div
                 px="4"
                 py="1"
                 border="1px solid"
@@ -98,12 +98,12 @@ export const Header = () => {
                 _hover={{ bg: "dip.green", color: "black" }}
               >
                 <SignUpButton />
-              </styled.button>
+              </styled.div>
             </Flex>
           </SignedOut>
           <SignedIn>
             <UserButton />
-            <styled.button
+            <styled.div
               px="4"
               py="1"
               border="1px solid"
@@ -116,7 +116,7 @@ export const Header = () => {
               _hover={{ bg: "dip.red", color: "black" }}
             >
               <SignOutButton />
-            </styled.button>
+            </styled.div>
           </SignedIn>
         </HStack>
       </HeaderContainer>

@@ -3,6 +3,9 @@ import "./globals.css";
 
 import { Header } from "@/components/ui/header/header";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Footer } from "@/components/ui/footer/footer";
+import { MainWrapper } from "@/components/ui/main/main";
+import { flex } from "@/styled-system/patterns";
 
 export const metadata: Metadata = {
   title: "whodat",
@@ -17,9 +20,12 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body>
+        <body
+          className={flex({ direction: "column", minH: "100vh", bg: "dip.bg" })}
+        >
           <Header />
-          {children}
+          <MainWrapper>{children}</MainWrapper>
+          <Footer />
         </body>
       </html>
     </ClerkProvider>
