@@ -19,6 +19,12 @@ export default defineConfig({
           mono: { value: "var(--font-mono), monospace" },
         },
       },
+      keyframes: {
+        glowPulse: {
+          "0%, 100%": { boxShadow: "0 0 10px rgba(255, 77, 77, 0.2)" },
+          "50%": { boxShadow: "0 0 30px rgba(255, 77, 77, 0.5)" },
+        },
+      },
     },
   },
   jsxFramework: "react",

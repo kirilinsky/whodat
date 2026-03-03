@@ -1,7 +1,5 @@
+import { PlayScreen } from "@/components/play-screen/play-screen";
+
 export default function Home() {
-  return (
-    <div>
-      <h1>Hello there, general kenobi!</h1>
-    </div>
-  );
+  return <PlayScreen />;
 }

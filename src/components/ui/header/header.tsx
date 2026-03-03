@@ -46,7 +46,10 @@ export const Header = () => {
         <HStack gap="3">
           <div className={css({ color: "dip.red", fontSize: "2xl" })}>🧬</div>
           <styled.h1 fontSize="xl" fontWeight="bold">
-            who dat<styled.span color="dip.red">_v0.1</styled.span>
+            who dat
+            <styled.span color="dip.red">
+              _v{process.env.NEXT_PUBLIC_APP_VERSION}
+            </styled.span>
           </styled.h1>
         </HStack>
 

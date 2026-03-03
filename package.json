@@ -1,6 +1,6 @@
 {
   "name": "whodat",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "prepare": "panda codegen",
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.0.0",
+    "framer-motion": "^12.34.5",
     "jotai": "^2.18.0",
     "next": "16.1.6",
     "react": "19.2.3",
