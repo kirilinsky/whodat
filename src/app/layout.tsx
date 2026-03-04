@@ -7,7 +7,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Footer } from "@/components/ui/footer/footer";
 import { MainWrapper } from "@/components/ui/main/main";
 import { flex } from "@/styled-system/patterns";
-import { defaultLocale } from "@/i18n/config";
+import { syncUser } from "./actions/user";
 
 export const metadata: Metadata = {
   title: "whodat",
@@ -19,6 +19,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  let user = await syncUser();
   const locale = await getLocale();
   const messages = await getMessages();
   return (
@@ -32,7 +33,7 @@ export default async function RootLayout({
               bg: "dip.bg",
             })}
           >
-            <Header />
+            <Header user={user.user} />
             <MainWrapper>{children}</MainWrapper>
             <Footer />
           </body>

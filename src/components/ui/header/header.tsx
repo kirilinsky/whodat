@@ -1,5 +1,6 @@
 import { css } from "@/styled-system/css";
 import { styled, HStack, Flex } from "@/styled-system/jsx";
+import { UserType } from "@/types/user.types";
 import {
   ClerkProvider,
   SignInButton,
@@ -39,7 +40,9 @@ const NavLink = styled("a", {
   },
 });
 
-export const Header = () => {
+export const Header = ({ user }: { user?: UserType }) => {
+  console.log(user, "user from props");
+
   return (
     <ClerkProvider>
       <HeaderContainer>
@@ -54,7 +57,7 @@ export const Header = () => {
         </HStack>
 
         <HStack gap="10" display={{ base: "none", md: "flex" }}>
-          <NavLink>dashboard</NavLink>
+          <NavLink href="/dashboard">dashboard</NavLink>
           <NavLink>chat</NavLink>
           <NavLink>about</NavLink>
         </HStack>
@@ -68,9 +71,15 @@ export const Header = () => {
             >
               System Status
             </styled.span>
-            <styled.span fontSize="xs" color="dip.green" fontWeight="bold">
-              ● OPERATIONAL
-            </styled.span>
+            {user ? (
+              <styled.span fontSize="xs" color="dip.green" fontWeight="bold">
+                ● OPERATIONAL ({user.username})
+              </styled.span>
+            ) : (
+              <styled.span fontSize="xs" color="dip.red" fontWeight="bold">
+                ● FAILED (no user)
+              </styled.span>
+            )}
           </Flex>
           <SignedOut>
             <Flex direction="column" gap="1">

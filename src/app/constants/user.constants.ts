@@ -1,0 +1,1 @@
+export const defaultRank = 'newbie'
