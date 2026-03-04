@@ -1,4 +1,8 @@
-import { EntityCategory } from "../constants/entities.constants";
+import { getEntitiesByCategory } from "../actions/entities";
+import {
+  EntityCategory,
+  EntityCategoryType,
+} from "../constants/entities.constants";
 import DashboardScreen from "@/screens/dashboard/dashboard";
 
 export default async function DashboardPage({
@@ -7,7 +11,8 @@ export default async function DashboardPage({
   searchParams: Promise<{ cat?: string }>;
 }) {
   const { cat } = await searchParams;
-  const activeCategory = cat || EntityCategory.ANCIENT;
+  const activeCategory = (cat as EntityCategoryType) || EntityCategory.ANCIENT;
+  const entities = await getEntitiesByCategory(activeCategory);
 
-  return <DashboardScreen activeCategory={activeCategory} />;
+  return <DashboardScreen entities={entities} activeCategory={activeCategory} />;
 }

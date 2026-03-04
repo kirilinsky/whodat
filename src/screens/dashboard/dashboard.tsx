@@ -1,11 +1,14 @@
-import { EntityCategory } from "@/app/constants/entities.constants";
+import EntitiesGrid from "@/components/dashboard/grid/grid";
 import CategoryTabs from "@/components/dashboard/tabs/tabs";
 import { css } from "@/styled-system/css";
+import { EntityType } from "@/types/entities.types";
 
 export default async function DashboardScreen({
   activeCategory,
+  entities,
 }: {
   activeCategory: string;
+  entities: EntityType[] ;
 }) {
   return (
     <main
@@ -34,30 +37,7 @@ export default async function DashboardScreen({
       <CategoryTabs active={activeCategory} />
 
       <section className={css({ mt: "12" })}>
-        <div
-          className={css({
-            display: "grid",
-            gridTemplateColumns: { base: "1", sm: "2", lg: "3" },
-            gap: "4",
-          })}
-        >
-          <div
-            className={css({
-              border: "1px solid",
-              borderColor: "white/5",
-              bg: "white/5",
-              p: "10",
-              textAlign: "center",
-              fontFamily: "mono",
-              fontSize: "10px",
-              textTransform: "uppercase",
-              letterSpacing: "widest",
-              color: "dip.gray",
-            })}
-          >
-            Scanning for intel in {activeCategory.replace("_", " ")}...
-          </div>
-        </div>
+        <EntitiesGrid entities={entities} />
       </section>
     </main>
   );

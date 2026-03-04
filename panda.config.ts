@@ -10,13 +10,20 @@ export default defineConfig({
         colors: {
           dip: {
             red: { value: "#ff4d4d" },
+            red_dark: { value: "#3a1a1a" },
             gray: { value: "#a0a0a0" },
+            gray_light: { value: "#5c5c5c" },
             bg: { value: "#0a0a0a" },
             green: { value: "#4caf50" },
+            gray_card: { value: "#0c0c0c" },
           },
         },
         fonts: {
           mono: { value: "var(--font-mono), monospace" },
+        },
+        fontWeights: {
+          light: { value: 300 },
+          bold: { value: 700 },
         },
       },
       keyframes: {
