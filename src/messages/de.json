@@ -1,0 +1,9 @@
+{
+    "PlayScreen": {
+        "protocol": "[ PROTOKOLL: IDENTITÄTS_WIEDERHERSTELLUNG ]",
+        "story": "Das Große Digitale Archiv wurde geschaffen, um die Köpfe derer zu bewahren, die unsere Welt geformt haben. Doch dann geschah die Korruption...",
+        "mission": "Stellen Sie die Ordnung wieder her. Identifizieren Sie die Fragmente. Die Entitäten sind höchst instabil. Limit: 7 ANFRAGEN.",
+        "button": "Start mission",
+        "missionObjective": "MISSION OBJECTIVE"
+    }
+}

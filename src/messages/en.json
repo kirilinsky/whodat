@@ -1,0 +1,9 @@
+{
+    "PlayScreen": {
+        "protocol": "[ PROTOCOL: IDENTITY_RECONSTRUCTION ]",
+        "story": "The Great Digital Archive was created to preserve the minds of those who shaped our world. But then, the Corruption happened...",
+        "mission": "Restore order. Identify the fragments. The entities are highly unstable. Connection limit: 7 QUERIES.",
+        "missionObjective": "MISSION_OBJECTIVE",
+        "button": "Start mission"
+    }
+}

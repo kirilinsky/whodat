@@ -1,4 +1,4 @@
-import { PlayScreen } from "@/components/play-screen/play-screen";
+import { PlayScreen } from "@/screens/play-screen/play-screen";
 
 export default function Home() {
   return <PlayScreen />;

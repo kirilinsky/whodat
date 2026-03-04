@@ -31,7 +31,7 @@ export const Footer = () => {
   return (
     <FooterContainer>
       <styled.span>
-        whodat © 2044 <a href="https://github.com/kirilinsky">kirilinsky</a>
+        whodat © 2039 <a href="https://github.com/kirilinsky">kirilinsky</a>
       </styled.span>
 
       <HStack gap="8">
