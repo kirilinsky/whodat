@@ -1,9 +1,11 @@
+import { UserRankType } from "@/app/constants/user.constants";
+
 export type UserType = {
-  clerkId: string;
-  createdAt: Date;
-  email: string;
   id: string;
-  rank: string;
-  username: string;
+  clerkId: string;
+  email: string;
+  username: string | null;
+  createdAt: Date | null;
   xp: number;
+  rank: UserRankType;
 };
