@@ -20,7 +20,7 @@ export default function GridItem({ entity }: { entity: EnrichedEntityType }) {
           className={css({
             position: "relative",
             w: "full",
-           aspectRatio: "3/4",
+            aspectRatio: "3/4",
             bg: "black",
             backgroundSize: "cover",
             backgroundPosition: "center",
@@ -32,17 +32,27 @@ export default function GridItem({ entity }: { entity: EnrichedEntityType }) {
             mb: "4",
           })}
         >
-          {entity.imageUrl ? (
-            <img
-              src={entity.imageUrl}
-              alt={entity.name.en}
-              className={css({ w: "full", h: "full", objectFit: "cover" })}
-            />
-          ) : (
-            <div className={css({ color: "#1a1a1a", fontSize: "60px" })}>
-              👤
-            </div>
-          )}
+          <img
+            src={
+              entity.locked && entity.imageUrl
+                ? `/categories/${entity.category}.webp`
+                : entity.imageUrl
+            }
+            alt={entity.name.en}
+            className={css({
+              w: "full",
+              h: "full",
+              objectFit: "cover",
+
+              filter: entity.locked ? "brightness(0.5) blur(1px)" : "none",
+
+              transition: "filter 0.4s ease-in-out",
+
+              _hover: {
+                filter: entity.locked ? "brightness(1) blur(0px)" : "none",
+              },
+            })}
+          />
         </div>
 
         <div

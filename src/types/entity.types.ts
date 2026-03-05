@@ -8,7 +8,7 @@ export type EnrichedEntityType = {
     en: string;
     de: string;
   };
-  imageUrl: string | null;
+  imageUrl: string;
   appearAt: string | null;
   xp: number;
   locked: boolean;

@@ -44,7 +44,9 @@ export async function getEntitiesByCategory(
         category: row.category as EntityCategoryType,
         appearAt: row.appearAt,
         name: isRevealed ? realName : defaultClassifiedName,
-        imageUrl: isRevealed ? row.rawImageUrl : null,
+        imageUrl: isRevealed
+          ? (row.rawImageUrl as string)
+          : `/categories/${row.category}.webp`,
         xp: row.earnedXp || 0,
         locked: !isRevealed,
         played: isStarted,
@@ -91,7 +93,9 @@ export async function getEnrichedEntityById(
     category: row.category as EntityCategoryType,
     appearAt: row.appearAt,
     name: isRevealed ? (row.rawName as any) : defaultClassifiedName,
-    imageUrl: isRevealed ? row.rawImageUrl : null,
+    imageUrl: isRevealed
+      ? (row.rawImageUrl as string)
+      : `/categories/${row.category}.webp`,
     xp: row.earnedXp || 0,
     locked: !isRevealed,
     played: row.sessionActive === true,
