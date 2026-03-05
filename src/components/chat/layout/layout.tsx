@@ -2,6 +2,8 @@ import { css } from "@/styled-system/css";
 import { flex } from "@/styled-system/patterns";
 import Aside from "../aside/aside";
 import { EnrichedEntityType } from "@/types/entity.types";
+import Progress from "../progress/progress";
+import Input from "../input/input";
 
 export default function ChatLayout({
   entity,
@@ -49,7 +51,8 @@ export default function ChatLayout({
             bg: "black",
           })}
         >
-          Input area
+          <Progress current={6} />
+          <Input />
         </footer>
       </main>
     </div>
