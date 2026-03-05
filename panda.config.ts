@@ -9,6 +9,7 @@ export default defineConfig({
       tokens: {
         colors: {
           dip: {
+            blue: { value: "#3a4bb0ff" },
             red: { value: "#ff4d4d" },
             red_dark: { value: "#3a1a1a" },
             gray: { value: "#a0a0a0" },

@@ -11,3 +11,9 @@ export const EntityCategory = {
 
 export type EntityCategoryType =
   (typeof EntityCategory)[keyof typeof EntityCategory];
+
+export const defaultClassifiedName = {
+  ru: "ЛИЧНОСТЬ ЗАСЕКРЕЧЕНА",
+  en: "CLASSIFIED",
+  de: "GEHEIM",
+};

@@ -1,14 +1,16 @@
 import { EntityCategoryType } from "@/app/constants/entities.constants";
 
-export type EntityType = {
+export type EnrichedEntityType = {
   id: number;
   category: EntityCategoryType;
   name: {
-    en: string;
     ru: string;
+    en: string;
     de: string;
   };
   imageUrl: string | null;
   appearAt: string | null;
-  createdAt: Date | null;
+  xp: number;
+  locked: boolean;
+  played: boolean;
 };

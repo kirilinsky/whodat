@@ -1,8 +1,12 @@
 import { css } from "@/styled-system/css";
 import GridItem from "../grid-item/grid-item";
-import { EntityType } from "@/types/entity.types";
+import { EnrichedEntityType } from "@/types/entity.types";
 
-export default function EntitiesGrid({ entities }: { entities: EntityType[] }) {
+export default function EntitiesGrid({
+  entities,
+}: {
+  entities: EnrichedEntityType[];
+}) {
   return (
     <div
       className={css({

@@ -35,7 +35,7 @@ export const entities = pgTable("entities", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const gameSessions = pgTable("sessions", {
+export const sessions = pgTable("sessions", {
   id: serial("id").primaryKey(),
   userId: text("user_id")
     .notNull()
@@ -54,7 +54,7 @@ export const sessionMessages = pgTable("messages", {
   id: serial("id").primaryKey(),
   sessionId: integer("session_id")
     .notNull()
-    .references(() => gameSessions.id),
+    .references(() => sessions.id),
   bot: boolean("bot").default(false).notNull(),
   content: text("content").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),

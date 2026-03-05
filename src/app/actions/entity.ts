@@ -1,19 +1,56 @@
 import { db } from "@/db";
-import { entities } from "@/db/schema";
-import { eq } from "drizzle-orm";
-import { EntityCategoryType } from "@/app/constants/entities.constants";
-import { EntityType } from "@/types/entity.types";
+import { entities, sessions } from "@/db/schema";
+import { and, eq, desc } from "drizzle-orm";
+import { auth } from "@clerk/nextjs/server";
+import {
+  defaultClassifiedName,
+  EntityCategoryType,
+} from "@/app/constants/entities.constants";
+import { EnrichedEntityType } from "@/types/entity.types";
 
 export async function getEntitiesByCategory(
   category: EntityCategoryType,
-): Promise<EntityType[]> {
-  try {
-    const results = await db.query.entities.findMany({
-      where: eq(entities.category, category),
-      orderBy: (entities, { desc }) => [desc(entities.appearAt)],
-    });
+): Promise<EnrichedEntityType[]> {
+  const { userId } = await auth();
+  if (!userId) return [];
 
-    return results as EntityType[];
+  try {
+    const results = await db
+      .select({
+        id: entities.id,
+        category: entities.category,
+        appearAt: entities.appearAt,
+        rawName: entities.name,
+        rawImageUrl: entities.imageUrl,
+        sessionActive: sessions.active,
+        sessionSuccess: sessions.success,
+        earnedXp: sessions.xp,
+      })
+      .from(entities)
+      .leftJoin(
+        sessions,
+        and(eq(sessions.entityId, entities.id), eq(sessions.userId, userId)),
+      )
+      .where(eq(entities.category, category))
+      .orderBy(desc(entities.appearAt));
+
+    return results.map((row): EnrichedEntityType => {
+      const isRevealed = row.sessionSuccess === true;
+      const isStarted = row.sessionActive === true;
+
+      const realName = row.rawName as EnrichedEntityType["name"];
+
+      return {
+        id: row.id,
+        category: row.category as EntityCategoryType,
+        appearAt: row.appearAt,
+        name: isRevealed ? realName : defaultClassifiedName,
+        imageUrl: isRevealed ? row.rawImageUrl : null,
+        xp: row.earnedXp || 0,
+        locked: !isRevealed,
+        played: isStarted,
+      };
+    });
   } catch (error) {
     console.error("Database Error:", error);
     return [];
