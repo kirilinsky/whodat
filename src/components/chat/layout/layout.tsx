@@ -52,7 +52,7 @@ export default function ChatLayout({
           })}
         >
           <Progress current={6} />
-          <Input />
+          <Input attemptsCount={6} />
         </footer>
       </main>
     </div>
