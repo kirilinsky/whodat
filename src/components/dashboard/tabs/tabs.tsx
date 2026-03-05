@@ -24,7 +24,7 @@ export default function CategoryTabs({ active }: { active: number }) {
     >
       {categories.map((cat, index) => {
         const isActive = active === cat;
-        const isLocked = index > 1;
+        const isLocked = index > 2;
 
         if (isLocked) {
           return (
