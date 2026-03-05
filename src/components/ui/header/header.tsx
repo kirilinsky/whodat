@@ -47,9 +47,9 @@ export const Header = ({ user }: { user?: UserType }) => {
       <HeaderContainer>
         <HStack gap="2">
           <Image src="/logo.png" width={34} height={33} alt="logo" />
-          <styled.h1 fontSize="xl" fontWeight="bold">
+          <styled.a href="/" fontSize="xl" fontWeight="bold">
             who<styled.span color="dip.red">dat</styled.span>
-          </styled.h1>
+          </styled.a>
         </HStack>
 
         <HStack gap="9" display={{ base: "none", md: "flex" }}>
