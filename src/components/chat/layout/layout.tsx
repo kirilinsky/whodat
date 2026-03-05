@@ -22,7 +22,7 @@ export default function ChatLayout({
       className={css({
         display: "grid",
         gridTemplateColumns: { base: "1fr", lg: "380px 1fr" },
-        h: { base: "auto", lg: "calc(100vh - 94px)" },
+        h: { base: "auto", lg: "calc(100vh - 95px)" },
         w: "full",
         bg: "black",
         gap: "0",
@@ -50,9 +50,9 @@ export default function ChatLayout({
         </div>
         <footer
           className={css({
-            p: "6",
+            p: "5",
             borderTop: "1px solid",
-            borderColor: "white/10",
+            borderColor: "white/50",
             bg: "black",
           })}
         >

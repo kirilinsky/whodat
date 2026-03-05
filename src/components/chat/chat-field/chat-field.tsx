@@ -171,9 +171,9 @@ export default function ChatField({
           >
             XP CREDITS TRANSFERRED TO YOUR ACCOUNT
           </div>
-          <div ref={messagesEndRef} className={css({ h: "1px" })} />
         </motion.div>
       )}
+      <div ref={messagesEndRef} className={css({ h: "1px" })} />
     </div>
   );
 }
