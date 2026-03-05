@@ -43,17 +43,6 @@ export const PlayScreen = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div
-            className={css({
-              color: "dip.red",
-              fontSize: "xs",
-              fontWeight: "bold",
-              mb: "2",
-              letterSpacing: "widest",
-            })}
-          >
-            [ ARCHIVE_LOG_2039 ]
-          </div>
           <p
             className={css({
               color: "dip.gray",
@@ -88,7 +77,7 @@ export const PlayScreen = () => {
               />
             ))}
           </AnimatePresence>
-          <Link href={'/dashboard'}>
+          <Link href={"/dashboard"}>
             <motion.button
               onClick={handleClick}
               whileHover={{ scale: 1.02 }}
@@ -185,18 +174,6 @@ export const PlayScreen = () => {
             </p>
           </div>
         </motion.div>
-
-        <div className={css({ textAlign: "right" })}>
-          <div
-            className={css({
-              fontSize: "10px",
-              color: "dip.gray",
-              opacity: 0.3,
-            })}
-          >
-            D.I.P. SECURE_TERMINAL_v.44.0
-          </div>
-        </div>
       </div>
     </div>
   );

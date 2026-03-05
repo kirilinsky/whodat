@@ -1,4 +1,5 @@
 import { styled, HStack } from "@/styled-system/jsx";
+import Link from "next/link";
 
 const FooterContainer = styled("footer", {
   base: {
@@ -19,7 +20,7 @@ const FooterContainer = styled("footer", {
   },
 });
 
-const FooterLink = styled("a", {
+const FooterLink = styled(Link, {
   base: {
     cursor: "pointer",
     transition: "color 0.2s",
@@ -31,11 +32,11 @@ export const Footer = () => {
   return (
     <FooterContainer>
       <styled.span>
-        whodat © 2039 <a href="https://github.com/kirilinsky">kirilinsky</a>
+        whodat © 2026 <a href="https://github.com/kirilinsky">kirilinsky</a>
       </styled.span>
 
       <HStack gap="8">
-        <FooterLink>Terms_of_Entry</FooterLink>
+        <FooterLink href="/terms">Terms_of_Entry</FooterLink>
       </HStack>
     </FooterContainer>
   );
