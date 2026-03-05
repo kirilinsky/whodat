@@ -41,6 +41,7 @@ export async function sendMessage(sessionId: number, content: string) {
         4. If asked what you are famous for, list your key historical contributions or notorious acts clearly and short.
         5. Maximum response length: 26 words.
         6. Language: Use the same language as the user's message.
+        7. Don't reveal yourself easily, only if user spell you name
       `,
         },
         { role: "user", content },
