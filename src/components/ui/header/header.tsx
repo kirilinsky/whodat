@@ -10,6 +10,7 @@ import {
   SignedIn,
   SignedOut,
 } from "@clerk/nextjs";
+import Image from "next/image";
 
 const HeaderContainer = styled("header", {
   base: {
@@ -45,12 +46,9 @@ export const Header = ({ user }: { user?: UserType }) => {
     <ClerkProvider>
       <HeaderContainer>
         <HStack gap="2">
-          <div className={css({ color: "dip.red", fontSize: "2xl" })}>🧬</div>
+          <Image src="/logo.png" width={34} height={33} alt="logo" />
           <styled.h1 fontSize="xl" fontWeight="bold">
-            who dat
-            <styled.span color="dip.red">
-              _v{process.env.NEXT_PUBLIC_APP_VERSION}
-            </styled.span>
+            who<styled.span color="dip.red">dat</styled.span>
           </styled.h1>
         </HStack>
 

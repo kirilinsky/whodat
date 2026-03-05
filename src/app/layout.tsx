@@ -10,7 +10,7 @@ import { flex } from "@/styled-system/patterns";
 import { syncUser } from "./actions/user";
 
 export const metadata: Metadata = {
-  title: "whodat",
+  title: "whodat | Guess game",
   description: "Try to guess",
 };
 
