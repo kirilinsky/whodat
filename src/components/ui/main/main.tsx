@@ -35,8 +35,6 @@ export const MainWrapper = ({ children }: MainWrapperProps) => {
           flex: "1",
           display: "flex",
           flexDirection: "column",
-          px: { base: "4", md: "12" },
-          py: "8",
           position: "relative",
           zIndex: 1,
         })}

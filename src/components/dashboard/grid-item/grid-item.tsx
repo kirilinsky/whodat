@@ -3,8 +3,6 @@ import { EnrichedEntityType } from "@/types/entity.types";
 import EntityStatus from "../entitiy-status/entity-status";
 
 export default function GridItem({ entity }: { entity: EnrichedEntityType }) {
-  console.log(entity, "entity");
-
   return (
     <a href={`/chat/${entity.id}`}>
       <div

@@ -41,12 +41,10 @@ const NavLink = styled("a", {
 });
 
 export const Header = ({ user }: { user?: UserType }) => {
-  console.log(user, "user from props");
-
   return (
     <ClerkProvider>
       <HeaderContainer>
-        <HStack gap="3">
+        <HStack gap="2">
           <div className={css({ color: "dip.red", fontSize: "2xl" })}>🧬</div>
           <styled.h1 fontSize="xl" fontWeight="bold">
             who dat
@@ -56,10 +54,10 @@ export const Header = ({ user }: { user?: UserType }) => {
           </styled.h1>
         </HStack>
 
-        <HStack gap="10" display={{ base: "none", md: "flex" }}>
+        <HStack gap="9" display={{ base: "none", md: "flex" }}>
           <NavLink href="/dashboard">dashboard</NavLink>
-          <NavLink>chat</NavLink>
-          <NavLink>about</NavLink>
+
+          <NavLink href="/about">about</NavLink>
         </HStack>
 
         <HStack gap="6">

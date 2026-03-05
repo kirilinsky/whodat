@@ -33,9 +33,6 @@ export const syncUser = cache(async () => {
         return { success: "Agent Created", user: newUser as UserType };
       }
 
-      console.info(
-        `--- SYNC USER: Agent ${user.id} is already in the archive ---`,
-      );
       return { success: "Agent Exists", user: existingUser as UserType };
     } catch (error) {
       console.error("--- SYNC USER ---", error);

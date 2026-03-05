@@ -7,7 +7,7 @@ export default async function DashboardScreen({
   activeCategory,
   entities,
 }: {
-  activeCategory: string;
+  activeCategory: number;
   entities: EnrichedEntityType[];
 }) {
   return (

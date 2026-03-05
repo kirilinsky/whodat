@@ -4,6 +4,7 @@ export type SessionType = {
   entityId: number;
   active: boolean;
   success: boolean;
+  attempts: number;
   xp: number;
   createdAt: Date;
   updatedAt: Date;

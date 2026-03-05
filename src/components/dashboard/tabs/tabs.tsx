@@ -1,10 +1,11 @@
 "use client";
 
 import { EntityCategory } from "@/app/constants/entities.constants";
+import { getCategoryLabel } from "@/services/get-category-label";
 import { css } from "@/styled-system/css";
 import Link from "next/link";
 
-export default function CategoryTabs({ active }: { active: string }) {
+export default function CategoryTabs({ active }: { active: number }) {
   const categories = Object.values(EntityCategory);
 
   return (
@@ -22,19 +23,19 @@ export default function CategoryTabs({ active }: { active: string }) {
     >
       {categories.map((cat, index) => {
         const isActive = active === cat;
-        const isLocked = index > 3;
+        const isLocked = index > 1;
 
         if (isLocked) {
           return (
             <div
               key={cat}
               className={css({
-                color: "white/10",
                 textDecoration: "line-through",
                 textTransform: "uppercase",
               })}
             >
-              LOCKED_{String(index + 1).padStart(2, "0")}
+              {/* TODO locale */}
+              <span>{getCategoryLabel(cat, "ru")}</span>
             </div>
           );
         }
@@ -87,7 +88,8 @@ export default function CategoryTabs({ active }: { active: string }) {
                 />
               </>
             )}
-            <span>{cat.replace("_", " ")}</span>
+            {/* TODO locale */}
+            <span>{getCategoryLabel(cat, "ru")}</span>
           </Link>
         );
       })}

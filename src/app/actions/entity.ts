@@ -9,7 +9,7 @@ import {
 import { EnrichedEntityType } from "@/types/entity.types";
 
 export async function getEntitiesByCategory(
-  category: EntityCategoryType,
+  category: number,
 ): Promise<EnrichedEntityType[]> {
   const { userId } = await auth();
   if (!userId) return [];
@@ -37,7 +37,6 @@ export async function getEntitiesByCategory(
     return results.map((row): EnrichedEntityType => {
       const isRevealed = row.sessionSuccess === true;
       const isStarted = row.sessionActive === true;
-
       const realName = row.rawName as EnrichedEntityType["name"];
 
       return {

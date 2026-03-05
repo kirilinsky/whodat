@@ -11,8 +11,20 @@ export default async function DashboardPage({
   searchParams: Promise<{ cat?: string }>;
 }) {
   const { cat } = await searchParams;
-  const activeCategory = (cat as EntityCategoryType) || EntityCategory.ANCIENT;
+
+  const categoryId = cat ? parseInt(cat, 10) : EntityCategory.ANCIENT;
+
+  const isValidCategory = Object.values(EntityCategory).includes(
+    categoryId as EntityCategoryType,
+  );
+
+  const activeCategory = isValidCategory
+    ? (categoryId as EntityCategoryType)
+    : EntityCategory.ANCIENT;
+
   const entities = await getEntitiesByCategory(activeCategory);
 
-  return <DashboardScreen entities={entities} activeCategory={activeCategory} />;
+  return (
+    <DashboardScreen entities={entities} activeCategory={activeCategory} />
+  );
 }

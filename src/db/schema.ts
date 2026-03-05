@@ -24,14 +24,12 @@ export const users = pgTable("users", {
   rank: text("rank").default(UserRank.NEWBIE),
 });
 
-const categories = Object.values(EntityCategory) as [string, ...string[]];
-export const entityCategoryEnum = pgEnum("entity_category", categories);
 export const entities = pgTable("entities", {
   id: serial("id").primaryKey(),
-  category: entityCategoryEnum("category").notNull(),
+  category: integer("category").notNull(),
   name: jsonb("name").notNull(),
   imageUrl: text("image_url"),
-  appearAt: date("appear_at").unique(),
+  appearAt: date("appear_at"),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
@@ -46,8 +44,12 @@ export const sessions = pgTable("sessions", {
   active: boolean("active").default(true).notNull(),
   success: boolean("success").default(false).notNull(),
   xp: integer("xp").default(0).notNull(),
+  attempts: integer("attempts").default(7).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at")
+    .defaultNow()
+    .notNull()
+    .$onUpdate(() => new Date()),
 });
 
 export const sessionMessages = pgTable("messages", {
@@ -58,5 +60,8 @@ export const sessionMessages = pgTable("messages", {
   bot: boolean("bot").default(false).notNull(),
   content: text("content").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at")
+    .defaultNow()
+    .notNull()
+    .$onUpdate(() => new Date()),
 });
