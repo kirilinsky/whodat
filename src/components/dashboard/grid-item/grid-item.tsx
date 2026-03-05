@@ -1,19 +1,29 @@
 import { css } from "@/styled-system/css";
+import { flex, stack } from "@/styled-system/patterns";
 import { EnrichedEntityType } from "@/types/entity.types";
 import EntityStatus from "../entitiy-status/entity-status";
+import { defaultClassifiedName } from "@/app/constants/entity.constants";
 
 export default function GridItem({ entity }: { entity: EnrichedEntityType }) {
+  const { locked, name, id, imageUrl, category, xp, played } = entity;
+
   return (
-    <a href={`/chat/${entity.id}`}>
+    <a href={`/chat/${id}`} className={css({ display: "block", w: "full" })}>
       <div
-        className={css({
-          position: "relative",
+        className={stack({
+          gap: "0",
           w: "full",
           bg: "dip.gray_card",
           border: "1px solid",
-          borderColor: "dip.red_dark/30",
-          p: "4",
+          borderColor: "white/10",
+          p: "3",
           fontFamily: "mono",
+          transition: "all 0.3s ease",
+          _hover: {
+            borderColor: locked ? "dip.red/40" : "dip.green/40",
+            transform: "translateY(-2px)",
+            boxShadow: "0 10px 20px rgba(0,0,0,0.5)",
+          },
         })}
       >
         <div
@@ -22,96 +32,70 @@ export default function GridItem({ entity }: { entity: EnrichedEntityType }) {
             w: "full",
             aspectRatio: "3/4",
             bg: "black",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            overflow: "hidden",
+            mb: "3",
             border: "1px solid",
             borderColor: "white/5",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            mb: "4",
           })}
         >
           <img
-            src={
-              entity.locked && entity.imageUrl
-                ? `/categories/${entity.category}.webp`
-                : entity.imageUrl
-            }
-            alt={entity.name.en}
+            src={locked ? `/categories/${category}.webp` : imageUrl || ""}
+            alt={name.en}
             className={css({
               w: "full",
               h: "full",
               objectFit: "cover",
-
-              filter: entity.locked ? "brightness(0.5) blur(1px)" : "none",
-
-              transition: "filter 0.4s ease-in-out",
-
-              _hover: {
-                filter: entity.locked ? "brightness(1) blur(0px)" : "none",
-              },
+              filter: locked ? "grayscale(1) brightness(0.4)" : "none",
+              transition: "all 0.5s ease",
+            })}
+          />
+          <div
+            className={css({
+              position: "absolute",
+              inset: 0,
+              bg: "repeating-linear-gradient(0deg, rgba(255,0,0,0.03) 0px, transparent 2px)",
+              pointerEvents: "none",
             })}
           />
         </div>
+        <div className={stack({ gap: "3" })}>
+          <EntityStatus locked={locked} xp={xp} played={played} />
 
-        <div
-          className={css({
-            borderTop: "1px solid",
-            borderColor: "white/5",
-            pt: "3",
-          })}
-        >
           <div
-            className={css({
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-end",
-            })}
+            className={flex({ justify: "space-between", align: "flex-end" })}
           >
-            <div>
+            <div className={stack({ gap: "0" })}>
               <span
                 className={css({
-                  fontSize: "xs",
+                  fontSize: "9px",
+                  color: locked ? "dip.red" : "dip.green",
                   textTransform: "uppercase",
-                  color: "dip.gray_light",
-                  display: "block",
-                  mb: "1",
+                  mb: "0.5",
                 })}
               >
-                SUBJECT_ID
+                {locked ? "● Encrypted" : "● Decrypted"}
               </span>
-              <span
+              <h3
                 className={css({
-                  fontSize: "lg",
-                  textTransform: "uppercase",
-                  color: "white",
+                  fontSize: "md",
                   fontWeight: "bold",
-                })}
-              >
-                {entity.id}
-              </span>
-            </div>
-
-            <div className={css({ textAlign: "right" })}>
-              <EntityStatus
-                locked={entity.locked}
-                xp={entity.xp}
-                played={entity.played}
-              />
-
-              {/* TODO: handle locale */}
-              <span
-                className={css({
-                  fontSize: "sm",
                   textTransform: "uppercase",
-                  color: entity.locked ? "dip.red" : "dip.green",
-                  fontWeight: "bold",
+                  color: locked ? "white/40" : "white",
+                  lineHeight: "1",
                 })}
               >
-                {entity.name.ru}
-              </span>
+                {locked ? defaultClassifiedName.ru : name.ru}
+              </h3>
             </div>
+            <span
+              className={css({
+                fontSize: "10px",
+                color: "white/30",
+                letterSpacing: "0.1em",
+              })}
+            >
+              REF_NO: #{id.toString().padStart(4, "0")}
+            </span>
           </div>
         </div>
       </div>

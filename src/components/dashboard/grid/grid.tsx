@@ -16,12 +16,12 @@ export default function EntitiesGrid({
         display: "grid",
         gridTemplateColumns: {
           base: "1fr",
-          md: "repeat(2, 1fr)",
-          lg: "repeat(3, 1fr)",
+          md: "repeat(3, 1fr)",
+          lg: "repeat(4, 1fr)",
         },
         gap: "6",
         w: "full",
-        maxW: "1200px",
+        maxW: "1260px",
         mx: "auto",
         py: "6",
       })}

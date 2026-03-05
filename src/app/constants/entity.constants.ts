@@ -59,7 +59,7 @@ export const EntityCategoryLabels: Record<
 };
 
 export const defaultClassifiedName = {
-  ru: "ЛИЧНОСТЬ ЗАСЕКРЕЧЕНА",
+  ru: "СЕКРЕТНО",
   en: "CLASSIFIED",
   de: "GEHEIM",
 };
