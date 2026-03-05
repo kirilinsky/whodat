@@ -1,6 +1,7 @@
-import { notFound } from "next/navigation"; 
+import { notFound } from "next/navigation";
 import { getOrCreateSession } from "@/app/actions/session";
 import ChatLayout from "@/components/chat/layout/layout";
+import { getEnrichedEntityById } from "@/app/actions/entity";
 
 export default async function ChatPage({
   params,
@@ -12,7 +13,10 @@ export default async function ChatPage({
 
   if (isNaN(entityId)) return notFound();
 
-  const session = await getOrCreateSession(entityId);
-    
-  return <ChatLayout />;
+  const [session, entity] = await Promise.all([
+    getOrCreateSession(entityId),
+    getEnrichedEntityById(entityId),
+  ]);
+
+  return <ChatLayout entity={entity} />;
 }

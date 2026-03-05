@@ -20,7 +20,7 @@ export default function GridItem({ entity }: { entity: EnrichedEntityType }) {
           className={css({
             position: "relative",
             w: "full",
-            aspectRatio: "3/3",
+           aspectRatio: "3/4",
             bg: "black",
             backgroundSize: "cover",
             backgroundPosition: "center",

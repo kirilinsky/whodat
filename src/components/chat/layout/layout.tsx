@@ -1,7 +1,13 @@
 import { css } from "@/styled-system/css";
 import { flex } from "@/styled-system/patterns";
+import Aside from "../aside/aside";
+import { EnrichedEntityType } from "@/types/entity.types";
 
-export default function ChatLayout() {
+export default function ChatLayout({
+  entity,
+}: {
+  entity: EnrichedEntityType | null;
+}) {
   return (
     <div
       className={css({
@@ -14,18 +20,7 @@ export default function ChatLayout() {
         overflow: "hidden",
       })}
     >
-      <aside
-        className={css({
-          borderRight: { lg: "1px solid" },
-          borderBottom: { base: "1px solid", lg: "none" },
-          borderColor: "white/10",
-          p: "6",
-          overflowY: "auto",
-          bg: "rgba(10, 5, 5, 1)",
-        })}
-      >
-        Dossier
-      </aside>
+      {entity && <Aside entity={entity} />}
 
       <main
         className={flex({
@@ -43,7 +38,7 @@ export default function ChatLayout() {
             p: { base: "4", lg: "8" },
           })}
         >
-         chat...
+          chat...
         </div>
 
         <footer

@@ -55,3 +55,45 @@ export async function getEntitiesByCategory(
     return [];
   }
 }
+
+export async function getEnrichedEntityById(
+  entityId: number,
+): Promise<EnrichedEntityType | null> {
+  const { userId } = await auth();
+  if (!userId) return null;
+
+  const result = await db
+    .select({
+      id: entities.id,
+      category: entities.category,
+      appearAt: entities.appearAt,
+      rawName: entities.name,
+      rawImageUrl: entities.imageUrl,
+      sessionActive: sessions.active,
+      sessionSuccess: sessions.success,
+      earnedXp: sessions.xp,
+    })
+    .from(entities)
+    .leftJoin(
+      sessions,
+      and(eq(sessions.entityId, entities.id), eq(sessions.userId, userId)),
+    )
+    .where(eq(entities.id, entityId))
+    .limit(1);
+
+  if (result.length === 0) return null;
+
+  const row = result[0];
+  const isRevealed = row.sessionSuccess === true;
+
+  return {
+    id: row.id,
+    category: row.category as EntityCategoryType,
+    appearAt: row.appearAt,
+    name: isRevealed ? (row.rawName as any) : defaultClassifiedName,
+    imageUrl: isRevealed ? row.rawImageUrl : null,
+    xp: row.earnedXp || 0,
+    locked: !isRevealed,
+    played: row.sessionActive === true,
+  };
+}
