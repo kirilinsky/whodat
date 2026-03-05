@@ -2,8 +2,9 @@
 
 import { db } from "@/db";
 import { sessionMessages } from "@/db/schema";
-import { eq, and, sql } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { auth } from "@clerk/nextjs/server";
+import { SessionMessageType } from "@/types/message.types";
 
 export async function getChatMessages(sessionId: number) {
   const { userId } = await auth();
@@ -21,7 +22,7 @@ export async function getChatMessages(sessionId: number) {
       .where(eq(sessionMessages.sessionId, sessionId))
       .orderBy(sessionMessages.createdAt);
 
-    return messages;
+    return messages as SessionMessageType[];
   } catch (error) {
     console.error("Failed to fetch messages:", error);
     return [];

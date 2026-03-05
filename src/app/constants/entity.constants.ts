@@ -17,7 +17,7 @@ export const EntityCategoryLabels: Record<
   { ru: string; en: string; de: string }
 > = {
   [EntityCategory.ANCIENT]: {
-    ru: "Древний мир",
+    ru: "Античность",
     en: "Ancient World",
     de: "Antike",
   },

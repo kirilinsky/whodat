@@ -1,4 +1,4 @@
-import { EntityCategoryType } from "@/app/constants/entities.constants";
+import { EntityCategoryType } from "@/app/constants/entity.constants";
 
 export type RawEntity = {
   id: number;

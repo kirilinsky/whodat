@@ -1,3 +1,5 @@
+"use client";
+import { motion, AnimatePresence } from "framer-motion";
 import { getCategoryLabel } from "@/services/get-category-label";
 import { css } from "@/styled-system/css";
 import { stack, flex } from "@/styled-system/patterns";
@@ -6,11 +8,17 @@ import { DataField } from "../data-field/data-field";
 
 interface ChatAsideProps {
   entity: EnrichedEntityType;
+  success: boolean;
   locale?: "ru" | "en" | "de";
 }
-/* TODO locales */
-export default function Aside({ entity, locale = "ru" }: ChatAsideProps) {
+
+export default function Aside({
+  success,
+  entity,
+  locale = "ru",
+}: ChatAsideProps) {
   const { locked, played, imageUrl, name, category } = entity;
+  const lockedImageUrl = imageUrl ? `/categories/${category}.webp` : null;
 
   return (
     <aside
@@ -22,17 +30,18 @@ export default function Aside({ entity, locale = "ru" }: ChatAsideProps) {
         py: "3",
         maxH: "full",
         overflowY: "auto",
-        overflowX: "hidden",
+        scrollbar: "hidden",
       })}
     >
       <div
         className={css({
           position: "relative",
           border: "1px solid",
-          borderColor: locked ? "white/5" : "white/15",
+          borderColor: success ? "dip.red" : "white/15",
           p: "4",
-          bg: "rgba(10, 5, 5, 0.6)",
-          transition: "all 0.3s ease",
+          bg: "dip.gray_card",
+          transition: "border-color 1s ease",
+          animation: success ? "glowPulse 3s infinite" : "none",
         })}
       >
         <div
@@ -40,78 +49,88 @@ export default function Aside({ entity, locale = "ru" }: ChatAsideProps) {
             aspectRatio: "3/4",
             bg: "black",
             mb: "4",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            overflow: "hidden",
             position: "relative",
+            overflow: "hidden",
             border: "1px solid",
             borderColor: "white/10",
           })}
         >
-          {imageUrl ? (
-            <img
-              src={imageUrl}
-              alt="Subject Profile"
-              className={css({
-                w: "full",
-                h: "full",
-                objectFit: "cover",
-                filter: locked
-                  ? "grayscale(1) brightness(0.3) blur(4px)"
-                  : "none",
-                opacity: locked ? 0.5 : 1,
-              })}
-            />
-          ) : (
-            <div className={css({ fontSize: "4xl", opacity: 0.2 })}>👤</div>
-          )}
+          <AnimatePresence mode="popLayout">
+            {success ? (
+              <motion.img
+                key="real"
+                src={imageUrl || ""}
+                initial={{ opacity: 0, scale: 1.1, filter: "brightness(2)" }}
+                animate={{ opacity: 1, scale: 1, filter: "brightness(1)" }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+                className={css({ w: "full", h: "full", objectFit: "cover" })}
+              />
+            ) : (
+              <motion.img
+                key="locked"
+                src={lockedImageUrl || ""}
+                exit={{ opacity: 0, filter: "brightness(3) blur(10px)" }}
+                transition={{ duration: 1 }}
+                className={css({
+                  w: "full",
+                  h: "full",
+                  objectFit: "cover",
+                  filter: "grayscale(1) brightness(0.3) blur(4px)",
+                })}
+              />
+            )}
+          </AnimatePresence>
           <div
             className={css({
               position: "absolute",
               inset: 0,
-              bg: "repeating-linear-gradient(0deg, rgba(255,0,0,0.05) 0px, rgba(255,0,0,0.05) 1px, transparent 2px, transparent 3px)",
+              bg: "repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, transparent 2px)",
               pointerEvents: "none",
+              zIndex: 10,
             })}
           />
         </div>
+
         <div className={stack({ gap: "1" })}>
           <div className={flex({ justify: "space-between", align: "center" })}>
             <span className={css({ color: "dip.red", fontSize: "10px" })}>
               ID: {entity.id}
             </span>
-            {played && !locked && (
+            {played && !success && (
               <span
                 className={css({
                   fontSize: "9px",
                   px: "2",
-                  py: 1,
+                  py: "0.5",
                   bg: "dip.red_dark",
                   color: "white",
+                  border: "1px solid",
+                  borderColor: "dip.red/30",
                 })}
               >
                 ACTIVE SESSION
               </span>
             )}
           </div>
-          <h3
+
+          <motion.h3
+            animate={{ color: success ? "#e0d7d7" : "rgba(255,255,255,0.4)" }}
             className={css({
               fontSize: "xl",
               fontWeight: "bold",
               textTransform: "uppercase",
-              color: locked ? "white/40" : "white",
             })}
           >
             {name[locale]}
-          </h3>
+          </motion.h3>
         </div>
       </div>
 
       <div className={stack({ gap: "1" })}>
         <DataField
           label="Current Status"
-          value={locked ? "Unknown" : "Identified"}
-          isAlert={locked}
+          value={success ? "IDENTIFIED" : "CLASSIFIED"}
+          isAlert={!success}
         />
         <DataField
           label="Threat Category"

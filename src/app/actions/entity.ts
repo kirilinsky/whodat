@@ -5,7 +5,7 @@ import { auth } from "@clerk/nextjs/server";
 import {
   defaultClassifiedName,
   EntityCategoryType,
-} from "@/app/constants/entities.constants";
+} from "@/app/constants/entity.constants";
 import { EnrichedEntityType } from "@/types/entity.types";
 
 export async function getEntitiesByCategory(

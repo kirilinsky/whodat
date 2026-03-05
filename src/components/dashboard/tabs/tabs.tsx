@@ -1,6 +1,6 @@
 "use client";
 
-import { EntityCategory } from "@/app/constants/entities.constants";
+import { EntityCategory } from "@/app/constants/entity.constants";
 import { getCategoryLabel } from "@/services/get-category-label";
 import { css } from "@/styled-system/css";
 import Link from "next/link";

@@ -1,4 +1,3 @@
-import { EntityCategory } from "@/app/constants/entities.constants";
 import { UserRank } from "@/app/constants/user.constants";
 import {
   pgTable,

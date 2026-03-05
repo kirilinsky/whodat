@@ -1,7 +1,7 @@
 import {
   EntityCategoryLabels,
   EntityCategoryType,
-} from "@/app/constants/entities.constants";
+} from "@/app/constants/entity.constants";
 
 export const getCategoryLabel = (
   categoryId: number,

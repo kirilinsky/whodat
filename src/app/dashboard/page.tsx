@@ -2,7 +2,7 @@ import { getEntitiesByCategory } from "../actions/entity";
 import {
   EntityCategory,
   EntityCategoryType,
-} from "../constants/entities.constants";
+} from "../constants/entity.constants";
 import DashboardScreen from "@/screens/dashboard/dashboard";
 
 export default async function DashboardPage({

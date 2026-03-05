@@ -1,18 +1,15 @@
 import { db } from "@/db";
-import { sessions } from "@/db/schema";
+import { sessionMessages, sessions } from "@/db/schema";
 import { and, eq } from "drizzle-orm";
 import { auth } from "@clerk/nextjs/server";
+import { WELCOME_MESSAGES } from "../constants/message.constants";
 
 export async function getOrCreateSession(entityId: number) {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
 
   const existingSession = await db.query.sessions.findFirst({
-    where: and(
-      eq(sessions.userId, userId),
-      eq(sessions.entityId, entityId),
-      eq(sessions.active, true),
-    ),
+    where: and(eq(sessions.userId, userId), eq(sessions.entityId, entityId)),
   });
 
   if (existingSession) {
@@ -25,8 +22,17 @@ export async function getOrCreateSession(entityId: number) {
       userId,
       entityId,
       active: true,
+      attempts: 7,
     })
     .returning();
+  const randomIndex = Math.floor(Math.random() * WELCOME_MESSAGES.length);
+  const greeting = WELCOME_MESSAGES[randomIndex];
+  const content = JSON.stringify(greeting.ru);
+  await db.insert(sessionMessages).values({
+    sessionId: newSession.id,
+    content,
+    bot: true,
+  });
 
   return newSession;
 }

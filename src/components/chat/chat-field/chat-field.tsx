@@ -1,18 +1,38 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { css } from "@/styled-system/css";
 import { flex, stack } from "@/styled-system/patterns";
 import { TypingText } from "../text-item/text-item";
-import { useUser } from "@clerk/nextjs";
+import { UserAvatar, useUser } from "@clerk/nextjs";
+import { SessionMessageType } from "@/types/message.types";
+import { useEffect, useRef } from "react";
+import { SUCCESS_MESSAGES } from "@/app/constants/chat.constants";
 
-interface Message {
-  id: number;
-  content: string;
-  bot: boolean;
-}
-
-export default function ChatField({ messages }: { messages: Message[] }) {
+export default function ChatField({
+  messages,
+  success,
+  locale = "ru",
+}: {
+  success: boolean;
+  messages: SessionMessageType[];
+  locale?: "ru" | "en" | "de";
+}) {
   const { user } = useUser();
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = (behavior: "smooth" | "auto" = "smooth") => {
+    messagesEndRef.current?.scrollIntoView({ behavior });
+  };
+
+  useEffect(() => {
+    scrollToBottom("smooth");
+  }, []);
+
+  useEffect(() => {
+    scrollToBottom("smooth");
+  }, [messages, success]);
+
   return (
     <div
       className={stack({
@@ -21,6 +41,7 @@ export default function ChatField({ messages }: { messages: Message[] }) {
         w: "full",
         maxW: "800px",
         mx: "auto",
+        pb: "20",
       })}
     >
       {messages.map((msg, index) => {
@@ -33,7 +54,6 @@ export default function ChatField({ messages }: { messages: Message[] }) {
               direction: "column",
               align: msg.bot ? "flex-start" : "flex-end",
               w: "full",
-              position: "relative",
             })}
           >
             <div
@@ -59,7 +79,7 @@ export default function ChatField({ messages }: { messages: Message[] }) {
                   fontSize: "xs",
                 })}
               >
-                {msg.bot ? "👤" : user?.firstName?.[0]}
+                {msg.bot ? "👤" : <UserAvatar />}
               </div>
               <span
                 className={css({
@@ -93,13 +113,13 @@ export default function ChatField({ messages }: { messages: Message[] }) {
               <p>
                 {msg.bot ? (
                   isLastMessage ? (
-                    <TypingText text={`"${msg.content}"`} />
+                    <TypingText text={msg.content} />
                   ) : (
-                    `"${msg.content}"`
+                    msg.content
                   )
                 ) : (
-                  <span className={css({ color: "white/50" })}>
-                    Query: {msg.content}
+                  <span className={css({ color: "white/60" })}>
+                    {msg.content}
                   </span>
                 )}
               </p>
@@ -107,6 +127,53 @@ export default function ChatField({ messages }: { messages: Message[] }) {
           </div>
         );
       })}
+
+      {success && (
+        <motion.div
+          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+          className={css({
+            alignSelf: "center",
+            w: "full",
+            maxW: "md",
+            mt: "4",
+            p: "4",
+            bg: "dip.red/10",
+            border: "1px double",
+            borderColor: "dip.red",
+            position: "relative",
+            textAlign: "center",
+            boxShadow: "0 0 30px token(colors.dip.red_dark)",
+          })}
+        >
+          <div
+            className={css({
+              color: "white",
+              fontFamily: "mono",
+              fontSize: "sm",
+              fontWeight: "bold",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              animation: "pulse 2s infinite",
+            })}
+          >
+            {SUCCESS_MESSAGES[locale as keyof typeof SUCCESS_MESSAGES]}
+          </div>
+          <div
+            className={css({
+              fontSize: "9px",
+              color: "dip.green",
+              mt: "2",
+              opacity: 0.7,
+              fontFamily: "mono",
+            })}
+          >
+            XP CREDITS TRANSFERRED TO YOUR ACCOUNT
+          </div>
+          <div ref={messagesEndRef} className={css({ h: "1px" })} />
+        </motion.div>
+      )}
     </div>
   );
 }
