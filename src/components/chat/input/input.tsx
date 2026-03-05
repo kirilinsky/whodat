@@ -1,22 +1,44 @@
 "use client";
-import { useState } from "react";
+
+import { useState, useTransition } from "react";
 import { css } from "@/styled-system/css";
 import { flex } from "@/styled-system/patterns";
+import { sendMessage } from "@/app/actions/chat";
 
 interface InputProps {
+  sessionId: number;
   attemptsCount: number;
-  isLoading?: boolean;
+  success: boolean;
 }
 
-export default function Input({ attemptsCount, isLoading }: InputProps) {
+export default function Input({
+  sessionId,
+  attemptsCount,
+  success,
+}: InputProps) {
   const [value, setValue] = useState("");
-  const isDisabled = attemptsCount <= 0 || isLoading;
+  const [isPending, startTransition] = useTransition();
+
+  const isDisabled = attemptsCount <= 0 || isPending || success;
   const maxLength = 32;
 
-  const handleSubmit = (e?: React.SubmitEvent) => {
-    e?.preventDefault();
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
     if (value.trim() && !isDisabled) {
+      const messageContent = value.trim();
       setValue("");
+
+      startTransition(async () => {
+        try {
+          const result = await sendMessage(sessionId, messageContent);
+          if (result?.error) {
+            console.error(result.error);
+          }
+        } catch (error) {
+          console.error("Failed to send message:", error);
+        }
+      });
     }
   };
 
@@ -92,6 +114,7 @@ export default function Input({ attemptsCount, isLoading }: InputProps) {
           {value.length}/{maxLength}
         </span>
       </div>
+
       <button
         type="submit"
         disabled={isDisabled || !value.trim()}
@@ -111,8 +134,7 @@ export default function Input({ attemptsCount, isLoading }: InputProps) {
           borderRadius: "sm",
           _hover: {
             bg: "red.600",
-
-            boxShadow: "0 4px 2px dip.dark_red",
+            boxShadow: "0 4px 12px rgba(255, 0, 0, 0.3)", // Поправил тень
           },
           _active: { transform: "translateY(0)" },
           _disabled: {
@@ -124,9 +146,9 @@ export default function Input({ attemptsCount, isLoading }: InputProps) {
           },
         })}
       >
-        <span>Send Data</span>
-        {/* TODO move svg into dedicated component */}
-        <svg
+        <span>{isPending ? "Processing..." : "Send Data"}</span>
+                {/* TODO move svg into dedicated component */}
+<svg
           width="16"
           height="16"
           viewBox="0 0 24 24"
@@ -135,6 +157,7 @@ export default function Input({ attemptsCount, isLoading }: InputProps) {
           strokeWidth="2.5"
           strokeLinecap="round"
           strokeLinejoin="round"
+          className={isPending ? css({ animation: "pulse 1s infinite" }) : ""}
         >
           <line x1="22" y1="2" x2="11" y2="13"></line>
           <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>

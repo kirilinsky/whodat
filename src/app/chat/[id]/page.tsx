@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getOrCreateSession } from "@/app/actions/session";
 import ChatLayout from "@/components/chat/layout/layout";
 import { getEnrichedEntityById } from "@/app/actions/entity";
+import { getChatMessages } from "@/app/actions/message";
 
 export default async function ChatPage({
   params,
@@ -18,5 +19,13 @@ export default async function ChatPage({
     getEnrichedEntityById(entityId),
   ]);
 
-  return <ChatLayout entity={entity} />;
+  const initialMessages = await getChatMessages(session.id);
+
+  return (
+    <ChatLayout
+      session={session}
+      entity={entity}
+      initialMessages={initialMessages}
+    />
+  );
 }

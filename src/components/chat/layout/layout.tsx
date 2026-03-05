@@ -4,11 +4,18 @@ import Aside from "../aside/aside";
 import { EnrichedEntityType } from "@/types/entity.types";
 import Progress from "../progress/progress";
 import Input from "../input/input";
+import { SessionType } from "@/types/session.types";
+import ChatField from "../chat-field/chat-field";
 
 export default function ChatLayout({
   entity,
+  session,
+  initialMessages,
 }: {
   entity: EnrichedEntityType | null;
+  session: SessionType;
+  /* TODO types any */
+  initialMessages: any;
 }) {
   return (
     <div
@@ -23,7 +30,6 @@ export default function ChatLayout({
       })}
     >
       {entity && <Aside entity={entity} />}
-
       <main
         className={flex({
           direction: "column",
@@ -40,9 +46,8 @@ export default function ChatLayout({
             p: { base: "4", lg: "8" },
           })}
         >
-          chat...
+          <ChatField messages={initialMessages} />
         </div>
-
         <footer
           className={css({
             p: "6",
@@ -51,8 +56,12 @@ export default function ChatLayout({
             bg: "black",
           })}
         >
-          <Progress current={6} />
-          <Input attemptsCount={6} />
+          <Progress current={session.attempts} />
+          <Input
+            success={session.success}
+            attemptsCount={session.attempts}
+            sessionId={session.id}
+          />
         </footer>
       </main>
     </div>
