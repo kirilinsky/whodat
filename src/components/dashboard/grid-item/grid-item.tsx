@@ -1,5 +1,5 @@
 import { css } from "@/styled-system/css";
-import { EntityType } from "@/types/entities.types";
+import { EntityType } from "@/types/entity.types";
 
 export default function GridItem({ entity }: { entity: EntityType }) {
   return (

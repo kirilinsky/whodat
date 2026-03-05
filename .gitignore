@@ -20,6 +20,9 @@
 # production
 /build
 
+# db
+/drizzle
+
 # misc
 .DS_Store
 *.pem

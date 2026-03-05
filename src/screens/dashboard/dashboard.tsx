@@ -1,14 +1,14 @@
 import EntitiesGrid from "@/components/dashboard/grid/grid";
 import CategoryTabs from "@/components/dashboard/tabs/tabs";
 import { css } from "@/styled-system/css";
-import { EntityType } from "@/types/entities.types";
+import { EntityType } from "@/types/entity.types";
 
 export default async function DashboardScreen({
   activeCategory,
   entities,
 }: {
   activeCategory: string;
-  entities: EntityType[] ;
+  entities: EntityType[];
 }) {
   return (
     <main

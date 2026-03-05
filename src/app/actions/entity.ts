@@ -2,7 +2,7 @@ import { db } from "@/db";
 import { entities } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { EntityCategoryType } from "@/app/constants/entities.constants";
-import { EntityType } from "@/types/entities.types";
+import { EntityType } from "@/types/entity.types";
 
 export async function getEntitiesByCategory(
   category: EntityCategoryType,

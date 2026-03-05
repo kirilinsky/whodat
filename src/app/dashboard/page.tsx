@@ -1,4 +1,4 @@
-import { getEntitiesByCategory } from "../actions/entities";
+import { getEntitiesByCategory } from "../actions/entity";
 import {
   EntityCategory,
   EntityCategoryType,

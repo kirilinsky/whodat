@@ -1,12 +1,12 @@
 import { css } from "@/styled-system/css";
 import GridItem from "../grid-item/grid-item";
-import { EntityType } from "@/types/entities.types";
+import { EntityType } from "@/types/entity.types";
 
 export default function EntitiesGrid({ entities }: { entities: EntityType[] }) {
   return (
     <div
       className={css({
-        display: "grid", 
+        display: "grid",
         gridTemplateColumns: {
           base: "1fr",
           md: "repeat(2, 1fr)",
