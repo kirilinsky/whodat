@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { css } from "@/styled-system/css";
 import GridItem from "../grid-item/grid-item";
 import { EnrichedEntityType } from "@/types/entity.types";
@@ -20,10 +23,23 @@ export default function EntitiesGrid({
         w: "full",
         maxW: "1200px",
         mx: "auto",
+        py: "6",
       })}
     >
       {entities.map((entity, i) => (
-        <GridItem key={i} entity={entity} />
+        <motion.div
+          key={entity.id}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.4,
+            delay: i * 0.05,
+            ease: [0.23, 1, 0.32, 1],
+          }}
+          whileHover={{ y: -5 }}
+        >
+          <GridItem entity={entity} />
+        </motion.div>
       ))}
     </div>
   );

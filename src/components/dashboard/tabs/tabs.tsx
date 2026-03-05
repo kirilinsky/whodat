@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { EntityCategory } from "@/app/constants/entity.constants";
 import { getCategoryLabel } from "@/services/get-category-label";
 import { css } from "@/styled-system/css";
@@ -32,9 +33,10 @@ export default function CategoryTabs({ active }: { active: number }) {
               className={css({
                 textDecoration: "line-through",
                 textTransform: "uppercase",
+                color: "white/20",
+                cursor: "not-allowed",
               })}
             >
-              {/* TODO locale */}
               <span>{getCategoryLabel(cat, "ru")}</span>
             </div>
           );
@@ -49,47 +51,58 @@ export default function CategoryTabs({ active }: { active: number }) {
               display: "flex",
               alignItems: "center",
               gap: "3",
+              px: "2",
               textTransform: "uppercase",
               letterSpacing: "0.2em",
-              transition: "colors",
+              transition: "color 0.3s ease",
               color: isActive ? "white" : "dip.gray",
               _hover: { color: "dip.red" },
             })}
           >
             {isActive && (
               <>
-                <div
+                <motion.div
+                  layoutId="active-tab-bg"
                   className={css({
                     position: "absolute",
-                    insetX: "-4",
+                    insetX: "-2",
                     insetY: "-2",
                     border: "1px solid",
                     borderColor: "dip.red/30",
                     bg: "dip.red/5",
+                    zIndex: -1,
                   })}
+                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                 />
-                <div
+
+                <motion.div
+                  layoutId="active-tab-underline"
                   className={css({
                     position: "absolute",
                     bottom: "-17px",
-                    insetX: "-4",
+                    insetX: "-2",
                     h: "2px",
                     bg: "dip.red",
+                    boxShadow: "0 0 10px token(colors.dip.red)",
                   })}
+                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                 />
-                <span
+                <motion.span
+                  layoutId="active-tab-dot"
                   className={css({
                     w: "1.5",
                     h: "1.5",
                     rounded: "full",
                     bg: "dip.red",
-                    boxShadow: "0 0 8px {colors.dip.red}",
+                    boxShadow: "0 0 8px token(colors.dip.red)",
                   })}
                 />
               </>
             )}
-            {/* TODO locale */}
-            <span>{getCategoryLabel(cat, "ru")}</span>
+
+            <span className={css({ position: "relative", zIndex: 1 })}>
+              {getCategoryLabel(cat, "ru")}
+            </span>
           </Link>
         );
       })}

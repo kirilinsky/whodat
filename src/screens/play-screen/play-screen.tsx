@@ -5,6 +5,7 @@ import { css } from "@/styled-system/css";
 import { flex, center } from "@/styled-system/patterns";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 export const PlayScreen = () => {
   const [ripples, setRipples] = useState<{ id: number }[]>([]);
@@ -87,56 +88,57 @@ export const PlayScreen = () => {
               />
             ))}
           </AnimatePresence>
-
-          <motion.button
-            onClick={handleClick}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className={css({
-              position: "relative",
-              animation: "glowPulse 4s ease-in-out infinite",
-              bg: "black",
-              color: "dip.red",
-              border: "2px solid",
-              borderColor: "dip.red",
-              px: "16",
-              py: "8",
-              fontFamily: "mono",
-              fontWeight: "bold",
-              fontSize: "3xl",
-              cursor: "pointer",
-              zIndex: 10,
-              textTransform: "uppercase",
-              letterSpacing: "0.2em",
-              overflow: "hidden",
-              _before: {
-                content: '""',
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "10px",
-                height: "10px",
-                borderTop: "2px solid",
-                borderLeft: "2px solid",
+          <Link href={'/dashboard'}>
+            <motion.button
+              onClick={handleClick}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className={css({
+                position: "relative",
+                animation: "glowPulse 4s ease-in-out infinite",
+                bg: "black",
+                color: "dip.red",
+                border: "2px solid",
                 borderColor: "dip.red",
-              },
-            })}
-          >
-            <div className={css({ position: "relative", zIndex: 1 })}>
-              {t("button")}
-              <div
-                className={css({
-                  fontSize: "12px",
-                  mt: "2",
-                  opacity: 0.8,
-                  fontWeight: "normal",
-                  letterSpacing: "normal",
-                })}
-              >
-                {t("protocol")}
+                px: "16",
+                py: "8",
+                fontFamily: "mono",
+                fontWeight: "bold",
+                fontSize: "3xl",
+                cursor: "pointer",
+                zIndex: 10,
+                textTransform: "uppercase",
+                letterSpacing: "0.2em",
+                overflow: "hidden",
+                _before: {
+                  content: '""',
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "10px",
+                  height: "10px",
+                  borderTop: "2px solid",
+                  borderLeft: "2px solid",
+                  borderColor: "dip.red",
+                },
+              })}
+            >
+              <div className={css({ position: "relative", zIndex: 1 })}>
+                {t("button")}
+                <div
+                  className={css({
+                    fontSize: "12px",
+                    mt: "2",
+                    opacity: 0.8,
+                    fontWeight: "normal",
+                    letterSpacing: "normal",
+                  })}
+                >
+                  {t("protocol")}
+                </div>
               </div>
-            </div>
-          </motion.button>
+            </motion.button>
+          </Link>
         </div>
       </div>
 
