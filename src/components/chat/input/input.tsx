@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { css } from "@/styled-system/css";
 import { flex } from "@/styled-system/patterns";
 import { sendMessage } from "@/app/actions/chat";
@@ -112,7 +112,7 @@ export default function Input({
 
       <button
         type="submit"
-        disabled={isDisabled || !value.trim()}
+        disabled={isDisabled || !value.trim() || value.length > maxLength}
         className={css({
           bg: "dip.red",
           color: "white",
