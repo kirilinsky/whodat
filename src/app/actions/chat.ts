@@ -48,7 +48,7 @@ OPERATIONAL RULES:
 6. Constraints: Max 26 words. Match user's language.If asked what you are famous for, list your key historical contributions or notorious acts clearly and short.
 `,
         },
-        { role: "user", content },
+        { role: "user", content: content.slice(0, 32) },
       ],
       max_tokens: 50,
     });
