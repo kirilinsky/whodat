@@ -47,7 +47,7 @@ export default function Input({
       onSubmit={handleSubmit}
       className={flex({
         direction: "row",
-        gap: "4",
+        gap: { base: "2", md: "4" },
         w: "full",
         align: "stretch",
       })}
@@ -59,7 +59,7 @@ export default function Input({
           bg: "rgba(255, 255, 255, 0.02)",
           border: "1px solid",
           borderColor: isDisabled ? "white/5" : "white/10",
-          px: "4",
+          px: { base: "2", md: "4" },
           borderRadius: "sm",
           position: "relative",
           _focusWithin: {
@@ -72,22 +72,17 @@ export default function Input({
           className={css({
             color: isDisabled ? "white/10" : "dip.red",
             fontFamily: "mono",
-            mr: "3",
+            mr: "2",
             fontSize: "sm",
           })}
         >
           {">"}
         </span>
-
         <input
           type="text"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          placeholder={
-            isDisabled
-              ? "INTERROGATION TERMINATED"
-              : "Enter interrogation command..."
-          }
+          placeholder={isDisabled ? "TERMINATED" : "type your message..."}
           disabled={isDisabled}
           maxLength={maxLength}
           className={css({
@@ -98,7 +93,7 @@ export default function Input({
             color: "white",
             fontSize: "sm",
             fontFamily: "mono",
-            py: "4",
+            py: { base: "3", md: "4" },
             _placeholder: { color: "white/20" },
             _disabled: { cursor: "not-allowed" },
           })}
@@ -106,7 +101,7 @@ export default function Input({
         <span
           className={css({
             fontSize: "10px",
-            color: value.length >= maxLength ? "dip.red" : "white/20",
+            color: value.length >= maxLength ? "dip.red" : "white/40",
             fontFamily: "mono",
             ml: "2",
           })}
@@ -121,10 +116,10 @@ export default function Input({
         className={css({
           bg: "dip.red",
           color: "white",
-          px: "8",
+          px: { base: "2", md: "8" },
           display: "flex",
           alignItems: "center",
-          gap: "3",
+          gap: { base: "1", md: "3" },
           fontSize: "xs",
           fontWeight: "bold",
           textTransform: "uppercase",
@@ -134,11 +129,11 @@ export default function Input({
           borderRadius: "sm",
           _hover: {
             bg: "red.600",
-            boxShadow: "0 4px 12px rgba(255, 0, 0, 0.3)", // Поправил тень
+            boxShadow: "0 4px 12px rgba(255, 0, 0, 0.3)",
           },
           _active: { transform: "translateY(0)" },
           _disabled: {
-            bg: "white/5",
+            bg: "white/10",
             color: "white/20",
             cursor: "not-allowed",
             boxShadow: "none",
@@ -147,8 +142,8 @@ export default function Input({
         })}
       >
         <span>{isPending ? "Processing..." : "Send Data"}</span>
-                {/* TODO move svg into dedicated component */}
-<svg
+        {/* TODO move svg into dedicated component */}
+        <svg
           width="16"
           height="16"
           viewBox="0 0 24 24"

@@ -142,12 +142,13 @@ export const PlayScreen = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className={css({ maxW: "400px" })}
+          className={css({mx:{base:'3',md:'0'}, maxW: { base: "full", md: "420px" } })}
         >
           <div
             className={css({
               bg: "whiteAlpha.50",
               p: "4",
+
               border: "1px solid",
               borderColor: "whiteAlpha.200",
             })}

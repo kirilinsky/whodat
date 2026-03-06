@@ -16,8 +16,8 @@ const HeaderContainer = styled("header", {
   base: {
     bg: "dip.bg",
     color: "white",
-    px: "8",
-    py: "4",
+    px: { base: "2", md: "8" },
+    py: { base: "3", md: "4" },
     borderBottom: "1px solid",
     borderColor: "whiteAlpha.200",
     fontFamily: "mono",
@@ -25,6 +25,7 @@ const HeaderContainer = styled("header", {
     alignItems: "center",
     justifyContent: "space-between",
     width: "full",
+    height: "67px",
   },
 });
 
@@ -52,14 +53,18 @@ export const Header = ({ user }: { user?: UserType }) => {
           </styled.a>
         </HStack>
 
-        <HStack gap="9" display={{ base: "none", md: "flex" }}>
+        <HStack gap={{ base: 3, md: 9 }}>
           <NavLink href="/dashboard">dashboard</NavLink>
 
           <NavLink href="/about">about</NavLink>
         </HStack>
 
         <HStack gap="6">
-          <Flex direction="column" alignItems="flex-end">
+          <Flex
+            direction="column"
+            alignItems="flex-end"
+            display={{ base: "none", md: "flex" }}
+          >
             <styled.span
               fontSize="10px"
               color="dip.gray"

@@ -24,11 +24,17 @@ export default function EntitiesGrid({
         maxW: "1260px",
         mx: "auto",
         py: "6",
+        px: { base: "4", md: "0" },
+        justifyItems: "center",
       })}
     >
       {entities.map((entity, i) => (
         <motion.div
           key={entity.id}
+          className={css({
+            w: "full",
+            maxW: { base: "335px", md: "full" },
+          })}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
@@ -36,7 +42,7 @@ export default function EntitiesGrid({
             delay: i * 0.05,
             ease: [0.23, 1, 0.32, 1],
           }}
-          whileHover={{ y: -5 }}
+          whileHover={{ y: -4 }}
         >
           <GridItem entity={entity} />
         </motion.div>

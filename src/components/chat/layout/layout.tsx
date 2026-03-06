@@ -7,6 +7,7 @@ import Input from "../input/input";
 import { SessionType } from "@/types/session.types";
 import ChatField from "../chat-field/chat-field";
 import { SessionMessageType } from "@/types/message.types";
+import MobileInfo from "../mobile-info/mobile-info";
 
 export default function ChatLayout({
   entity,
@@ -22,13 +23,14 @@ export default function ChatLayout({
       className={css({
         display: "grid",
         gridTemplateColumns: { base: "1fr", lg: "380px 1fr" },
-        h: { base: "auto", lg: "calc(100vh - 95px)" },
+        h: "calc(100vh - 97px)",
         w: "full",
         bg: "black",
         gap: "0",
         overflow: "hidden",
       })}
     >
+      {entity && <MobileInfo attempts={session.attempts} entity={entity} />}
       {entity && <Aside success={session.success} entity={entity} />}
       <main
         className={flex({
@@ -43,26 +45,33 @@ export default function ChatLayout({
           className={css({
             flex: "1",
             overflowY: "auto",
-            p: { base: "4", lg: "8" },
+            p: { base: "3", lg: "6" },
           })}
         >
-          <ChatField success={session.success} messages={initialMessages} />
+          <ChatField
+            category={entity?.category}
+            success={session.success}
+            messages={initialMessages}
+          />
         </div>
-        <footer
+        <div
           className={css({
-            p: "5",
+            p: { base: "0", md: "5" },
+            py: { base: 1 },
             borderTop: "1px solid",
             borderColor: "white/50",
             bg: "black",
           })}
         >
-          <Progress current={session.attempts} />
+          <div className={css({ display: { base: "none", md: "block" } })}>
+            <Progress current={session.attempts} />
+          </div>
           <Input
             success={session.success}
             attemptsCount={session.attempts}
             sessionId={session.id}
           />
-        </footer>
+        </div>
       </main>
     </div>
   );

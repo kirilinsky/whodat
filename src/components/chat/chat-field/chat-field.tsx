@@ -8,15 +8,19 @@ import { UserAvatar, useUser } from "@clerk/nextjs";
 import { SessionMessageType } from "@/types/message.types";
 import { useEffect, useRef } from "react";
 import { SUCCESS_MESSAGES } from "@/app/constants/chat.constants";
+import Link from "next/link";
+import { EntityCategoryType } from "@/app/constants/entity.constants";
 
 export default function ChatField({
+  category,
   messages,
   success,
   locale = "ru",
 }: {
-  success: boolean;
+  success: boolean | null;
   messages: SessionMessageType[];
   locale?: "ru" | "en" | "de";
+  category?: EntityCategoryType;
 }) {
   const { user } = useUser();
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -36,17 +40,19 @@ export default function ChatField({
   return (
     <div
       className={stack({
-        gap: "8",
-        py: "4",
+        gap: { base: "5", md: "8" },
+        py: { base: "3", md: "4" },
         w: "full",
-        maxW: "800px",
-        mx: "auto",
-        pb: "20",
+        maxW: { base: "full", md: "800px" },
+        mx: { base: "0", md: "auto" },
+        minH: { base: "calc(100vh - 245px)", md: "full" },
+        flexGrow: 1,
+        px: { base: "4", md: "0" },
+        pb: { base: "5", md: "20" },
       })}
     >
       {messages.map((msg, index) => {
         const isLastMessage = index === messages.length - 1;
-
         return (
           <div
             key={msg.id}
@@ -105,7 +111,7 @@ export default function ChatField({
                 position: "relative",
                 color: "white/90",
                 fontSize: "sm",
-                lineHeight: "1.6",
+                lineHeight: "1.7",
                 fontFamily: "mono",
                 boxShadow: msg.bot ? "0 0 20px rgba(255, 0, 0, 0.05)" : "none",
               })}
@@ -144,7 +150,7 @@ export default function ChatField({
             borderColor: "dip.red",
             position: "relative",
             textAlign: "center",
-            boxShadow: "0 0 30px token(colors.dip.red_dark)",
+            boxShadow: "0 0 20px token(colors.dip.red_dark)",
           })}
         >
           <div
@@ -171,6 +177,28 @@ export default function ChatField({
           >
             XP CREDITS TRANSFERRED TO YOUR ACCOUNT
           </div>
+          <Link
+            href={`/dashboard?cat=${category}`}
+            className={flex({
+              align: "center",
+              justifyContent: "center",
+              gap: "2",
+              color: "white/50",
+              fontFamily: "mono",
+              fontSize: "xs",
+              textTransform: "uppercase",
+              letterSpacing: "widest",
+              transition: "all 0.2s ease",
+              width: "full",
+              _hover: {
+                color: "dip.red",
+                transform: "translateX(-4px)",
+              },
+            })}
+          >
+            <span className={css({ fontSize: "lg" })}>←</span>
+            <span>вернуться к списку персонажей</span>
+          </Link>
         </motion.div>
       )}
       <div ref={messagesEndRef} className={css({ h: "1px" })} />

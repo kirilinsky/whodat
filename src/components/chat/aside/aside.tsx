@@ -17,12 +17,13 @@ export default function Aside({
   entity,
   locale = "ru",
 }: ChatAsideProps) {
-  const { locked, played, imageUrl, name, category } = entity;
+  const { played, imageUrl, name, category } = entity;
   const lockedImageUrl = imageUrl ? `/categories/${category}.webp` : null;
 
   return (
     <aside
       className={stack({
+        display: { base: "none", md: "flex" },
         gap: "5",
         w: "full",
         color: "white",

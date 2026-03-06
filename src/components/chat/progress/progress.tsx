@@ -8,7 +8,15 @@ interface ProgressProps {
 
 export default function Progress({ current, total = 7 }: ProgressProps) {
   return (
-    <div className={css({ w: "full", mb: "4" })}>
+    <div
+      className={css({
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: { base: "center", md: "flex-start" },
+        w: "full",
+        mb: { base: "0", md: "4" },
+      })}
+    >
       <div
         className={flex({
           justify: "space-between",
