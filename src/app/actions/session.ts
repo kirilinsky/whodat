@@ -27,10 +27,10 @@ export async function getOrCreateSession(entityId: number) {
     .returning();
   const randomIndex = Math.floor(Math.random() * WELCOME_MESSAGES.length);
   const greeting = WELCOME_MESSAGES[randomIndex];
-  const content = JSON.stringify(greeting.ru);
+
   await db.insert(sessionMessages).values({
     sessionId: newSession.id,
-    content,
+    content: greeting.ru,
     bot: true,
   });
 

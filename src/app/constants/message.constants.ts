@@ -10,6 +10,21 @@ export const WELCOME_MESSAGES = [
     de: "Ich höre zu. Lass deine Fragen zählen...",
   },
   {
+    en: "The record is corrupted, but I am still here. Ask.",
+    ru: "Запись повреждена, но я все еще здесь. Спрашивай.",
+    de: "Der Datensatz ist korrupt, aber ich bin noch hier. Frag.",
+  },
+  {
+    en: "You are searching for a ghost. Perhaps I can help you find me.",
+    ru: "Ты ищешь призрака. Возможно, я помогу тебе меня найти.",
+    de: "Du suchst nach einem Geist. Vielleicht kann ich dir helfen, mich zu finden.",
+  },
+  {
+    en: "7 attempts to solve a life. Don't waste them on trivialities.",
+    ru: "7 попыток, чтобы расшифровать жизнь. Не трать их на пустяки.",
+    de: "7 Versuche, um ein Leben zu entschlüsseln. Verschwende sie nicht für Trivialitäten.",
+  },
+  {
     en: "Interrogation started. Proceed...",
     ru: "Допрос начат. Приступай...",
     de: "Verhör gestartet. Fahre fort...",
@@ -76,5 +91,20 @@ export const FINALE_MESSAGES = [
     en: "The truth has a way of coming out. You've earned this victory.",
     ru: "Правда всегда находит выход. Ты заслужил эту победу.",
     de: "Die Wahrheit findet immer einen Weg. Du hast diesen Sieg verdient.",
+  },
+  {
+    en: "Access granted. The redaction is lifted. You have identified the subject correctly.",
+    ru: "Доступ разрешен. Гриф секретности снят. Личность субъекта установлена верно.",
+    de: "Zugriff gewährt. Die Schwärzung ist aufgehoben. Du hast das Subjekt korrekt идентифицирован.",
+  },
+  {
+    en: "Data corruption repaired. My name returns to the archive. Well played, investigator.",
+    ru: "Искажение устранено. Мое имя возвращено в архив. Отличная работа, детектив.",
+    de: "Datenkorrektur abgeschlossen. Mein Name kehrt ins Archiv zurück. Gut gespielt, Ermittler.",
+  },
+  {
+    en: "The logic holds. You've unmasked the phantom in the machine. Mission accomplished.",
+    ru: "Логика неоспорима. Тебе удалось сорвать маску с призрака в машине. Миссия выполнена.",
+    de: "Die Logik stimmt. Du hast das Phantom in der Maschine enttarnt. Mission erfüllt.",
   },
 ];
