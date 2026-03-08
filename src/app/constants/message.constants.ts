@@ -108,3 +108,26 @@ export const FINALE_MESSAGES = [
     de: "Die Logik stimmt. Du hast das Phantom in der Maschine enttarnt. Mission erfüllt.",
   },
 ];
+
+export const RANK_UP_MESSAGES = [
+  {
+    en: "Promotion confirmed. Your clearance level has been elevated. New sectors are now accessible.",
+    ru: "Повышение подтверждено. Ваш уровень допуска повышен. Открыт доступ к новым секторам.",
+    de: "Beförderung bestätigt. Deine Freigabestufe wurde erhöht. Neue Sektoren sind nun zugänglich.",
+  },
+  {
+    en: "The Command has recognized your progress. You have been reassigned to a higher rank.",
+    ru: "Командование признало ваши успехи. Вам присвоено новое звание.",
+    de: "Das Kommando hat deine Fortschritte anerkannt. Dir wurde ein höherer Rang zugewiesen.",
+  },
+  {
+    en: "Exceptional work, Agent. Your influence in the archives is growing. Keep digging.",
+    ru: "Исключительная работа, агент. Ваше влияние в архивах растет. Продолжайте поиск.",
+    de: "Außergewöhnliche Arbeit, Agent. Dein Einfluss in den Archiven wächst. Grab weiter.",
+  },
+  {
+    en: "Threshold reached. Encrypted data from further eras is now within your reach.",
+    ru: "Порог пройден. Зашифрованные данные следующих эпох теперь в вашем распоряжении.",
+    de: "Schwelle erreicht. Verschlüsselte Daten aus weiteren Epochen sind nun in deiner Reichweite.",
+  },
+];
