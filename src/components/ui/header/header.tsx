@@ -56,7 +56,7 @@ export const Header = ({ user }: { user?: UserType }) => {
         <HStack gap={{ base: 3, md: 9 }}>
           <NavLink href="/dashboard">dashboard</NavLink>
 
-          <NavLink href="/about">about</NavLink>
+          <NavLink href="/profile">profile</NavLink>
         </HStack>
 
         <HStack gap="6">

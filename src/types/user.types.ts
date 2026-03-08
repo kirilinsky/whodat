@@ -1,5 +1,3 @@
-import { UserRankType } from "@/app/constants/user.constants";
-
 export type UserType = {
   id: string;
   clerkId: string;
@@ -7,5 +5,5 @@ export type UserType = {
   username: string | null;
   createdAt: Date | null;
   xp: number;
-  rank: UserRankType;
+  rank: number;
 };

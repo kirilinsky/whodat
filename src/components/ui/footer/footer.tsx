@@ -37,6 +37,7 @@ export const Footer = () => {
       </styled.span>
 
       <HStack gap="8">
+         <FooterLink href="/about">About</FooterLink>
         <FooterLink href="/terms">Terms_of_Entry</FooterLink>
       </HStack>
     </FooterContainer>

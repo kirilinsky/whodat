@@ -1,4 +1,3 @@
-import { UserRank } from "@/app/constants/user.constants";
 import {
   pgTable,
   uuid,
@@ -20,7 +19,7 @@ export const users = pgTable("users", {
   username: varchar("username", { length: 255 }),
   createdAt: timestamp("created_at").defaultNow(),
   xp: integer("xp").default(0),
-  rank: text("rank").default(UserRank.NEWBIE),
+  rank: integer("rank").default(0).notNull(),
 });
 
 export const entities = pgTable("entities", {
