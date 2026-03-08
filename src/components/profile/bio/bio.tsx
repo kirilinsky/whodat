@@ -1,0 +1,125 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { css } from "@/styled-system/css";
+import { stack, flex } from "@/styled-system/patterns";
+import Image from "next/image";
+import { UserType } from "@/types/user.types";
+import { useUser } from "@clerk/nextjs";
+import { getRankLabel } from "@/services/get-rank-label";
+import { RANK_ICONS } from "@/app/constants/user.constants";
+
+interface BioProps {
+  user: UserType;
+}
+
+export default function Bio({ user }: BioProps) {
+  const { user: clerkUser } = useUser();
+  const containerStyle = css({
+    bg: "rgba(20, 20, 20, 0.8)",
+    border: "1px solid",
+    borderColor: "white/10",
+    borderRadius: "xl",
+    p: "6",
+    position: "relative",
+    overflow: "hidden",
+  });
+
+  const labelStyle = css({
+    fontSize: "10px",
+    color: "dip.gray",
+    textTransform: "uppercase",
+    letterSpacing: "widest",
+  });
+  const Icon = RANK_ICONS[user.rank];
+  return (
+    <div className={stack({ gap: "6", w: "full" })}>
+      <motion.div
+        initial={{ x: -20, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        className={containerStyle}
+      >
+        <div className={stack({ gap: "6" })}>
+          <div
+            className={css({
+              w: "200px",
+              h: "200px",
+              border: "2px solid",
+              borderColor: "dip.blue/30",
+              borderRadius: "lg",
+              overflow: "hidden",
+              mx: "auto",
+              position: "relative",
+            })}
+          >
+            <Image
+              src={clerkUser?.imageUrl ?? "/default.png"}
+              alt="Agent Avatar"
+              fill
+              className={css({
+                objectFit: "cover",
+                filter: "grayscale(100%) contrast(120%)",
+              })}
+            />
+          </div>
+
+          <div className={stack({ gap: "2" })}>
+            <h2
+              className={css({
+                fontSize: "3xl",
+                fontWeight: "bold",
+                color: "dip.green",
+                textTransform: "uppercase",
+                fontFamily: "mono",
+              })}
+            >
+              {clerkUser?.fullName || "UNKNOWN_SUBJECT"}
+            </h2>
+
+            <div className={stack({ gap: "1" })}>
+              <div className={flex({ align: "center", gap: "3" })}>
+                <span className={labelStyle}>Status:</span>
+                <span
+                  className={css({
+                    fontSize: "xs",
+                    color: "dip.green",
+                    fontWeight: "bold",
+                  })}
+                >
+                  ACTIVE
+                </span>
+              </div>
+              <div className={flex({ align: "center", gap: "3" })}>
+                <span className={labelStyle}>Location:</span>
+                <span
+                  className={css({
+                    fontSize: "xs",
+                    color: "dip.red",
+                    textTransform: "uppercase",
+                  })}
+                >
+                  Classified
+                </span>
+              </div>
+              <div className={flex({ align: "center", gap: "3" })}>
+                <span className={labelStyle}>Rank:</span>
+                <div
+                  className={css({
+                    fontSize: "xs",
+                    color: "white",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "2",
+                  })}
+                >
+                  {getRankLabel(user.rank, "ru")}
+                  <Icon size={17} strokeWidth={1.5} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+}

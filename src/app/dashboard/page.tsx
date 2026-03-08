@@ -1,4 +1,6 @@
+import { UserType } from "@/types/user.types";
 import { getEntitiesByCategory } from "../actions/entity";
+import { getProfileData } from "../actions/profile";
 import {
   EntityCategory,
   EntityCategoryType,
@@ -11,6 +13,7 @@ export default async function DashboardPage({
   searchParams: Promise<{ cat?: string }>;
 }) {
   const { cat } = await searchParams;
+  const { user } = await getProfileData();
 
   const categoryId = cat ? parseInt(cat, 10) : EntityCategory.ANCIENT;
 
@@ -25,6 +28,10 @@ export default async function DashboardPage({
   const entities = await getEntitiesByCategory(activeCategory);
 
   return (
-    <DashboardScreen entities={entities} activeCategory={activeCategory} />
+    <DashboardScreen
+      user={user as UserType}
+      entities={entities}
+      activeCategory={activeCategory}
+    />
   );
 }

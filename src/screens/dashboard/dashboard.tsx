@@ -2,13 +2,16 @@ import EntitiesGrid from "@/components/dashboard/grid/grid";
 import CategoryTabs from "@/components/dashboard/tabs/tabs";
 import { css } from "@/styled-system/css";
 import { EnrichedEntityType } from "@/types/entity.types";
+import { UserType } from "@/types/user.types";
 
 export default async function DashboardScreen({
   activeCategory,
   entities,
+  user,
 }: {
   activeCategory: number;
   entities: EnrichedEntityType[];
+  user: UserType;
 }) {
   return (
     <main
@@ -19,7 +22,7 @@ export default async function DashboardScreen({
         color: "white",
       })}
     >
-      <CategoryTabs active={activeCategory} />
+      <CategoryTabs user={user} active={activeCategory} />
 
       <EntitiesGrid entities={entities} />
     </main>

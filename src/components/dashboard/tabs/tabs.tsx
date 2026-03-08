@@ -5,39 +5,118 @@ import { EntityCategory } from "@/app/constants/entity.constants";
 import { getCategoryLabel } from "@/services/get-category-label";
 import { css } from "@/styled-system/css";
 import Link from "next/link";
+import {
+  RANK_ICONS,
+  RANK_THRESHOLDS,
+  RankLevel,
+} from "@/app/constants/user.constants";
+import { getRankLabel } from "@/services/get-rank-label";
+import { UserType } from "@/types/user.types";
 
-export default function CategoryTabs({ active }: { active: number }) {
-  const categories = Object.values(EntityCategory);
+interface CategoryTabsProps {
+  active: number;
+  user: UserType;
+}
+
+export default function CategoryTabs({ active, user }: CategoryTabsProps) {
+  const categories = Object.values(EntityCategory) as number[];
 
   return (
     <nav
       className={css({
         display: "flex",
         flexWrap: "wrap",
-        gap: "6",
+        gap: "4",
         borderBottom: "1px solid",
         borderColor: "white/10",
-        pb: "4",
+        pb: "6",
         fontFamily: "mono",
-        fontSize: "12px",
+        fontSize: "11px",
       })}
     >
-      {categories.map((cat, index) => {
+      {categories.map((cat) => {
         const isActive = active === cat;
-        const isLocked = index > 2;
+        const isLocked = cat > user.rank;
+        const Icon = RANK_ICONS[cat as RankLevel];
+
+        const requiredXp = RANK_THRESHOLDS[cat as RankLevel];
+        const xpToUnlock = requiredXp - user.xp;
 
         if (isLocked) {
           return (
             <div
               key={cat}
-              className={css({
-                textDecoration: "line-through",
-                textTransform: "uppercase",
-                color: "white/20",
-                cursor: "not-allowed",
-              })}
+              className={
+                "group " +
+                css({
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "2",
+                  px: "3",
+                  py: "2",
+                  color: "white/10",
+                  cursor: "not-allowed",
+                  border: "1px solid transparent",
+                })
+              }
             >
-              <span>{getCategoryLabel(cat, "ru")}</span>
+              <Icon
+                size={14}
+                strokeWidth={1}
+                className={css({ opacity: 0.3 })}
+              />
+              <span
+                className={css({
+                  textTransform: "uppercase",
+                  letterSpacing: "widest",
+                })}
+              >
+                {getCategoryLabel(cat, "ru")}
+              </span>
+              <div
+                className={css({
+                  position: "absolute",
+                  top: "100%",
+                  left: "0",
+                  bg: "black",
+                  border: "1px solid",
+                  borderColor: "dip.red/40",
+                  p: "2",
+                  mt: "2",
+                  whiteSpace: "nowrap",
+                  zIndex: 50,
+                  opacity: 0,
+                  visibility: "hidden",
+                  transform: "translateY(5px)",
+                  transition: "all 0.2s ease-in-out",
+
+                  ".group:hover &": {
+                    opacity: 1,
+                    visibility: "visible",
+                    transform: "translateY(0)",
+                  },
+                })}
+              >
+                <p
+                  className={css({
+                    color: "dip.red",
+                    fontSize: "10px",
+                    fontWeight: "bold",
+                  })}
+                >
+                  ТРЕБУЕТСЯ РАНГ: {getRankLabel(cat, "ru").toUpperCase()}
+                </p>
+                <p
+                  className={css({
+                    color: "white/60",
+                    fontSize: "9px",
+                    fontFamily: "mono",
+                  })}
+                >
+                  XP до открытия {xpToUnlock.toLocaleString()}
+                </p>
+              </div>
             </div>
           );
         }
@@ -50,59 +129,44 @@ export default function CategoryTabs({ active }: { active: number }) {
               position: "relative",
               display: "flex",
               alignItems: "center",
-              gap: "3",
-              px: "2",
+              gap: "2",
+              px: "3",
+              py: "2",
               textTransform: "uppercase",
-              letterSpacing: "0.2em",
-              transition: "color 0.3s ease",
+              letterSpacing: "0.15em",
+              transition: "all 0.3s ease",
               color: isActive ? "white" : "dip.gray",
-              _hover: { color: "dip.red" },
+              border: "1px solid",
+              borderColor: isActive ? "dip.red/30" : "transparent",
+              bg: isActive ? "dip.red/5" : "transparent",
+              _hover: { color: "white", bg: "white/5" },
             })}
           >
-            {isActive && (
-              <>
-                <motion.div
-                  layoutId="active-tab-bg"
-                  className={css({
-                    position: "absolute",
-                    insetX: "-2",
-                    insetY: "-2",
-                    border: "1px solid",
-                    borderColor: "dip.red/30",
-                    bg: "dip.red/5",
-                    zIndex: -1,
-                  })}
-                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                />
-
-                <motion.div
-                  layoutId="active-tab-underline"
-                  className={css({
-                    position: "absolute",
-                    bottom: "-17px",
-                    insetX: "-2",
-                    h: "2px",
-                    bg: "dip.red",
-                    boxShadow: "0 0 10px token(colors.dip.red)",
-                  })}
-                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                />
-                <motion.span
-                  layoutId="active-tab-dot"
-                  className={css({
-                    w: "1.5",
-                    h: "1.5",
-                    rounded: "full",
-                    bg: "dip.red",
-                    boxShadow: "0 0 8px token(colors.dip.red)",
-                  })}
-                />
-              </>
+            {Icon && (
+              <Icon
+                size={14}
+                strokeWidth={isActive ? 2 : 1.5}
+                className={css({ color: isActive ? "dip.red" : "inherit" })}
+              />
             )}
 
             <span className={css({ position: "relative", zIndex: 1 })}>
               {getCategoryLabel(cat, "ru")}
             </span>
+
+            {isActive && (
+              <motion.div
+                layoutId="active-tab-underline"
+                className={css({
+                  position: "absolute",
+                  bottom: "-1px",
+                  insetX: "0",
+                  h: "2px",
+                  bg: "dip.red",
+                  boxShadow: "0 0 10px token(colors.dip.red)",
+                })}
+              />
+            )}
           </Link>
         );
       })}
