@@ -4,8 +4,16 @@ import { motion } from "framer-motion";
 import { css } from "@/styled-system/css";
 import { grid, stack, flex } from "@/styled-system/patterns";
 import { StatsType } from "@/types/profile.types";
+import { Locale } from "@/services/get-server-locale";
+import { t } from "@/services/get-translation";
 
-export default function Statistics({ stats }: { stats: StatsType }) {
+export default function Statistics({
+  stats,
+  locale,
+}: {
+  stats: StatsType;
+  locale: Locale;
+}) {
   const cardStyle = css({
     bg: "rgba(20, 20, 20, 0.8)",
     border: "1px solid",
@@ -20,6 +28,7 @@ export default function Statistics({ stats }: { stats: StatsType }) {
     textTransform: "uppercase",
     letterSpacing: "widest",
     mb: "1",
+    fontFamily: "mono",
   });
 
   const numberStyle = css({
@@ -49,21 +58,27 @@ export default function Statistics({ stats }: { stats: StatsType }) {
           className={labelStyle}
           style={{ color: "white", fontSize: "12px", marginBottom: 0 }}
         >
-          Mission Statistics
+          {t("mission_stats.title", locale)}
         </h3>
       </div>
 
       <div className={grid({ columns: { base: 1, md: 3 }, gap: "6" })}>
+        {/* Total Messages */}
         <div className={stack({ gap: "0" })}>
-          <span className={labelStyle}>Total Messages Sent</span>
+          <span className={labelStyle}>
+            {t("mission_stats.total_messages", locale)}
+          </span>
           <span className={numberStyle}>{stats.totalMessages || 0}</span>
           <div className={css({ w: "full", h: "1", bg: "white/5", mt: "2" })}>
             <div className={css({ w: "60%", h: "full", bg: "dip.red" })} />
           </div>
         </div>
 
+        {/* Completed Archives */}
         <div className={stack({ gap: "0" })}>
-          <span className={labelStyle}>Completed Archives</span>
+          <span className={labelStyle}>
+            {t("mission_stats.completed_archives", locale)}
+          </span>
           <span
             className={numberStyle}
             style={{ color: "var(--colors-dip-green)" }}
@@ -77,8 +92,11 @@ export default function Statistics({ stats }: { stats: StatsType }) {
           </div>
         </div>
 
+        {/* Active Sessions */}
         <div className={stack({ gap: "0" })}>
-          <span className={labelStyle}>Active Sessions</span>
+          <span className={labelStyle}>
+            {t("mission_stats.active_sessions", locale)}
+          </span>
           <span
             className={numberStyle}
             style={{ color: "var(--colors-dip-gray)" }}

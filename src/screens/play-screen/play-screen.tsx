@@ -4,12 +4,13 @@ import { useState } from "react";
 import { css } from "@/styled-system/css";
 import { flex, center } from "@/styled-system/patterns";
 import { AnimatePresence, motion } from "framer-motion";
-import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { useLocale } from "@/hooks/use-locale";
+import { t } from "@/services/get-translation";
 
 export const PlayScreen = () => {
   const [ripples, setRipples] = useState<{ id: number }[]>([]);
-  const t = useTranslations("PlayScreen");
+  const { locale } = useLocale();
 
   const handleClick = () => {
     const id = Date.now();
@@ -29,6 +30,7 @@ export const PlayScreen = () => {
         py: "12",
       })}
     >
+      {/* Intro Text Section */}
       <div
         className={css({
           maxW: "600px",
@@ -51,7 +53,7 @@ export const PlayScreen = () => {
               lineHeight: "1.6",
             })}
           >
-            {t("story")}
+            {t("play_screen.story", locale)}
           </p>
         </motion.div>
       </div>
@@ -77,7 +79,8 @@ export const PlayScreen = () => {
               />
             ))}
           </AnimatePresence>
-          <Link href={"/dashboard"}>
+
+          <Link href="/dashboard">
             <motion.button
               onClick={handleClick}
               whileHover={{ scale: 1.02 }}
@@ -113,7 +116,7 @@ export const PlayScreen = () => {
               })}
             >
               <div className={css({ position: "relative", zIndex: 1 })}>
-                {t("button")}
+                {t("play_screen.button", locale)}
                 <div
                   className={css({
                     fontSize: "12px",
@@ -123,7 +126,7 @@ export const PlayScreen = () => {
                     letterSpacing: "normal",
                   })}
                 >
-                  {t("protocol")}
+                  {t("play_screen.protocol", locale)}
                 </div>
               </div>
             </motion.button>
@@ -142,13 +145,15 @@ export const PlayScreen = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className={css({mx:{base:'3',md:'0'}, maxW: { base: "full", md: "420px" } })}
+          className={css({
+            mx: { base: "3", md: "0" },
+            maxW: { base: "full", md: "420px" },
+          })}
         >
           <div
             className={css({
               bg: "whiteAlpha.50",
               p: "4",
-
               border: "1px solid",
               borderColor: "whiteAlpha.200",
             })}
@@ -159,9 +164,10 @@ export const PlayScreen = () => {
                 fontSize: "xs",
                 mb: "2",
                 fontWeight: "bold",
+                textTransform: "uppercase",
               })}
             >
-              {t("missionObjective")}:
+              {t("play_screen.mission_objective", locale)}:
             </p>
             <p
               className={css({
@@ -171,7 +177,7 @@ export const PlayScreen = () => {
                 lineHeight: "1.4",
               })}
             >
-              {t("mission")}
+              {t("play_screen.mission", locale)}
             </p>
           </div>
         </motion.div>

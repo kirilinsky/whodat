@@ -6,15 +6,16 @@ import { grid, stack, flex } from "@/styled-system/patterns";
 import { EntityCategoryLabels } from "@/app/constants/entity.constants";
 import { CategoryStatsType } from "@/types/profile.types";
 import { getCategoryLabel } from "@/services/get-category-label";
+import { Locale } from "@/services/get-server-locale";
+import { t } from "@/services/get-translation";
 
 export default function CategoryStatistics({
   categories,
+  locale,
 }: {
   categories: CategoryStatsType[];
+  locale: Locale;
 }) {
-  /* TODO: взять из настроек пользователя или контекста */
-  const lang = "ru";
-
   const cardStyle = css({
     bg: "rgba(20, 20, 20, 0.8)",
     border: "1px solid",
@@ -23,7 +24,6 @@ export default function CategoryStatistics({
     p: "6",
   });
 
-  // Мапим пришедшую статистику для быстрого доступа
   const statsMap = categories.reduce(
     (acc, curr) => {
       acc[curr.category] = curr.count;
@@ -54,9 +54,10 @@ export default function CategoryStatistics({
             fontSize: "12px",
             textTransform: "uppercase",
             letterSpacing: "widest",
+            fontFamily: "mono",
           })}
         >
-          Архивные Сектора
+          {t("statistics.archive_sectors", locale)}
         </h3>
       </div>
 
@@ -64,7 +65,7 @@ export default function CategoryStatistics({
         {Object.keys(EntityCategoryLabels).map((id) => {
           const catId = Number(id);
           const countValue = statsMap[catId] || 0;
-          const label = getCategoryLabel(catId, lang);
+          const label = getCategoryLabel(catId, locale);
 
           return (
             <div
@@ -77,7 +78,7 @@ export default function CategoryStatistics({
                 border: "1px solid",
                 borderColor: countValue > 0 ? "dip.green/20" : "white/5",
                 transition: "all 0.2s ease",
-                opacity: countValue > 0 ? 1 : 0.6, // Приглушаем пустые категории
+                opacity: countValue > 0 ? 1 : 0.4,
               })}
             >
               <span
@@ -88,6 +89,7 @@ export default function CategoryStatistics({
                   whiteSpace: "nowrap",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
+                  fontFamily: "mono",
                 })}
               >
                 {label}
@@ -103,17 +105,18 @@ export default function CategoryStatistics({
                 >
                   {countValue}
                 </span>
-                {countValue > 0 && (
-                  <span
-                    className={css({
-                      fontSize: "8px",
-                      color: "dip.green/60",
-                      fontWeight: "bold",
-                    })}
-                  >
-                    DONE
-                  </span>
-                )}
+                <span
+                  className={css({
+                    fontSize: "8px",
+                    color: countValue > 0 ? "dip.green/60" : "white/10",
+                    fontWeight: "bold",
+                    fontFamily: "mono",
+                  })}
+                >
+                  {countValue > 0
+                    ? t("statistics.done", locale)
+                    : t("statistics.empty", locale)}
+                </span>
               </div>
 
               <div
@@ -134,7 +137,7 @@ export default function CategoryStatistics({
                     bg: "dip.green/40",
                     boxShadow:
                       countValue > 0
-                        ? "0 0 8px var(--colors-dip-green)"
+                        ? "0 0 8px token(colors.dip.green)"
                         : "none",
                   })}
                 />

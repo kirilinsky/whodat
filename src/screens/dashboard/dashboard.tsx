@@ -22,8 +22,7 @@ export default async function DashboardScreen({
         color: "white",
       })}
     >
-      <CategoryTabs user={user} active={activeCategory} />
-
+      <CategoryTabs user={user} active={activeCategory} /> 
       <EntitiesGrid entities={entities} />
     </main>
   );

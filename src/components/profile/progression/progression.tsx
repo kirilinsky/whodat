@@ -9,14 +9,16 @@ import {
   RankLevel,
 } from "@/app/constants/user.constants";
 import { getRankLabel } from "@/services/get-rank-label";
+import { Locale } from "@/services/get-server-locale";
+import { t } from "@/services/get-translation";
 
-export default function Progression({
-  rank,
-  xp,
-}: {
+interface ProgressionProps {
   rank: number;
   xp: number;
-}) {
+  locale: Locale;
+}
+
+export default function Progression({ rank, xp, locale }: ProgressionProps) {
   const currentRank = rank as RankLevel;
   const nextRank = (rank < 7 ? rank + 1 : 7) as RankLevel;
 
@@ -54,12 +56,19 @@ export default function Progression({
               fontWeight: "bold",
               textTransform: "uppercase",
               letterSpacing: "tight",
+              fontFamily: "mono",
             })}
           >
-            Rank Progression
+            {t("progression.title", locale)}
           </h3>
-          <p className={css({ color: "dip.gray", fontSize: "xs" })}>
-            Career advancement trajectory
+          <p
+            className={css({
+              color: "dip.gray",
+              fontSize: "xs",
+              fontFamily: "mono",
+            })}
+          >
+            {t("progression.subtitle", locale)}
           </p>
         </div>
       </div>
@@ -71,6 +80,7 @@ export default function Progression({
           px: "2",
           overflowX: { base: "auto", md: "visible" },
           pb: { base: "4", md: "0" },
+          scrollbar: "hidden",
         })}
       >
         <div
@@ -134,9 +144,10 @@ export default function Progression({
                         fontWeight: "bold",
                         borderRadius: "xs",
                         textTransform: "uppercase",
+                        fontFamily: "mono",
                       })}
                     >
-                      Active
+                      {t("progression.active_label", locale)}
                     </motion.div>
                   )}
                 </div>
@@ -167,9 +178,11 @@ export default function Progression({
                       color: isActive ? "white" : "dip.gray",
                       textTransform: "uppercase",
                       textAlign: "center",
+                      fontFamily: "mono",
+                      minH: "20px",
                     })}
                   >
-                    {getRankLabel(level, "en")}
+                    {getRankLabel(level, locale)}
                   </span>
                   <span
                     className={css({
@@ -201,9 +214,20 @@ export default function Progression({
             <span className={css({ color: "white/20" })}>/</span>{" "}
             {nextThreshold.toLocaleString()} XP
           </span>
-          {rank < 7 && (
+          {rank < 7 ? (
             <span className={css({ color: "dip.gray", fontSize: "10px" })}>
-              {remainingXp.toLocaleString()} XP TO NEXT LEVEL
+              {remainingXp.toLocaleString()}{" "}
+              {t("progression.xp_to_next", locale)}
+            </span>
+          ) : (
+            <span
+              className={css({
+                color: "dip.green",
+                fontSize: "10px",
+                fontWeight: "bold",
+              })}
+            >
+              {t("progression.max_level", locale)}
             </span>
           )}
         </div>

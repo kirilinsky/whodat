@@ -9,6 +9,7 @@ import { CategoryStatsType, StatsType } from "@/types/profile.types";
 import Statistics from "../statistics/statistics";
 import CategoryStatistics from "../categories/categories";
 import Progression from "../progression/progression";
+import { useLocale } from "@/hooks/use-locale";
 
 interface ProfileLayoutProps {
   user: UserType;
@@ -21,6 +22,7 @@ export default function ProfileLayout({
   stats,
   categoryStats,
 }: ProfileLayoutProps) {
+  const { locale } = useLocale();
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -45,7 +47,7 @@ export default function ProfileLayout({
             gridColumn: { base: "span 1", lg: "span 4" },
           })}
         >
-          <Bio user={user} />
+          <Bio locale={locale} user={user} />
         </aside>
 
         <main
@@ -54,9 +56,9 @@ export default function ProfileLayout({
           })}
         >
           <div className={stack({ gap: "6" })}>
-            <Statistics stats={stats} />
-            <CategoryStatistics categories={categoryStats} />
-            <Progression xp={user.xp} rank={user.rank} />
+            <Statistics locale={locale} stats={stats} />
+            <CategoryStatistics locale={locale} categories={categoryStats} />
+            <Progression locale={locale} xp={user.xp} rank={user.rank} />
           </div>
         </main>
       </div>

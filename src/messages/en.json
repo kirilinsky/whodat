@@ -1,10 +1,10 @@
 {
-    "PlayScreen": {
-        "protocol": "[ PROTOCOL: IDENTITY_RECONSTRUCTION ]",
-        "story": "The Great Digital Archive was created to preserve the minds of those who shaped our world. But then, the Corruption happened...",
-        "mission": "Restore order. Identify the fragments. The entities are highly unstable. Connection limit: 7 QUERIES.",
-        "missionObjective": "MISSION_OBJECTIVE",
-        "button": "Start mission"
+    "play_screen": {
+        "story": "The Archive is a digital necropolis of human history. Data fragments are drifting, losing their original anchors. Your neural interface is the only tool capable of stabilizing these entities.",
+        "button": "Initiate",
+        "protocol": "DECRYPT_ARCHIVE_PROTOCOL",
+        "mission_objective": "MISSION OBJECTIVE",
+        "mission": "Identify the historical entity through indirect interaction. You have limited temporal stable windows (attempts). Failure results in data collapse."
     },
     "about": {
         "description": "WhoDat is a social deduction experiment designed to test human intuition against reconstructed historical personas. In the age of digital decay, names are the first to vanish. Your objective is to restore the connection.",
@@ -82,5 +82,31 @@
     "categories": {
         "required_rank": "REQUIRED RANK",
         "xp_to_unlock": "XP needed to unlock"
+    },
+    "bio": {
+        "subject_unknown": "UNKNOWN_SUBJECT",
+        "status_label": "Status",
+        "status_active": "ACTIVE",
+        "location_label": "Location",
+        "location_classified": "Classified",
+        "rank_label": "Rank"
+    },
+    "statistics": {
+        "archive_sectors": "Archive Sectors",
+        "done": "DONE",
+        "empty": "LOCKED"
+    },
+    "progression": {
+        "title": "Rank Progression",
+        "subtitle": "Career advancement trajectory",
+        "active_label": "Active",
+        "xp_to_next": "XP TO NEXT LEVEL",
+        "max_level": "MAXIMUM CLEARANCE REACHED"
+    },
+    "mission_stats": {
+        "title": "Mission Statistics",
+        "total_messages": "Total Messages Sent",
+        "completed_archives": "Completed Archives",
+        "active_sessions": "Active Sessions"
     }
 }

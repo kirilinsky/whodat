@@ -1,10 +1,10 @@
 {
-    "PlayScreen": {
-        "protocol": "[ PROTOKOLL: IDENTITÄTS_WIEDERHERSTELLUNG ]",
-        "story": "Das Große Digitale Archiv wurde geschaffen, um die Köpfe derer zu bewahren, die unsere Welt geformt haben. Doch dann geschah die Korruption...",
-        "mission": "Stellen Sie die Ordnung wieder her. Identifizieren Sie die Fragmente. Die Entitäten sind höchst instabil. Limit: 7 ANFRAGEN.",
-        "button": "Start mission",
-        "missionObjective": "MISSION OBJECTIVE"
+    "play_screen": {
+        "story": "Das Archiv ist eine digitale Nekropole der Menschheitsgeschichte. Datenfragmente treiben dahin und verlieren ihre ursprüngliche Verankerung. Dein Neuralinterface ist das einzige Werkzeug, das diese Entitäten stabilisieren kann.",
+        "button": "Starten",
+        "protocol": "ARCHIV_ENTSCHLÜSSELUNGS_PROTOKOLL",
+        "mission_objective": "MISSIONSZIEL",
+        "mission": "Identifiziere die historische Entität durch indirekte Interaktion. Du hast begrenzte zeitliche Stabilitätsfenster (Versuche). Ein Fehlschlag führt zum Datenkollaps."
     },
     "about": {
         "description": "WhoDat ist ein soziales Deduktions-Experiment, das entwickelt wurde, um die menschliche Intuition gegen rekonstruierte historische Persönlichkeiten zu testen. Im Zeitalter des digitalen Verfalls verschwinden Namen zuerst. Deine Aufgabe ist es, die Verbindung wiederherzustellen.",
@@ -82,5 +82,31 @@
     "categories": {
         "required_rank": "RANG ERFORDERLICH",
         "xp_to_unlock": "XP zum Freischalten"
+    },
+    "bio": {
+        "subject_unknown": "UNBEKANNTES_SUBJEKT",
+        "status_label": "Status",
+        "status_active": "AKTIV",
+        "location_label": "Standort",
+        "location_classified": "Streng Geheim",
+        "rank_label": "Rang"
+    },
+    "statistics": {
+        "archive_sectors": "Archivsektoren",
+        "done": "ERLEDIGT",
+        "empty": "GESPERRT"
+    },
+    "progression": {
+        "title": "Rang-Fortschritt",
+        "subtitle": "Karriereverlaufstrajektorie",
+        "active_label": "Aktiv",
+        "xp_to_next": "XP BIS ZUM NÄCHSTEN LEVEL",
+        "max_level": "MAXIMALE FREIGABESTUFE ERREICHT"
+    },
+    "mission_stats": {
+        "title": "Missionsstatistik",
+        "total_messages": "Gesendete Nachrichten",
+        "completed_archives": "Abgeschlossene Archive",
+        "active_sessions": "Aktive Sitzungen"
     }
 }
