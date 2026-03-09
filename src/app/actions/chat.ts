@@ -61,8 +61,23 @@ OPERATIONAL RULES:
       if (isWin) {
         const baseWinXp = 10;
 
-        const remainingAttemptsBonus = Math.max(0, data.sessions.attempts - 1);
-        const totalEarnedXp = baseWinXp + remainingAttemptsBonus;
+        const sessionWithEntity = await tx
+          .select({
+            attempts: sessions.attempts,
+            category: entities.category,
+          })
+          .from(sessions)
+          .innerJoin(entities, eq(sessions.entityId, entities.id))
+          .where(eq(sessions.id, sessionId))
+          .then((res) => res[0]);
+
+        if (!sessionWithEntity) throw new Error("Session context lost");
+        const { attempts, category } = sessionWithEntity;
+        const remainingAttempts = Math.max(0, attempts - 1);
+        const categoryMultiplier = 1 + category * 0.5;
+        const bonusXp = Math.floor(remainingAttempts * categoryMultiplier);
+
+        const totalEarnedXp = baseWinXp + bonusXp;
 
         await tx
           .update(sessions)
