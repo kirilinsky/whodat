@@ -3,11 +3,19 @@
 import { motion } from "framer-motion";
 import { css } from "@/styled-system/css";
 import { stack, flex, grid } from "@/styled-system/patterns";
-import { RANK_THRESHOLDS } from "@/app/constants/user.constants";
+import {
+  RANK_ICONS,
+  RANK_THRESHOLDS,
+  RankLevel,
+} from "@/app/constants/user.constants";
 import { getRankLabel } from "@/services/get-rank-label";
 import { Shield, Zap, Target, Star } from "lucide-react";
+import { useLocale } from "@/hooks/use-locale";
+import { t } from "@/services/get-translation";
 
 export default function AboutPage() {
+  const { locale } = useLocale(); // "ru" | "en" | "de"
+
   return (
     <div
       className={stack({
@@ -18,7 +26,7 @@ export default function AboutPage() {
         py: "10",
         fontFamily: "mono",
       })}
-    > 
+    >
       <div className={stack({ gap: "2" })}>
         <motion.h1
           initial={{ opacity: 0 }}
@@ -35,65 +43,95 @@ export default function AboutPage() {
         </motion.h1>
         <div className={css({ h: "1px", w: "full", bg: "white/10" })} />
       </div>
- 
+
       <section className={stack({ gap: "4" })}>
-        <p className={css({ color: "white/70", fontSize: "sm", lineHeight: "1.8" })}>
-          WhoDat — это социальный эксперимент по дедукции, разработанный для проверки человеческой 
-          интуиции против реконструированных исторических личностей. В эпоху цифрового распада 
-          имена исчезают первыми. Ваша задача — восстановить связь.
+        <p
+          className={css({
+            color: "white/70",
+            fontSize: "sm",
+            lineHeight: "1.8",
+          })}
+        >
+          {t("about.description", locale)}
         </p>
       </section>
 
-       <section className={stack({ gap: "6" })}>
+      <section className={stack({ gap: "6" })}>
         <div className={flex({ align: "center", gap: "2" })}>
-          <div className={css({ w: "2", h: "2", bg: "dip.red", transform: "rotate(45deg)" })} />
-          <h2 className={css({ color: "white", fontSize: "xs", letterSpacing: "0.2em", textTransform: "uppercase" })}>
-            Progression_Protocol
+          <div
+            className={css({
+              w: "2",
+              h: "2",
+              bg: "dip.red",
+              transform: "rotate(45deg)",
+            })}
+          />
+          <h2
+            className={css({
+              color: "white",
+              fontSize: "xs",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+            })}
+          >
+            {t("about.protocol_title", locale)}
           </h2>
         </div>
-        
-        <p className={css({ color: "white/50", fontSize: "xs", lineHeight: "1.6" })}>
-          Каждая успешная идентификация субъекта приносит очки опыта (XP). 
-          Накопление XP повышает ваш уровень допуска, открывая доступ к более глубоким слоям 
-          архива — от Античности до Новейшего времени.
+
+        <p
+          className={css({
+            color: "white/50",
+            fontSize: "xs",
+            lineHeight: "1.6",
+          })}
+        >
+          {t("about.protocol_desc", locale)}
         </p>
 
         <div className={grid({ columns: { base: 1, sm: 2 }, gap: "4" })}>
-          {[0, 2, 5, 7].map((level) => (
-            <div 
-              key={level} 
-              className={flex({ 
-                align: "center", 
-                gap: "3", 
-                p: "3", 
-                bg: "white/2", 
-                border: "1px solid", 
-                borderColor: "white/5" 
-              })}
-            >
-              <span className={css({ color: "dip.red", fontSize: "14px" })}>
-                {level === 0 && <Target size={16} />}
-                {level === 2 && <Shield size={16} />}
-                {level === 5 && <Zap size={16} />}
-                {level === 7 && <Star size={16} />}
-              </span>
-              <div className={stack({ gap: "0" })}>
-                <span className={css({ color: "white", fontSize: "xs", fontWeight: "bold" })}>
-                  {getRankLabel(level, "ru")}
+          {[0, 1, 2, 3, 4, 5, 6, 7].map((level) => {
+            const Icon = RANK_ICONS[level as RankLevel];
+            return (
+              <div
+                key={level}
+                className={flex({
+                  align: "center",
+                  gap: "3",
+                  p: "3",
+                  bg: "white/2",
+                  border: "1px solid",
+                  borderColor: "white/5",
+                })}
+              >
+                <span className={css({ color: "dip.red", fontSize: "14px" })}>
+                  <Icon size={16} />
                 </span>
-                <span className={css({ color: "white/30", fontSize: "10px" })}>
-                  LEVEL {level} / {RANK_THRESHOLDS[level as keyof typeof RANK_THRESHOLDS]} XP
-                </span>
+                <div className={stack({ gap: "0" })}>
+                  <span
+                    className={css({
+                      color: "white",
+                      fontSize: "xs",
+                      fontWeight: "bold",
+                    })}
+                  >
+                    {getRankLabel(level, locale)}
+                  </span>
+                  <span
+                    className={css({ color: "white/30", fontSize: "10px" })}
+                  >
+                    {t("about.level_label", locale)} {level} /{" "}
+                    {RANK_THRESHOLDS[level as keyof typeof RANK_THRESHOLDS]} XP
+                  </span>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
-       <div
-        className={css({
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
+      <div
+        className={grid({
+          columns: 2,
           gap: "4",
           border: "1px solid",
           borderColor: "white/5",
@@ -102,20 +140,64 @@ export default function AboutPage() {
         })}
       >
         <div>
-          <span className={css({ display: "block", color: "dip.red", fontSize: "10px", mb: "1" })}>CORE_ENGINE</span>
-          <span className={css({ color: "white", fontSize: "xs" })}>GPT-4O-MINI / LLM</span>
+          <span
+            className={css({
+              display: "block",
+              color: "dip.red",
+              fontSize: "10px",
+              mb: "1",
+            })}
+          >
+            {t("about.tech_stack.engine", locale)}
+          </span>
+          <span className={css({ color: "white", fontSize: "xs" })}>
+            GPT-4O-MINI / LLM
+          </span>
         </div>
         <div>
-          <span className={css({ display: "block", color: "dip.red", fontSize: "10px", mb: "1" })}>DATABASE</span>
-          <span className={css({ color: "white", fontSize: "xs" })}>POSTGRES / DRIZZLE</span>
+          <span
+            className={css({
+              display: "block",
+              color: "dip.red",
+              fontSize: "10px",
+              mb: "1",
+            })}
+          >
+            {t("about.tech_stack.database", locale)}
+          </span>
+          <span className={css({ color: "white", fontSize: "xs" })}>
+            POSTGRES / DRIZZLE
+          </span>
         </div>
         <div>
-          <span className={css({ display: "block", color: "dip.red", fontSize: "10px", mb: "1" })}>PROGRESSION</span>
-          <span className={css({ color: "white", fontSize: "xs" })}>8 ACCESS LEVELS</span>
+          <span
+            className={css({
+              display: "block",
+              color: "dip.red",
+              fontSize: "10px",
+              mb: "1",
+            })}
+          >
+            {t("about.tech_stack.progression", locale)}
+          </span>
+          <span className={css({ color: "white", fontSize: "xs" })}>
+            {t("about.tech_stack.levels", locale)}
+          </span>
         </div>
         <div>
-          <span className={css({ display: "block", color: "dip.red", fontSize: "10px", mb: "1" })}>NEW ARCHIVE</span>
-          <span className={css({ color: "white", fontSize: "xs" })}>EVERY 24 HOURS</span>
+          <span
+            className={css({
+              display: "block",
+              color: "dip.red",
+              fontSize: "10px",
+              mb: "1",
+            })}
+          >
+            {t("about.tech_stack.archive", locale)}
+          </span>
+          <span className={css({ color: "white", fontSize: "xs" })}>
+            {t("about.tech_stack.every_24h", locale)}
+          </span>
         </div>
       </div>
     </div>

@@ -5,5 +5,34 @@
         "mission": "Stellen Sie die Ordnung wieder her. Identifizieren Sie die Fragmente. Die Entitäten sind höchst instabil. Limit: 7 ANFRAGEN.",
         "button": "Start mission",
         "missionObjective": "MISSION OBJECTIVE"
+    },
+    "about": {
+        "description": "WhoDat ist ein soziales Deduktions-Experiment, das entwickelt wurde, um die menschliche Intuition gegen rekonstruierte historische Persönlichkeiten zu testen. Im Zeitalter des digitalen Verfalls verschwinden Namen zuerst. Deine Aufgabe ist es, die Verbindung wiederherzustellen.",
+        "protocol_title": "Fortschritts_Protokoll",
+        "protocol_desc": "Jede erfolgreiche Identifizierung eines Subjekts bringt Erfahrungspunkte (XP). Das Sammeln von XP erhöht deine Freigabestufe und schaltet den Zugriff auf tiefere Archivebenen frei — von der Antike bis zur Neuzeit.",
+        "level_label": "LEVEL",
+        "tech_stack": {
+            "engine": "KERN_SYSTEM",
+            "database": "DATENBANK",
+            "progression": "FORTSCHRITT",
+            "archive": "NEUES ARCHIV",
+            "levels": "8 ZUGRIFFSSTUFEN",
+            "every_24h": "ALLE 24 STUNDEN"
+        }
+    },
+    "terms": {
+        "system_protocol": "SYSTEMPROTOKOLL: EINTRITTSBEDINGUNGEN",
+        "version": "Ver. 2026.03.05",
+        "acceptance": "Indem Sie fortfahren, akzeptieren Sie die oben genannten Verschlüsselungsprotokolle.",
+        "sections": {
+            "ai_title": "01. KÜNSTLICHE INTELLIGENZ",
+            "ai_content": "Alle Dialoge werden vom neuronalen Netzwerk GPT-4o-mini betrieben. Die KI kann halluzinieren, historisch ungenaue Daten liefern oder sich im Rahmen ihrer Persona provokativ verhalten.",
+            "ops_title": "02. OPERATIONELLE LIMITS",
+            "ops_content": "Benutzern werden 7 Verhörversuche pro Sitzung gewährt. Eingaben sind streng auf 32 Zeichen begrenzt, um die Systemstabilität zu gewährleisten.",
+            "data_title": "03. DATENSPEICHERUNG",
+            "data_content": "Wir verwenden Clerk zur Authentifizierung. Dein Verhörverlauf und XP-Fortschritt werden in unserer Datenbank in Supabase (PSQL) gespeichert.",
+            "warranty_title": "04. KEINE GEWÄHRLEISTUNG",
+            "warranty_content": "Dieses Projekt wird 'wie besehen' zur Verfügung gestellt. Wir garantieren keine 100%ige Verfügbarkeit. Das Archiv kann für Wartungsarbeiten oder aufgrund von 'Temporären Verzerrungen' offline gehen."
+        }
     }
 }

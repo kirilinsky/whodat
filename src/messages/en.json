@@ -5,5 +5,34 @@
         "mission": "Restore order. Identify the fragments. The entities are highly unstable. Connection limit: 7 QUERIES.",
         "missionObjective": "MISSION_OBJECTIVE",
         "button": "Start mission"
+    },
+    "about": {
+        "description": "WhoDat is a social deduction experiment designed to test human intuition against reconstructed historical personas. In the age of digital decay, names are the first to vanish. Your objective is to restore the connection.",
+        "protocol_title": "Progression_Protocol",
+        "protocol_desc": "Each successful identification of a subject grants experience points (XP). Accumulating XP increases your clearance level, unlocking access to deeper archive layers — from Antiquity to the Modern Era.",
+        "level_label": "LEVEL",
+        "tech_stack": {
+            "engine": "CORE_ENGINE",
+            "database": "DATABASE",
+            "progression": "PROGRESSION",
+            "archive": "NEW ARCHIVE",
+            "levels": "8 ACCESS LEVELS",
+            "every_24h": "EVERY 24 HOURS"
+        }
+    },
+    "terms": {
+        "system_protocol": "SYSTEM_PROTOCOL: TERMS_OF_ENTRY",
+        "version": "Ver. 2026.03.05",
+        "acceptance": "By proceeding, you accept the encryption protocols above.",
+        "sections": {
+            "ai_title": "01. ARTIFICIAL INTELLIGENCE",
+            "ai_content": "All dialogues are powered by the GPT-4o-mini neural network. The AI may hallucinate, provide historically inaccurate data, or behave provocatively as part of its persona.",
+            "ops_title": "02. OPERATIONAL LIMITS",
+            "ops_content": "Users are granted 7 interrogation attempts per session. Inputs are strictly limited to 32 characters to maintain system stability.",
+            "data_title": "03. DATA RETENTION",
+            "data_content": "We use Clerk for authentication. Your interrogation history and XP progress are stored in our database in Supabase (PSQL).",
+            "warranty_title": "04. NO WARRANTY",
+            "warranty_content": "This project is provided 'as is'. We do not guarantee 100% uptime. The Archive may go offline for maintenance or due to 'Temporal Distortions'."
+        }
     }
 }

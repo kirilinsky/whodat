@@ -3,35 +3,35 @@
 import { motion } from "framer-motion";
 import { css } from "@/styled-system/css";
 import { stack, flex } from "@/styled-system/patterns";
+import { useLocale } from "@/hooks/use-locale";
+import { t } from "@/services/get-translation";
 
 export default function TermsOfEntry() {
+  const { locale } = useLocale();
+
   const sections = [
     {
-      title: "01. ARTIFICIAL INTELLIGENCE",
-      content:
-        "All dialogues are powered by the GPT-4o-mini neural network. The AI may hallucinate, provide historically inaccurate data, or behave provocatively as part of its persona.",
+      title: t("terms.sections.ai_title", locale),
+      content: t("terms.sections.ai_content", locale),
     },
     {
-      title: "02. OPERATIONAL LIMITS",
-      content:
-        "Users are granted 7 interrogation attempts per session. Inputs are strictly limited to 32 characters to maintain system stability.",
+      title: t("terms.sections.ops_title", locale),
+      content: t("terms.sections.ops_content", locale),
     },
     {
-      title: "03. DATA RETENTION",
-      content:
-        "We use Clerk for authentication. Your interrogation history and XP progress are stored in our database in Supabase (PSQL).",
+      title: t("terms.sections.data_title", locale),
+      content: t("terms.sections.data_content", locale),
     },
     {
-      title: "04. NO WARRANTY",
-      content:
-        "This project is provided 'as is'. We do not guarantee 100% uptime. The Archive may go offline for maintenance or due to 'Temporal Distortions'.",
+      title: t("terms.sections.warranty_title", locale),
+      content: t("terms.sections.warranty_content", locale),
     },
   ];
 
   return (
     <div
       className={css({
-        w: "full", 
+        w: "full",
         p: "6",
         fontFamily: "mono",
       })}
@@ -52,10 +52,10 @@ export default function TermsOfEntry() {
             fontWeight: "bold",
           })}
         >
-          [ SYSTEM_PROTOCOL: TERMS_OF_ENTRY ]
+          [ {t("terms.system_protocol", locale)} ]
         </span>
         <span className={css({ color: "white/20", fontSize: "10px" })}>
-          Ver. 2026.03.05
+          {t("terms.version", locale)}
         </span>
       </div>
 
@@ -103,11 +103,12 @@ export default function TermsOfEntry() {
         <span
           className={css({
             color: "dip.red/60",
-            fontSize: "14px",
+            fontSize: "12px",
             textTransform: "uppercase",
+            letterSpacing: "tight",
           })}
         >
-          By proceeding, you accept the encryption protocols above.
+          {t("terms.acceptance", locale)}
         </span>
       </div>
     </div>
