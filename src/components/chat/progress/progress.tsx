@@ -1,12 +1,21 @@
+"use client";
+
 import { css } from "@/styled-system/css";
 import { flex, hstack } from "@/styled-system/patterns";
+import { t } from "@/services/get-translation";
+import { Locale } from "@/services/get-server-locale";
 
 interface ProgressProps {
   current: number;
   total?: number;
+  locale: Locale;
 }
 
-export default function Progress({ current, total = 7 }: ProgressProps) {
+export default function Progress({
+  current,
+  total = 7,
+  locale,
+}: ProgressProps) {
   return (
     <div
       className={css({
@@ -32,7 +41,7 @@ export default function Progress({ current, total = 7 }: ProgressProps) {
             textTransform: "uppercase",
           })}
         >
-          Progress
+          {t("progress.title", locale)}
         </span>
         <span
           className={css({
@@ -42,7 +51,7 @@ export default function Progress({ current, total = 7 }: ProgressProps) {
           })}
         >
           <strong className={css({ color: "dip.red" })}>{current}</strong>{" "}
-          ATTEMPTS REMAINING
+          {t("progress.attempts_label", locale)}
         </span>
       </div>
       <div className={hstack({ gap: "2", w: "full" })}>

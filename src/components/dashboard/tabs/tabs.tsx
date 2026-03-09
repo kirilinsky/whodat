@@ -12,6 +12,8 @@ import {
 } from "@/app/constants/user.constants";
 import { getRankLabel } from "@/services/get-rank-label";
 import { UserType } from "@/types/user.types";
+import { t } from "@/services/get-translation";
+import { useLocale } from "@/hooks/use-locale";
 
 interface CategoryTabsProps {
   active: number;
@@ -20,6 +22,7 @@ interface CategoryTabsProps {
 
 export default function CategoryTabs({ active, user }: CategoryTabsProps) {
   const categories = Object.values(EntityCategory) as number[];
+  const { locale } = useLocale();
 
   return (
     <nav
@@ -72,7 +75,7 @@ export default function CategoryTabs({ active, user }: CategoryTabsProps) {
                   letterSpacing: "widest",
                 })}
               >
-                {getCategoryLabel(cat, "ru")}
+                {getCategoryLabel(cat, locale)}
               </span>
               <div
                 className={css({
@@ -105,7 +108,8 @@ export default function CategoryTabs({ active, user }: CategoryTabsProps) {
                     fontWeight: "bold",
                   })}
                 >
-                  ТРЕБУЕТСЯ РАНГ: {getRankLabel(cat, "ru").toUpperCase()}
+                  {t("categories.required_rank", locale)}:{" "}
+                  {getRankLabel(cat, locale).toUpperCase()}
                 </p>
                 <p
                   className={css({
@@ -114,7 +118,8 @@ export default function CategoryTabs({ active, user }: CategoryTabsProps) {
                     fontFamily: "mono",
                   })}
                 >
-                  XP до открытия {xpToUnlock.toLocaleString()}
+                  {t("categories.xp_to_unlock", locale)}{" "}
+                  {xpToUnlock.toLocaleString()}
                 </p>
               </div>
             </div>
@@ -151,7 +156,7 @@ export default function CategoryTabs({ active, user }: CategoryTabsProps) {
             )}
 
             <span className={css({ position: "relative", zIndex: 1 })}>
-              {getCategoryLabel(cat, "ru")}
+              {getCategoryLabel(cat, locale)}
             </span>
 
             {isActive && (

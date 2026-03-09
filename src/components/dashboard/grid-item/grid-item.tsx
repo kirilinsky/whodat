@@ -3,8 +3,15 @@ import { flex, stack } from "@/styled-system/patterns";
 import { EnrichedEntityType } from "@/types/entity.types";
 import EntityStatus from "../entitiy-status/entity-status";
 import { defaultClassifiedName } from "@/app/constants/entity.constants";
+import { Locale } from "@/services/get-server-locale";
 
-export default function GridItem({ entity }: { entity: EnrichedEntityType }) {
+export default function GridItem({
+  entity,
+  locale,
+}: {
+  locale: Locale;
+  entity: EnrichedEntityType;
+}) {
   const { locked, name, id, imageUrl, category, xp, played } = entity;
 
   return (
@@ -59,7 +66,12 @@ export default function GridItem({ entity }: { entity: EnrichedEntityType }) {
           />
         </div>
         <div className={stack({ gap: "3" })}>
-          <EntityStatus locked={locked} xp={xp} played={played} />
+          <EntityStatus
+            locale={locale}
+            locked={locked}
+            xp={xp}
+            played={played}
+          />
 
           <div
             className={flex({ justify: "space-between", align: "flex-end" })}

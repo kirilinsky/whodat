@@ -34,5 +34,53 @@
             "warranty_title": "04. KEINE GEWÄHRLEISTUNG",
             "warranty_content": "Dieses Projekt wird 'wie besehen' zur Verfügung gestellt. Wir garantieren keine 100%ige Verfügbarkeit. Das Archiv kann für Wartungsarbeiten oder aufgrund von 'Temporären Verzerrungen' offline gehen."
         }
+    },
+    "footer": {
+        "about": "Über uns",
+        "terms": "Eintrittsbedingungen"
+    },
+    "header": {
+        "dashboard": "Dashboard",
+        "profile": "Profil",
+        "system_status": "Systemstatus",
+        "operational": "OPERATIV",
+        "failed": "FEHLER",
+        "no_user": "Kein Benutzer",
+        "sign_in": "Anmelden",
+        "sign_up": "Registrieren",
+        "sign_out": "Abmelden"
+    },
+    "aside": {
+        "active_session": "AKTIVE SITZUNG",
+        "status_label": "Aktueller Status",
+        "status_identified": "IDENTIFIZIERT",
+        "status_classified": "GEHEIM",
+        "threat_label": "Gefahrenkategorie"
+    },
+    "chat_field": {
+        "subject_label": "Subjekt",
+        "xp_credited": "XP-CREDITS AUF IHR KONTO ÜBERWIESEN",
+        "back_to_list": "Zurück zur Personalliste"
+    },
+    "chat_input": {
+        "placeholder": "Verhördaten eingeben...",
+        "terminated": "ZUGRIFF BEENDET",
+        "identified": "SUBJEKT IDENTIFIZIERT",
+        "send": "Senden",
+        "processing": "Verarbeitung..."
+    },
+    "progress": {
+        "title": "Fortschritt",
+        "attempts_label": "VERBLEIBENDE VERSUCHE"
+    },
+    "entity_status": {
+        "label": "STATUS",
+        "revealed": "ENTHÜLLT",
+        "in_progress": "IN BEARBEITUNG",
+        "unknown": "UNBEKANNT"
+    },
+    "categories": {
+        "required_rank": "RANG ERFORDERLICH",
+        "xp_to_unlock": "XP zum Freischalten"
     }
 }

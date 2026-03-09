@@ -1,26 +1,36 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { css } from "@/styled-system/css";
 import { flex } from "@/styled-system/patterns";
 import { sendMessage } from "@/app/actions/chat";
+import { t } from "@/services/get-translation";
+import { Locale } from "@/services/get-server-locale";
 
 interface InputProps {
   sessionId: number;
   attemptsCount: number;
   success: boolean;
+  locale: Locale;
 }
 
 export default function Input({
   sessionId,
   attemptsCount,
   success,
+  locale,
 }: InputProps) {
   const [value, setValue] = useState("");
   const [isPending, startTransition] = useTransition();
 
   const isDisabled = attemptsCount <= 0 || isPending || success;
   const maxLength = 32;
+
+  const getPlaceholder = () => {
+    if (success) return t("chat_input.identified", locale);
+    if (attemptsCount <= 0) return t("chat_input.terminated", locale);
+    return t("chat_input.placeholder", locale);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,8 +73,8 @@ export default function Input({
           borderRadius: "sm",
           position: "relative",
           _focusWithin: {
-            borderColor: "dip.red",
-            bg: "rgba(255, 0, 0, 0.02)",
+            borderColor: success ? "dip.green" : "dip.red",
+            bg: success ? "rgba(0, 255, 0, 0.02)" : "rgba(255, 0, 0, 0.02)",
           },
         })}
       >
@@ -82,7 +92,7 @@ export default function Input({
           type="text"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          placeholder={isDisabled ? "TERMINATED" : "type your message..."}
+          placeholder={getPlaceholder()}
           disabled={isDisabled}
           maxLength={maxLength}
           className={css({
@@ -94,7 +104,11 @@ export default function Input({
             fontSize: "sm",
             fontFamily: "mono",
             py: { base: "3", md: "4" },
-            _placeholder: { color: "white/20" },
+            _placeholder: {
+              color: success ? "dip.green/40" : "white/20",
+              textTransform: "uppercase",
+              fontSize: "10px",
+            },
             _disabled: { cursor: "not-allowed" },
           })}
         />
@@ -127,29 +141,30 @@ export default function Input({
           cursor: "pointer",
           transition: "all 0.2s ease",
           borderRadius: "sm",
+          minW: "fit-content",
           _hover: {
             bg: "red.600",
             boxShadow: "0 4px 12px rgba(255, 0, 0, 0.3)",
           },
-          _active: { transform: "translateY(0)" },
           _disabled: {
             bg: "white/10",
             color: "white/20",
             cursor: "not-allowed",
-            boxShadow: "none",
-            transform: "none",
           },
         })}
       >
-        <span>{isPending ? "Processing..." : "Send Data"}</span>
-        {/* TODO move svg into dedicated component */}
+        <span>
+          {isPending
+            ? t("chat_input.processing", locale)
+            : t("chat_input.send", locale)}
+        </span>
         <svg
-          width="16"
-          height="16"
+          width="14"
+          height="14"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="2.5"
+          strokeWidth="3"
           strokeLinecap="round"
           strokeLinejoin="round"
           className={isPending ? css({ animation: "pulse 1s infinite" }) : ""}

@@ -18,7 +18,7 @@ export default async function DashboardScreen({
       className={css({
         minH: "screen",
         bg: "dip.bg",
-        pt: "8",
+        pt: "6",
         color: "white",
       })}
     >

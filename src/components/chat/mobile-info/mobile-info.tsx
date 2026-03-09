@@ -3,13 +3,16 @@ import { flex, stack } from "@/styled-system/patterns";
 import { EnrichedEntityType } from "@/types/entity.types";
 import Progress from "../progress/progress";
 import { getCategoryLabel } from "@/services/get-category-label";
+import { Locale } from "@/services/get-server-locale";
 
 export default function MobileInfo({
   entity,
   attempts,
+  locale,
 }: {
   entity: EnrichedEntityType;
   attempts: number;
+  locale: Locale;
 }) {
   const { name, imageUrl, category, locked } = entity;
 
@@ -59,7 +62,7 @@ export default function MobileInfo({
               letterSpacing: "widest",
             })}
           >
-            {getCategoryLabel(category, "ru")}
+            {getCategoryLabel(category, locale)}
           </span>
           <h2
             className={css({
@@ -69,11 +72,11 @@ export default function MobileInfo({
               textTransform: "uppercase",
             })}
           >
-            {locked ? "CLASSIFIED" : name.ru}
+            {locked ? "INCOGNITO" : name[locale]}
           </h2>
         </div>
       </div>
-      <Progress current={attempts} />
+      <Progress locale={locale} current={attempts} />
     </div>
   );
 }

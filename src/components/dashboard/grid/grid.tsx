@@ -4,12 +4,15 @@ import { motion } from "framer-motion";
 import { css } from "@/styled-system/css";
 import GridItem from "../grid-item/grid-item";
 import { EnrichedEntityType } from "@/types/entity.types";
+import { useLocale } from "@/hooks/use-locale";
 
 export default function EntitiesGrid({
   entities,
 }: {
   entities: EnrichedEntityType[];
 }) {
+  const { locale } = useLocale();
+
   return (
     <div
       className={css({
@@ -44,7 +47,7 @@ export default function EntitiesGrid({
           }}
           whileHover={{ y: -4 }}
         >
-          <GridItem entity={entity} />
+          <GridItem locale={locale} entity={entity} />
         </motion.div>
       ))}
     </div>

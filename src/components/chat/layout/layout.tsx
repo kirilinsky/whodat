@@ -1,3 +1,5 @@
+"use client";
+
 import { css } from "@/styled-system/css";
 import { flex } from "@/styled-system/patterns";
 import Aside from "../aside/aside";
@@ -8,6 +10,7 @@ import { SessionType } from "@/types/session.types";
 import ChatField from "../chat-field/chat-field";
 import { SessionMessageType } from "@/types/message.types";
 import MobileInfo from "../mobile-info/mobile-info";
+import { useLocale } from "@/hooks/use-locale";
 
 export default function ChatLayout({
   entity,
@@ -18,6 +21,7 @@ export default function ChatLayout({
   session: SessionType;
   initialMessages: SessionMessageType[];
 }) {
+  const { locale } = useLocale();
   return (
     <div
       className={css({
@@ -30,8 +34,16 @@ export default function ChatLayout({
         overflow: "hidden",
       })}
     >
-      {entity && <MobileInfo attempts={session.attempts} entity={entity} />}
-      {entity && <Aside success={session.success} entity={entity} />}
+      {entity && (
+        <MobileInfo
+          locale={locale}
+          attempts={session.attempts}
+          entity={entity}
+        />
+      )}
+      {entity && (
+        <Aside locale={locale} success={session.success} entity={entity} />
+      )}
       <main
         className={flex({
           direction: "column",
@@ -52,6 +64,7 @@ export default function ChatLayout({
             category={entity?.category}
             success={session.success}
             messages={initialMessages}
+            locale={locale}
           />
         </div>
         <div
@@ -64,12 +77,13 @@ export default function ChatLayout({
           })}
         >
           <div className={css({ display: { base: "none", md: "block" } })}>
-            <Progress current={session.attempts} />
+            <Progress locale={locale} current={session.attempts} />
           </div>
           <Input
             success={session.success}
             attemptsCount={session.attempts}
             sessionId={session.id}
+            locale={locale}
           />
         </div>
       </main>

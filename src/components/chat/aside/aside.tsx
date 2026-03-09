@@ -1,22 +1,21 @@
 "use client";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { getCategoryLabel } from "@/services/get-category-label";
 import { css } from "@/styled-system/css";
 import { stack, flex } from "@/styled-system/patterns";
 import { EnrichedEntityType } from "@/types/entity.types";
 import { DataField } from "../data-field/data-field";
+import { t } from "@/services/get-translation";
+import { Locale } from "@/services/get-server-locale";
 
 interface ChatAsideProps {
   entity: EnrichedEntityType;
   success: boolean;
-  locale?: "ru" | "en" | "de";
+  locale: Locale;
 }
 
-export default function Aside({
-  success,
-  entity,
-  locale = "ru",
-}: ChatAsideProps) {
+export default function Aside({ success, entity, locale }: ChatAsideProps) {
   const { played, imageUrl, name, category } = entity;
   const lockedImageUrl = imageUrl ? `/categories/${category}.webp` : null;
 
@@ -42,7 +41,7 @@ export default function Aside({
           p: "4",
           bg: "dip.gray_card",
           transition: "border-color 1s ease",
-          animation: success ? "glowPulse 3s infinite" : "none",
+          boxShadow: success ? "0 0 20px token(colors.dip.red/20)" : "none",
         })}
       >
         <div
@@ -107,9 +106,10 @@ export default function Aside({
                   color: "white",
                   border: "1px solid",
                   borderColor: "dip.red/30",
+                  textTransform: "uppercase",
                 })}
               >
-                ACTIVE SESSION
+                {t("aside.active_session", locale)}
               </span>
             )}
           </div>
@@ -129,12 +129,16 @@ export default function Aside({
 
       <div className={stack({ gap: "1" })}>
         <DataField
-          label="Current Status"
-          value={success ? "IDENTIFIED" : "CLASSIFIED"}
+          label={t("aside.status_label", locale)}
+          value={
+            success
+              ? t("aside.status_identified", locale)
+              : t("aside.status_classified", locale)
+          }
           isAlert={!success}
         />
         <DataField
-          label="Threat Category"
+          label={t("aside.threat_label", locale)}
           value={getCategoryLabel(category, locale)}
         />
       </div>

@@ -36,5 +36,53 @@
             "warranty_title": "04. ОТКАЗ ОТ ГАРАНТИЙ",
             "warranty_content": "Этот проект предоставляется «как есть». Мы не гарантируем 100% аптайм. Архив может уходить в офлайн для обслуживания или из-за «Временных искажений»."
         }
+    },
+    "footer": {
+        "about": "О проекте",
+        "terms": "Условия_входа"
+    },
+    "header": {
+        "dashboard": "Персонажи",
+        "profile": "Профиль",
+        "system_status": "Статус Системы",
+        "operational": "АКТИВЕН",
+        "failed": "ОШИБКА",
+        "no_user": "Нет Пользователя",
+        "sign_in": "Войти",
+        "sign_up": "Регистрация",
+        "sign_out": "Выйти"
+    },
+    "aside": {
+        "active_session": "АКТИВНАЯ СЕССИЯ",
+        "status_label": "Текущий статус",
+        "status_identified": "ИДЕНТИФИЦИРОВАН",
+        "status_classified": "ЗАСЕКРЕЧЕНО",
+        "threat_label": "Категория угрозы"
+    },
+    "chat_field": {
+        "subject_label": "Инкогнито",
+        "xp_credited": "ОЧКИ ОПЫТА ЗАЧИСЛЕНЫ НА ВАШ СЧЕТ",
+        "back_to_list": "вернуться к списку персонажей"
+    },
+    "chat_input": {
+        "placeholder": "Введите данные допроса...",
+        "terminated": "ДОСТУП ПРЕКРАЩЕН",
+        "identified": "ОБЪЕКТ ОПОЗНАН",
+        "send": "Отправить",
+        "processing": "Обработка..."
+    },
+    "progress": {
+        "title": "Прогресс",
+        "attempts_label": "ПОПЫТОК ОСТАЛОСЬ"
+    },
+    "entity_status": {
+        "label": "СТАТУС",
+        "revealed": "РАСКРЫТ",
+        "in_progress": "В ПРОЦЕССЕ",
+        "unknown": "НЕИЗВЕСТНО"
+    },
+    "categories": {
+        "required_rank": "ТРЕБУЕТСЯ РАНГ",
+        "xp_to_unlock": "XP до открытия"
     }
 }

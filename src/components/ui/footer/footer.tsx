@@ -1,6 +1,11 @@
+"use client";
+
 import { styled, HStack } from "@/styled-system/jsx";
 import Link from "next/link";
 import LocaleSelector from "../locale-selector/locale-selector";
+import { useLocale } from "@/hooks/use-locale";
+import { t } from "@/services/get-translation";
+import { css } from "@/styled-system/css";
 
 const FooterContainer = styled("footer", {
   base: {
@@ -31,15 +36,28 @@ const FooterLink = styled(Link, {
 });
 
 export const Footer = () => {
+  const { locale } = useLocale();
+
   return (
     <FooterContainer>
       <styled.span>
-        whodat © 2026 <a href="https://github.com/kirilinsky">kirilinsky</a>
+        whodat © 2026{" "}
+        <a
+          className={css({
+            color: "dip.red",
+          })}
+          href="https://github.com/kirilinsky"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          kirilinsky
+        </a>
       </styled.span>
 
       <HStack gap="8">
-        <FooterLink href="/about">About</FooterLink>
-        <FooterLink href="/terms">Terms_of_Entry</FooterLink> <LocaleSelector />
+        <FooterLink href="/about">{t("footer.about", locale)}</FooterLink>
+        <FooterLink href="/terms">{t("footer.terms", locale)}</FooterLink>
+        <LocaleSelector />
       </HStack>
     </FooterContainer>
   );

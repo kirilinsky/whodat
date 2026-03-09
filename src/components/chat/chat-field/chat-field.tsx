@@ -10,16 +10,18 @@ import { useEffect, useRef } from "react";
 import { SUCCESS_MESSAGES } from "@/app/constants/chat.constants";
 import Link from "next/link";
 import { EntityCategoryType } from "@/app/constants/entity.constants";
+import { t } from "@/services/get-translation";
+import { Locale } from "@/services/get-server-locale";
 
 export default function ChatField({
   category,
   messages,
   success,
-  locale = "ru",
+  locale,
 }: {
   success: boolean | null;
   messages: SessionMessageType[];
-  locale?: "ru" | "en" | "de";
+  locale: Locale;
   category?: EntityCategoryType;
 }) {
   const { user } = useUser();
@@ -28,10 +30,6 @@ export default function ChatField({
   const scrollToBottom = (behavior: "smooth" | "auto" = "smooth") => {
     messagesEndRef.current?.scrollIntoView({ behavior });
   };
-
-  useEffect(() => {
-    scrollToBottom("smooth");
-  }, []);
 
   useEffect(() => {
     scrollToBottom("smooth");
@@ -96,7 +94,9 @@ export default function ChatField({
                   textTransform: "uppercase",
                 })}
               >
-                {msg.bot ? "Subject" : user?.firstName}
+                {msg.bot
+                  ? t("chat_field.subject_label", locale)
+                  : user?.firstName}
               </span>
             </div>
 
@@ -116,7 +116,7 @@ export default function ChatField({
                 boxShadow: msg.bot ? "0 0 20px rgba(255, 0, 0, 0.05)" : "none",
               })}
             >
-              <p>
+              <div>
                 {msg.bot ? (
                   isLastMessage ? (
                     <TypingText text={msg.content} />
@@ -128,7 +128,7 @@ export default function ChatField({
                     {msg.content}
                   </span>
                 )}
-              </p>
+              </div>
             </div>
           </div>
         );
@@ -173,13 +173,15 @@ export default function ChatField({
               mt: "2",
               opacity: 0.7,
               fontFamily: "mono",
+              textTransform: "uppercase",
             })}
           >
-            XP CREDITS TRANSFERRED TO YOUR ACCOUNT
+            {t("chat_field.xp_credited", locale)}
           </div>
           <Link
             href={`/dashboard?cat=${category}`}
             className={flex({
+              mt: "6",
               align: "center",
               justifyContent: "center",
               gap: "2",
@@ -197,7 +199,7 @@ export default function ChatField({
             })}
           >
             <span className={css({ fontSize: "lg" })}>←</span>
-            <span>вернуться к списку персонажей</span>
+            <span>{t("chat_field.back_to_list", locale)}</span>
           </Link>
         </motion.div>
       )}

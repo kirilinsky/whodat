@@ -34,5 +34,53 @@
             "warranty_title": "04. NO WARRANTY",
             "warranty_content": "This project is provided 'as is'. We do not guarantee 100% uptime. The Archive may go offline for maintenance or due to 'Temporal Distortions'."
         }
+    },
+    "footer": {
+        "about": "About",
+        "terms": "Terms_of_Entry"
+    },
+    "header": {
+        "dashboard": "Dashboard",
+        "profile": "Profile",
+        "system_status": "System Status",
+        "operational": "OPERATIONAL",
+        "failed": "FAILED",
+        "no_user": "No User",
+        "sign_in": "Sign In",
+        "sign_up": "Sign Up",
+        "sign_out": "Sign Out"
+    },
+    "aside": {
+        "active_session": "ACTIVE SESSION",
+        "status_label": "Current Status",
+        "status_identified": "IDENTIFIED",
+        "status_classified": "CLASSIFIED",
+        "threat_label": "Threat Category"
+    },
+    "chat_field": {
+        "subject_label": "Subject",
+        "xp_credited": "XP CREDITS TRANSFERRED TO YOUR ACCOUNT",
+        "back_to_list": "Return to personnel list"
+    },
+    "chat_input": {
+        "placeholder": "Enter interrogation data...",
+        "terminated": "ACCESS TERMINATED",
+        "identified": "SUBJECT IDENTIFIED",
+        "send": "Send Data",
+        "processing": "Processing..."
+    },
+    "progress": {
+        "title": "Progress",
+        "attempts_label": "ATTEMPTS REMAINING"
+    },
+    "entity_status": {
+        "label": "STATUS",
+        "revealed": "REVEALED",
+        "in_progress": "IN_PROGRESS",
+        "unknown": "UNKNOWN"
+    },
+    "categories": {
+        "required_rank": "REQUIRED RANK",
+        "xp_to_unlock": "XP needed to unlock"
     }
 }
