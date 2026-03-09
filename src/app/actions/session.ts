@@ -3,10 +3,12 @@ import { sessionMessages, sessions } from "@/db/schema";
 import { and, eq } from "drizzle-orm";
 import { auth } from "@clerk/nextjs/server";
 import { WELCOME_MESSAGES } from "../constants/message.constants";
+import { getServerLocale } from "@/services/get-server-locale";
 
 export async function getOrCreateSession(entityId: number) {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
+  const lang = await getServerLocale();
 
   const existingSession = await db.query.sessions.findFirst({
     where: and(eq(sessions.userId, userId), eq(sessions.entityId, entityId)),
@@ -30,7 +32,7 @@ export async function getOrCreateSession(entityId: number) {
 
   await db.insert(sessionMessages).values({
     sessionId: newSession.id,
-    content: greeting.ru,
+    content: greeting[lang],
     bot: true,
   });
 

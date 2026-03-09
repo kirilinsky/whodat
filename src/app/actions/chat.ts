@@ -10,12 +10,14 @@ import { RawEntity } from "@/types/entity.types";
 import { FINALE_MESSAGES } from "../constants/message.constants";
 import { RANK_THRESHOLDS, RankLevel } from "../constants/user.constants";
 import { UserType } from "@/types/user.types";
+import { getServerLocale } from "@/services/get-server-locale";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export async function sendMessage(sessionId: number, content: string) {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
+  const lang = await getServerLocale();
 
   const sessionData = await db
     .select()
@@ -125,7 +127,7 @@ OPERATIONAL RULES:
       });
       if (isWin) {
         const randomIndex = Math.floor(Math.random() * FINALE_MESSAGES.length);
-        const finaleText = FINALE_MESSAGES[randomIndex].ru;
+        const finaleText = FINALE_MESSAGES[randomIndex][lang];
 
         await tx.insert(sessionMessages).values({
           sessionId,

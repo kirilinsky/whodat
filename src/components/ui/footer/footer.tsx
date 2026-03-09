@@ -1,5 +1,6 @@
 import { styled, HStack } from "@/styled-system/jsx";
 import Link from "next/link";
+import LocaleSelector from "../locale-selector/locale-selector";
 
 const FooterContainer = styled("footer", {
   base: {
@@ -37,8 +38,8 @@ export const Footer = () => {
       </styled.span>
 
       <HStack gap="8">
-         <FooterLink href="/about">About</FooterLink>
-        <FooterLink href="/terms">Terms_of_Entry</FooterLink>
+        <FooterLink href="/about">About</FooterLink>
+        <FooterLink href="/terms">Terms_of_Entry</FooterLink> <LocaleSelector />
       </HStack>
     </FooterContainer>
   );
