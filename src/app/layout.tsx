@@ -10,8 +10,39 @@ import { flex } from "@/styled-system/patterns";
 import { syncUser } from "./actions/user";
 
 export const metadata: Metadata = {
-  title: "whodat | Guess game",
-  description: "Try to guess",
+  title: {
+    template: "%s | whodat",
+    default: "whodat | try to guess",
+  },
+  description:
+    "Crack the code, uncover the truth. Interrogate historical figures in a cyberpunk terminal interface.",
+  metadataBase: new URL("https://whodat.space"),
+  openGraph: {
+    title: "whodat | Guess the Identity",
+    description: "Cyberpunk interrogation game. Can you identify the subject?",
+    url: "https://whodat.space",
+    siteName: "whodat",
+    images: [
+      {
+        url: "/og-main.jpg",
+        width: 1200,
+        height: 630,
+        alt: "whodat Terminal Interface",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "whodat | Identity Interrogation",
+    description: "Do you have the mind to extract the truth?",
+    images: ["/og-main.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default async function RootLayout({
@@ -35,8 +66,8 @@ export default async function RootLayout({
               overflow: "hidden",
             })}
           >
-            <Header user={user.user} /> 
-            <MainWrapper>{children}</MainWrapper> 
+            <Header user={user.user} />
+            <MainWrapper>{children}</MainWrapper>
             <Footer />
           </body>
         </html>
