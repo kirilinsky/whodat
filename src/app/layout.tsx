@@ -12,14 +12,14 @@ import { syncUser } from "./actions/user";
 export const metadata: Metadata = {
   title: {
     template: "%s | whodat",
-    default: "whodat | try to guess",
+    default: "whodat | Identify the Subject: Cyberpunk Interrogation",
   },
   description:
     "Crack the code, uncover the truth. Interrogate historical figures in a cyberpunk terminal interface.",
   metadataBase: new URL("https://whodat.space"),
   openGraph: {
-    title: "whodat | Guess the Identity",
-    description: "Cyberpunk interrogation game. Can you identify the subject?",
+    title: "whodat | The Ultimate Cyberpunk Identity Guessing Game",
+    description: "A cyberpunk interrogation game. Use your logic to identify encrypted historical figures through chat. Limited attempts, high stakes. Start the decryption protocol.",
     url: "https://whodat.space",
     siteName: "whodat",
     images: [
