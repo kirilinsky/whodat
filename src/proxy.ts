@@ -8,33 +8,35 @@ const isProtectedRoute = createRouteMatcher([
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
+  const { pathname } = req.nextUrl;
+
+  if (pathname.startsWith("/_next") || pathname.includes("/api")) {
+    return NextResponse.next();
+  }
+
   if (isProtectedRoute(req)) {
     await auth.protect();
   }
 
-  const response = NextResponse.next();
   const cookieLocale = req.cookies.get("NEXT_LOCALE")?.value;
 
-  if (!cookieLocale) {
-    const acceptLang = req.headers.get("accept-language") || "";
-    let detectedLocale = "en";
-
-    if (acceptLang.includes("ru")) detectedLocale = "ru";
-    else if (acceptLang.includes("de")) detectedLocale = "de";
-
-    response.cookies.set("NEXT_LOCALE", detectedLocale, {
-      path: "/",
-      maxAge: 31536000,
-      sameSite: "lax",
-    });
+  if (cookieLocale) {
+    return NextResponse.next();
   }
+
+  const acceptLang = req.headers.get("accept-language") || "";
+  let detectedLocale = "en";
+  if (acceptLang.includes("ru")) detectedLocale = "ru";
+  else if (acceptLang.includes("de")) detectedLocale = "de";
+
+  const response = NextResponse.next();
+
+  response.cookies.set("NEXT_LOCALE", detectedLocale, {
+    path: "/",
+    maxAge: 31536000,
+    sameSite: "lax",
+    httpOnly: false,
+  });
 
   return response;
 });
-
-export const config = {
-  matcher: [
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    "/(api|trpc)(.*)",
-  ],
-};
