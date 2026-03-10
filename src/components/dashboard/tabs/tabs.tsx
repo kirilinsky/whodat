@@ -29,12 +29,13 @@ export default function CategoryTabs({ active, user }: CategoryTabsProps) {
       className={css({
         display: "flex",
         flexWrap: "wrap",
-        gap: "4",
+        gap: { base: "2", md: "4" },
         borderBottom: "1px solid",
         borderColor: "white/10",
         pb: "6",
         fontFamily: "mono",
         fontSize: "11px",
+        justifyContent: { base: "center", sm: "flex-start" },
       })}
     >
       {categories.map((cat) => {
@@ -77,11 +78,13 @@ export default function CategoryTabs({ active, user }: CategoryTabsProps) {
               >
                 {getCategoryLabel(cat, locale)}
               </span>
+
               <div
                 className={css({
                   position: "absolute",
                   top: "100%",
-                  left: "0",
+                  left: "50%",
+                  transform: "translateX(-50%) translateY(5px)",
                   bg: "black",
                   border: "1px solid",
                   borderColor: "dip.red/40",
@@ -91,13 +94,12 @@ export default function CategoryTabs({ active, user }: CategoryTabsProps) {
                   zIndex: 50,
                   opacity: 0,
                   visibility: "hidden",
-                  transform: "translateY(5px)",
                   transition: "all 0.2s ease-in-out",
-
+                  display: { base: "none", md: "block" },
                   ".group:hover &": {
                     opacity: 1,
                     visibility: "visible",
-                    transform: "translateY(0)",
+                    transform: "translateX(-50%) translateY(0)",
                   },
                 })}
               >
@@ -111,13 +113,7 @@ export default function CategoryTabs({ active, user }: CategoryTabsProps) {
                   {t("categories.required_rank", locale)}:{" "}
                   {getRankLabel(cat, locale).toUpperCase()}
                 </p>
-                <p
-                  className={css({
-                    color: "white/60",
-                    fontSize: "9px",
-                    fontFamily: "mono",
-                  })}
-                >
+                <p className={css({ color: "white/60", fontSize: "9px" })}>
                   {t("categories.xp_to_unlock", locale)}{" "}
                   {xpToUnlock.toLocaleString()}
                 </p>
@@ -135,15 +131,16 @@ export default function CategoryTabs({ active, user }: CategoryTabsProps) {
               display: "flex",
               alignItems: "center",
               gap: "2",
-              px: "3",
+              px: { base: "3", md: "4" },
               py: "2",
               textTransform: "uppercase",
               letterSpacing: "0.15em",
-              transition: "all 0.3s ease",
-              color: isActive ? "white" : "dip.gray",
+              transition: "all 0.2s ease",
+              color: isActive ? "white" : "white/40",
               border: "1px solid",
               borderColor: isActive ? "dip.red/30" : "transparent",
-              bg: isActive ? "dip.red/5" : "transparent",
+              bg: isActive ? "dip.red/10" : "transparent",
+              borderRadius: "sm",
               _hover: { color: "white", bg: "white/5" },
             })}
           >
@@ -161,7 +158,11 @@ export default function CategoryTabs({ active, user }: CategoryTabsProps) {
 
             {isActive && (
               <motion.div
-                layoutId="active-tab-underline"
+                layoutId={
+                  typeof window !== "undefined" && window.innerWidth > 768
+                    ? "active-tab-underline"
+                    : undefined
+                }
                 className={css({
                   position: "absolute",
                   bottom: "-1px",

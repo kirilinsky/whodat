@@ -11,15 +11,17 @@ const FooterContainer = styled("footer", {
   base: {
     bg: "dip.bg",
     color: "dip.gray",
-    px: "8",
-    py: { base: "2", md: "3" },
-    height: "38px",
+    px: { base: "4", md: "8" },
+    py: { base: "4", md: "0" },
+    minH: "38px",
     borderTop: "1px solid",
     borderColor: "whiteAlpha.100",
     fontFamily: "mono",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
+    flexDirection: { base: "column", md: "row" },
+    gap: { base: "4", md: "0" },
     width: "full",
     fontSize: "11px",
     textTransform: "uppercase",
@@ -32,6 +34,7 @@ const FooterLink = styled(Link, {
     cursor: "pointer",
     transition: "color 0.2s",
     _hover: { color: "white" },
+    whiteSpace: "nowrap",
   },
 });
 
@@ -40,11 +43,12 @@ export const Footer = () => {
 
   return (
     <FooterContainer>
-      <styled.span>
+      <HStack justify="flex-end" width={{ base: "full", md: "auto" }}>
         whodat © 2026{" "}
         <a
           className={css({
             color: "dip.red",
+            _hover: { textDecoration: "underline" },
           })}
           href="https://github.com/kirilinsky"
           target="_blank"
@@ -52,11 +56,19 @@ export const Footer = () => {
         >
           kirilinsky
         </a>
-      </styled.span>
+      </HStack>
 
-      <HStack gap="8">
-        <FooterLink href="/about">{t("footer.about", locale)}</FooterLink>
-        <FooterLink href="/terms">{t("footer.terms", locale)}</FooterLink>
+      <HStack
+        gap={{ base: "4", sm: "8" }}
+        width={{ base: "full", md: "auto" }}
+        justify="space-between"
+        flexWrap="wrap"
+      >
+        <HStack>
+          <FooterLink href="/about">{t("footer.about", locale)}</FooterLink>
+          <FooterLink href="/terms">{t("footer.terms", locale)}</FooterLink>
+        </HStack>
+
         <LocaleSelector />
       </HStack>
     </FooterContainer>

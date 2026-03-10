@@ -22,6 +22,7 @@ export default async function RootLayout({
   let user = await syncUser();
   const locale = await getLocale();
   const messages = await getMessages();
+
   return (
     <ClerkProvider>
       <NextIntlClientProvider locale={locale} messages={messages}>
@@ -29,12 +30,13 @@ export default async function RootLayout({
           <body
             className={flex({
               direction: "column",
-              minH: "100vh",
+              h: "100vh",
               bg: "dip.bg",
+              overflow: "hidden",
             })}
           >
-            <Header user={user.user} />
-            <MainWrapper>{children}</MainWrapper>
+            <Header user={user.user} /> 
+            <MainWrapper>{children}</MainWrapper> 
             <Footer />
           </body>
         </html>

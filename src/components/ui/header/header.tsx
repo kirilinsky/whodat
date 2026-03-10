@@ -21,8 +21,8 @@ const HeaderContainer = styled("header", {
   base: {
     bg: "dip.bg",
     color: "white",
-    px: { base: "2", md: "8" },
-    py: { base: "3", md: "4" },
+    px: { base: "3", md: "8" },
+    py: { base: "2", md: "4" },
     borderBottom: "1px solid",
     borderColor: "whiteAlpha.200",
     fontFamily: "mono",
@@ -30,13 +30,13 @@ const HeaderContainer = styled("header", {
     alignItems: "center",
     justifyContent: "space-between",
     width: "full",
-    height: "67px",
+    minH: { base: "80px", md: "67px" },  
   },
 });
 
 const NavLink = styled(Link, {
   base: {
-    fontSize: "xs",
+    fontSize: { base: "10px", md: "xs" },
     fontWeight: "bold",
     color: "dip.gray",
     letterSpacing: "widest",
@@ -52,101 +52,103 @@ export const Header = ({ user }: { user?: UserType }) => {
 
   return (
     <ClerkProvider>
-      <HeaderContainer>
-        <HStack gap="2">
+      <HeaderContainer gap="2">
+        <HStack gap="2" width="full" justify={"space-between"}>
           <Link
             href="/"
             className={css({ display: "flex", alignItems: "center", gap: "2" })}
           >
-            <Image src="/logo.png" width={34} height={33} alt="logo" />
-            <styled.div fontSize="xl" fontWeight="bold">
+            <Image
+              src="/logo.png"
+              width={24}
+              height={23}
+              alt="logo"
+              className={css({ md: { width: "34px", height: "33px" } })}
+            />
+            <styled.div fontSize={{ base: "md", md: "xl" }} fontWeight="bold">
               who<styled.span color="dip.red">dat</styled.span>
             </styled.div>
           </Link>
-        </HStack>
 
-        <HStack gap={{ base: 3, md: 9 }}>
-          <NavLink href="/dashboard">{t("header.dashboard", locale)}</NavLink>
-          <NavLink href="/profile">{t("header.profile", locale)}</NavLink>
-        </HStack>
-
-        <HStack gap="6">
-          <Flex
-            direction="column"
-            alignItems="flex-end"
-            display={{ base: "none", md: "flex" }}
+          <HStack
+            gap={{ base: 3, md: 10 }}
+            flexWrap={"wrap"}
+            justifyContent={{ base: "flex-end", md: "center" }}
+            width={"full"}
           >
-            <styled.span
-              fontSize="10px"
-              color="dip.gray"
-              textTransform="uppercase"
-            >
-              {t("header.system_status", locale)}
-            </styled.span>
-            {user ? (
-              <styled.span fontSize="xs" color="dip.green" fontWeight="bold">
-                ● {t("header.operational", locale)} ({user.username})
-              </styled.span>
-            ) : (
-              <styled.span fontSize="xs" color="dip.red" fontWeight="bold">
-                ● {t("header.failed", locale)} ({t("header.no_user", locale)})
-              </styled.span>
-            )}
-          </Flex>
+            <NavLink href="/dashboard">{t("header.dashboard", locale)}</NavLink>
+            <NavLink href="/profile">{t("header.profile", locale)}</NavLink>
+          </HStack>
+        </HStack>
 
+        <HStack gap={{ base: "2", md: "6" }}>
           <SignedOut>
-            <HStack gap="2">
-              <styled.div
-                px="4"
-                py="1"
-                border="1px solid"
-                borderColor="dip.green"
-                color="dip.green"
-                fontSize="xs"
-                fontWeight="bold"
-                borderRadius="sm"
-                transition="all 0.2s"
-                cursor="pointer"
-                _hover={{ bg: "dip.green", color: "black" }}
-              >
-                <SignInButton>{t("header.sign_in", locale)}</SignInButton>
-              </styled.div>
-              <styled.div
-                px="4"
-                py="1"
-                border="1px solid"
-                borderColor="dip.green"
-                color="dip.green"
-                fontSize="xs"
-                fontWeight="bold"
-                borderRadius="sm"
-                transition="all 0.2s"
-                cursor="pointer"
-                _hover={{ bg: "dip.green", color: "black" }}
-              >
-                <SignUpButton>{t("header.sign_up", locale)}</SignUpButton>
-              </styled.div>
+            <HStack gap="1.5">
+              <SignInButton>
+                <styled.div
+                  px={{ base: "2", md: "4" }}
+                  py="1"
+                  border="1px solid"
+                  borderColor="dip.green"
+                  color="dip.green"
+                  fontSize={{ base: "10px", md: "xs" }}
+                  fontWeight="bold"
+                  borderRadius="sm"
+                  cursor="pointer"
+                  _hover={{ bg: "dip.green", color: "black" }}
+                >
+                  {t("header.sign_in", locale)}
+                </styled.div>
+              </SignInButton>
+              <SignUpButton>
+                <styled.div
+                  px={{ base: "2", md: "4" }}
+                  py="1"
+                  bg="dip.green"
+                  color="black"
+                  fontSize={{ base: "10px", md: "xs" }}
+                  fontWeight="bold"
+                  borderRadius="sm"
+                  cursor="pointer"
+                  _hover={{ bg: "white" }}
+                >
+                  {t("header.sign_up", locale)}
+                </styled.div>
+              </SignUpButton>
             </HStack>
           </SignedOut>
 
           <SignedIn>
-            <HStack gap="4">
-              <UserButton />
-              <styled.div
-                px="4"
-                py="1"
-                border="1px solid"
-                borderColor="dip.red"
-                color="dip.red"
-                fontSize="xs"
-                fontWeight="bold"
-                borderRadius="sm"
-                transition="all 0.2s"
-                cursor="pointer"
-                _hover={{ bg: "dip.red", color: "black" }}
-              >
-                <SignOutButton>{t("header.sign_out", locale)}</SignOutButton>
-              </styled.div>
+            <HStack
+              gap={{ base: 2, md: 4 }}
+              display={{ base: "none", md: "flex" }}
+            >
+              <UserButton
+                appearance={{
+                  elements: {
+                    userButtonAvatarBox: {
+                      w: { base: "24px", md: "32px" },
+                      h: { base: "24px", md: "32px" },
+                    },
+                  },
+                }}
+              />
+              <SignOutButton>
+                <styled.div
+                  px={{ base: "2", md: "4" }}
+                  py="1"
+                  border="1px solid"
+                  borderColor="dip.red"
+                  color="dip.red"
+                  fontSize={{ base: "10px", md: "xs" }}
+                  fontWeight="bold"
+                  borderRadius="sm"
+                  cursor="pointer"
+                  _hover={{ bg: "dip.red", color: "black" }}
+                >
+                  {t("header.sign_out", locale)}
+                </styled.div>
+              </SignOutButton>
             </HStack>
           </SignedIn>
         </HStack>

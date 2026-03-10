@@ -22,34 +22,46 @@ export default function ChatLayout({
   initialMessages: SessionMessageType[];
 }) {
   const { locale } = useLocale();
+
   return (
     <div
       className={css({
-        display: "grid",
-        gridTemplateColumns: { base: "1fr", lg: "380px 1fr" },
-        h: "calc(100vh - 97px)",
+        display: { base: "flex", md: "grid" },
+        flexDirection: "column",
+        gridTemplateColumns: {
+          md: "320px 1fr",
+          lg: "380px 1fr",
+        },
+        flex: "1",
+        minH: 0,
         w: "full",
         bg: "black",
-        gap: "0",
         overflow: "hidden",
       })}
     >
       {entity && (
-        <MobileInfo
-          locale={locale}
-          attempts={session.attempts}
-          entity={entity}
-        />
-      )}
+        <div
+          className={css({
+            display: { base: "block", md: "none" },
+            flexShrink: 0,
+          })}
+        >
+          <MobileInfo
+            locale={locale}
+            attempts={session.attempts}
+            entity={entity}
+          />
+        </div>
+      )} 
       {entity && (
         <Aside locale={locale} success={session.success} entity={entity} />
       )}
+
       <main
         className={flex({
           direction: "column",
-          h: "full",
+          flex: "1",
           minH: 0,
-          position: "relative",
           bg: "rgba(15, 7, 7, 1)",
         })}
       >
@@ -57,7 +69,8 @@ export default function ChatLayout({
           className={css({
             flex: "1",
             overflowY: "auto",
-            p: { base: "3", lg: "6" },
+            p: { base: "3", lg: "5" },
+            scrollbarWidth: "none",
           })}
         >
           <ChatField
@@ -69,10 +82,10 @@ export default function ChatLayout({
         </div>
         <div
           className={css({
-            p: { base: "0", md: "5" },
-            py: { base: 1 },
+            flexShrink: 0,
+            p: { base: "2", md: "5" },
             borderTop: "1px solid",
-            borderColor: "white/50",
+            borderColor: "white/10",
             bg: "black",
           })}
         >

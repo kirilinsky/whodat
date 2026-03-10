@@ -41,12 +41,11 @@ export default function ChatField({
         gap: { base: "5", md: "8" },
         py: { base: "3", md: "4" },
         w: "full",
-        maxW: { base: "full", md: "800px" },
-        mx: { base: "0", md: "auto" },
-        minH: { base: "calc(100vh - 245px)", md: "full" },
-        flexGrow: 1,
+        mx: "auto",
+        display: "flex",
+        flexDirection: "column",
         px: { base: "4", md: "0" },
-        pb: { base: "5", md: "20" },
+        pb: { base: "10", md: "10" },
       })}
     >
       {messages.map((msg, index) => {
