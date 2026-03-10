@@ -43,9 +43,9 @@ export const RANK_THRESHOLDS: Record<RankLevel, number> = {
   0: 0,
   1: 70,
   2: 150,
-  3: 225,
-  4: 375,
-  5: 500,
-  6: 650,
+  3: 220,
+  4: 350,
+  5: 480,
+  6: 590,
   7: 800,
 };
