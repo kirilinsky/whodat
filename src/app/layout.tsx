@@ -19,7 +19,8 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://whodat.space"),
   openGraph: {
     title: "whodat | The Ultimate Cyberpunk Identity Guessing Game",
-    description: "A cyberpunk interrogation game. Use your logic to identify encrypted historical figures through chat. Limited attempts, high stakes. Start the decryption protocol.",
+    description:
+      "A cyberpunk interrogation game. Use your logic to identify encrypted historical figures through chat. Limited attempts, high stakes. Start the decryption protocol.",
     url: "https://whodat.space",
     siteName: "whodat",
     images: [
@@ -53,28 +54,30 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  let user = await syncUser();
-  const locale = await getLocale();
-  const messages = await getMessages();
+  const localePromise = getLocale();
+  const messagesPromise = getMessages();
+
+  const locale = await localePromise;
+  const messages = await messagesPromise;
 
   return (
     <ClerkProvider>
-      <NextIntlClientProvider locale={locale} messages={messages}>
-        <html lang={locale}>
+      <html lang={locale}>
+        <NextIntlClientProvider locale={locale} messages={messages}>
           <body
             className={flex({
               direction: "column",
-              h: "100vh",
+              h: "100dvh",
               bg: "dip.bg",
               overflow: "hidden",
             })}
           >
-            <Header user={user.user} />
+            <Header />
             <MainWrapper>{children}</MainWrapper>
             <Footer />
           </body>
-        </html>
-      </NextIntlClientProvider>
+        </NextIntlClientProvider>
+      </html>
     </ClerkProvider>
   );
 }
