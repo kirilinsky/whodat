@@ -8,6 +8,7 @@ import { Footer } from "@/components/ui/footer/footer";
 import { MainWrapper } from "@/components/ui/main/main";
 import { flex } from "@/styled-system/patterns";
 import { syncUser } from "./actions/user";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: {
@@ -76,6 +77,7 @@ export default async function RootLayout({
             <MainWrapper>{children}</MainWrapper>
             <Footer />
           </body>
+          <SpeedInsights />
         </NextIntlClientProvider>
       </html>
     </ClerkProvider>
