@@ -96,7 +96,7 @@ export default function GridItem({
                   lineHeight: "1",
                 })}
               >
-                {locked ? defaultClassifiedName.ru : name.ru}
+                {locked ? defaultClassifiedName[locale] : name[locale]}
               </h3>
             </div>
             <span
