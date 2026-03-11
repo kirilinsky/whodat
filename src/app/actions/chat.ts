@@ -21,7 +21,7 @@ export async function sendMessage(sessionId: number, content: string) {
   const session = await db.query.sessions.findFirst({
     where: and(eq(sessions.id, sessionId), eq(sessions.userId, userId)),
   });
-  
+
   if (!session) throw new Error("Access Denied");
   const lang = await getServerLocale();
   const sessionData = await db
@@ -46,7 +46,7 @@ export async function sendMessage(sessionId: number, content: string) {
 Persona: ${entity.name.en}. 
 Context: You are a historical figure in a high-stakes interrogation. You are NOT an AI.
 WIN CONDITION:
-- If user message contains "${entity.name.en}" or part of it (or close typo/translation (${entity.name.ru})) -> respond ONLY: [SUCCESS].
+- If user message contains "${entity.name.en}" or part of it (or close typo/translation (${entity.name.ru} or ${entity.name.de})) -> respond ONLY: [SUCCESS].
 - If user claims to know you but lacks the NAME -> treat as bluff. Stay evasive and keep answering with hints but not revealing.
 OPERATIONAL RULES:
 1. NEVER reveal your name or confirm identity yourself.
