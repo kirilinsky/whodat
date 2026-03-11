@@ -17,8 +17,13 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 export async function sendMessage(sessionId: number, content: string) {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
-  const lang = await getServerLocale();
 
+  const session = await db.query.sessions.findFirst({
+    where: and(eq(sessions.id, sessionId), eq(sessions.userId, userId)),
+  });
+  
+  if (!session) throw new Error("Access Denied");
+  const lang = await getServerLocale();
   const sessionData = await db
     .select()
     .from(sessions)
