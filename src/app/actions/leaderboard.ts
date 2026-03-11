@@ -1,9 +1,8 @@
-// src/app/actions/leaderboard.ts
 "use server";
 
 import { db } from "@/db";
 import { users, sessions } from "@/db/schema";
-import { desc, sql } from "drizzle-orm";
+import { and, count, desc, eq, sql } from "drizzle-orm";
 import { createClerkClient } from "@clerk/nextjs/server";
 
 export async function getLeaderboardData() {
@@ -15,13 +14,14 @@ export async function getLeaderboardData() {
       username: users.username,
       xp: users.xp,
       rank: users.rank,
-
-      solvedCount: db.$count(
-        sessions,
-        sql`${sessions.userId} = ${users.clerkId} AND ${sessions.success} = true`,
-      ),
+      solvedCount: count(sessions.id),
     })
     .from(users)
+    .leftJoin(
+      sessions,
+      and(eq(users.clerkId, sessions.userId), eq(sessions.success, true)),
+    )
+    .groupBy(users.id)
     .orderBy(desc(users.xp))
     .limit(50);
 

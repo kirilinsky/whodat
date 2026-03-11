@@ -7,7 +7,8 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Footer } from "@/components/ui/footer/footer";
 import { MainWrapper } from "@/components/ui/main/main";
 import { flex } from "@/styled-system/patterns";
-import { syncUser } from "./actions/user";
+import { Analytics } from "@vercel/analytics/next";
+
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
@@ -78,6 +79,7 @@ export default async function RootLayout({
             <Footer />
           </body>
           <SpeedInsights />
+          <Analytics />
         </NextIntlClientProvider>
       </html>
     </ClerkProvider>
