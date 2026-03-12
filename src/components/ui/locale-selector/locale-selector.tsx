@@ -4,10 +4,9 @@ import { css } from "@/styled-system/css";
 import { flex } from "@/styled-system/patterns";
 import { Languages } from "lucide-react";
 import { LanguageSelector } from "next-language-selector";
-
 const locales = [
-  { name: "ru", code: "ru" },
   { name: "de", code: "de" },
+  { name: "ru", code: "ru" }, 
   { name: "en", code: "en" },
 ];
 
@@ -18,8 +17,7 @@ export default function LocaleSelector() {
       <LanguageSelector
         defaultLocale="en"
         locales={locales}
-        isDropdown={false}
-      />
+       />
     </div>
   );
 }
