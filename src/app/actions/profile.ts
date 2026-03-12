@@ -2,7 +2,7 @@
 
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { db } from "@/db";
-import { users, sessions, entities } from "@/db/schema";
+import { users, sessions, entities, sessionMessages } from "@/db/schema";
 import { eq, sql, sum, count, and } from "drizzle-orm";
 
 export async function getProfileData() {
@@ -19,7 +19,7 @@ export async function getProfileData() {
     }),
     db
       .select({
-        totalMessages: sum(sessions.attempts),
+        totalMessages: count(sessionMessages.id),
         completed: count(sql`CASE WHEN ${sessions.active} = false THEN 1 END`),
         active: count(sql`CASE WHEN ${sessions.active} = true THEN 1 END`),
       })
