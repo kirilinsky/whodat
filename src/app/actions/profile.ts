@@ -13,7 +13,7 @@ export async function getProfileData() {
     throw new Error("Unauthorized");
   }
 
-  const [dbUser, sessionStats] = await Promise.all([
+  let [dbUser, sessionStats] = await Promise.all([
     db.query.users.findFirst({
       where: eq(users.clerkId, clerkId),
     }),
@@ -43,7 +43,21 @@ export async function getProfileData() {
     )
     .groupBy(entities.category);
 
-  if (!dbUser) throw new Error("User not found");
+  if (!dbUser) {
+    const [newUser] = await db
+      .insert(users)
+      .values({
+        clerkId,
+        email: clerkUser.emailAddresses[0].emailAddress,
+        username:
+          clerkUser.username || clerkUser.firstName || "Unknown Operator",
+        xp: 0,
+        rank: 0,
+      })
+      .returning();
+
+    dbUser = newUser;
+  }
 
   return {
     user: dbUser,
