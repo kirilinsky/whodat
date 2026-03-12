@@ -67,7 +67,8 @@
         "terminated": "ACCESS TERMINATED",
         "identified": "SUBJECT IDENTIFIED",
         "send": "Send Data",
-        "processing": "Processing..."
+        "processing": "Processing...",
+        "disclaimer": "AI units may produce anomalous data. Identity verification recommended."
     },
     "progress": {
         "title": "Progress",

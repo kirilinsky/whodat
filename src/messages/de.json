@@ -67,6 +67,7 @@
         "terminated": "ZUGRIFF BEENDET",
         "identified": "SUBJEKT IDENTIFIZIERT",
         "send": "Senden",
+        "disclaimer": "KI-Einheiten können Anomalien erzeugen. Datenverifizierung empfohlen.",
         "processing": "Verarbeitung..."
     },
     "progress": {
