@@ -8,6 +8,7 @@ import { Footer } from "@/components/ui/footer/footer";
 import { MainWrapper } from "@/components/ui/main/main";
 import { flex } from "@/styled-system/patterns";
 import { Analytics } from "@vercel/analytics/next";
+import { dark, neobrutalism } from "@clerk/ui/themes";
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -63,7 +64,12 @@ export default async function RootLayout({
   const messages = await messagesPromise;
 
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        theme: dark,
+        signIn: { theme: neobrutalism },
+      }}
+    >
       <html lang={locale}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <body
