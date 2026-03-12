@@ -40,7 +40,7 @@ const FooterLink = styled(Link, {
 
 export const Footer = () => {
   const { locale } = useLocale();
-
+ 
   return (
     <FooterContainer>
       <HStack justify="flex-end" width={{ base: "full", md: "auto" }}>
@@ -68,7 +68,6 @@ export const Footer = () => {
           <FooterLink href="/about">{t("footer.about", locale)}</FooterLink>
           <FooterLink href="/terms">{t("footer.terms", locale)}</FooterLink>
         </HStack>
-
         <LocaleSelector />
       </HStack>
     </FooterContainer>
