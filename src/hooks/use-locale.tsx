@@ -4,8 +4,11 @@ import { useState, useEffect } from "react";
 
 type Locale = "ru" | "en" | "de";
 
+const DEFAULT_LOCALE: Locale = "en";
+
 export function useLocale() {
-  const [locale, setLocale] = useState<Locale>("ru");
+  const [locale, setLocale] = useState<Locale>(DEFAULT_LOCALE);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const saved = document.cookie
@@ -16,6 +19,7 @@ export function useLocale() {
     if (saved && ["ru", "en", "de"].includes(saved)) {
       setLocale(saved);
     }
+    setMounted(true);
   }, []);
 
   const changeLocale = (newLocale: Locale) => {
@@ -24,5 +28,5 @@ export function useLocale() {
     window.location.reload();
   };
 
-  return { locale, changeLocale };
+  return { locale, changeLocale, mounted };
 }

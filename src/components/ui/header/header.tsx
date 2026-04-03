@@ -54,7 +54,9 @@ const NavLink = styled(Link, {
 });
 
 export const Header = ({ user }: { user?: UserType }) => {
-  const { locale } = useLocale();
+  const { locale, mounted } = useLocale();
+
+  if (!mounted) return <HeaderContainer />;
 
   return (
     <HeaderContainer gap="2">
@@ -87,7 +89,7 @@ export const Header = ({ user }: { user?: UserType }) => {
         </HStack>
       </HStack>
 
-      <HStack gap={{ base: "2", md: "6" }}>
+      <HStack gap={{ base: "2", md: "6" }} minW={{ base: "80px", md: "160px" }} justify="flex-end">
         <SignedOut>
           <HStack gap="1.5">
             <SignInButton>

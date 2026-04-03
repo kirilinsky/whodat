@@ -10,7 +10,7 @@ import { t } from "@/services/get-translation";
 
 export const PlayScreen = () => {
   const [ripples, setRipples] = useState<{ id: number }[]>([]);
-  const { locale } = useLocale();
+  const { locale, mounted } = useLocale();
 
   const handleClick = () => {
     const id = Date.now();
@@ -53,7 +53,7 @@ export const PlayScreen = () => {
               lineHeight: "1.6",
             })}
           >
-            {t("play_screen.story", locale)}
+            {mounted ? t("play_screen.story", locale) : null}
           </p>
         </motion.div>
       </div>
@@ -116,7 +116,7 @@ export const PlayScreen = () => {
               })}
             >
               <div className={css({ position: "relative", zIndex: 1 })}>
-                {t("play_screen.button", locale)}
+                {mounted ? t("play_screen.button", locale) : null}
                 <div
                   className={css({
                     fontSize: "12px",
@@ -126,7 +126,7 @@ export const PlayScreen = () => {
                     letterSpacing: "normal",
                   })}
                 >
-                  {t("play_screen.protocol", locale)}
+                  {mounted ? t("play_screen.protocol", locale) : null}
                 </div>
               </div>
             </motion.button>
@@ -167,7 +167,7 @@ export const PlayScreen = () => {
                 textTransform: "uppercase",
               })}
             >
-              {t("play_screen.mission_objective", locale)}:
+              {mounted ? t("play_screen.mission_objective", locale) : null}:
             </p>
             <p
               className={css({
@@ -177,7 +177,7 @@ export const PlayScreen = () => {
                 lineHeight: "1.4",
               })}
             >
-              {t("play_screen.mission", locale)}
+              {mounted ? t("play_screen.mission", locale) : null}
             </p>
           </div>
         </motion.div>
