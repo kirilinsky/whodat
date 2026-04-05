@@ -10,6 +10,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@clerk/localizations": "^4.3.0",
     "@clerk/nextjs": "^6.0.0",
     "@clerk/ui": "^1.2.1",
     "@libsql/client": "^0.17.0",

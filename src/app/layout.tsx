@@ -11,6 +11,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { dark, neobrutalism } from "@clerk/ui/themes";
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { clerkLocales } from "@/i18n/clerk-locales";
 
 export const metadata: Metadata = {
   title: {
@@ -65,6 +66,7 @@ export default async function RootLayout({
 
   return (
     <ClerkProvider
+      localization={clerkLocales[locale]}
       appearance={{
         theme: dark,
         signIn: { theme: neobrutalism },
