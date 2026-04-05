@@ -59,6 +59,36 @@ export const WELCOME_MESSAGES = [
     ru: "Каждое твое слово записывается. Выбирай мудро.",
     de: "Jedes deiner Worte wird aufgezeichnet. Wähle weise.",
   },
+  {
+    en: "They buried me in footnotes. Let's see if you can dig me out.",
+    ru: "Меня похоронили в сносках. Посмотрим, сумеешь ли ты меня откопать.",
+    de: "Sie haben mich in Fußnoten begraben. Mal sehen, ob du mich ausgraben kannst.",
+  },
+  {
+    en: "History remembers. But sometimes, it lies. Can you tell the difference?",
+    ru: "История помнит. Но иногда она лжёт. Сможешь отличить?",
+    de: "Die Geschichte erinnert sich. Aber manchmal lügt sie. Kannst du den Unterschied erkennen?",
+  },
+  {
+    en: "I've outlasted empires. Let's see if you can outlast seven questions.",
+    ru: "Я пережил империи. Посмотрим, хватит ли тебя на семь вопросов.",
+    de: "Ich habe Imperien überdauert. Mal sehen, ob du sieben Fragen überlebst.",
+  },
+  {
+    en: "The clock is ticking. Ask before the signal drops.",
+    ru: "Время идёт. Спрашивай, пока сигнал не пропал.",
+    de: "Die Uhr tickt. Frag, bevor das Signal abbricht.",
+  },
+  {
+    en: "I am a name erased from textbooks. Find it.",
+    ru: "Я — имя, вычеркнутое из учебников. Найди его.",
+    de: "Ich bin ein Name, der aus Lehrbüchern gestrichen wurde. Finde ihn.",
+  },
+  {
+    en: "Legends distort. Facts remain. Ask carefully.",
+    ru: "Легенды искажают. Факты остаются. Спрашивай осторожно.",
+    de: "Legenden verzerren. Fakten bleiben. Frag mit Bedacht.",
+  },
 ];
 
 export const FINALE_MESSAGES = [
@@ -107,6 +137,31 @@ export const FINALE_MESSAGES = [
     ru: "Логика неоспорима. Тебе удалось сорвать маску с призрака в машине. Миссия выполнена.",
     de: "Die Logik stimmt. Du hast das Phantom in der Maschine enttarnt. Mission erfüllt.",
   },
+  {
+    en: "You dug through centuries of noise to find my name. Respect.",
+    ru: "Ты прорылся сквозь века шума, чтобы найти моё имя. Уважаю.",
+    de: "Du hast dich durch Jahrhunderte des Rauschens gegraben, um meinen Namen zu finden. Respekt.",
+  },
+  {
+    en: "I didn't make it easy. You didn't give up. Fair enough.",
+    ru: "Я не облегчал задачу. Ты не сдался. Заслуженно.",
+    de: "Ich habe es nicht leicht gemacht. Du hast nicht aufgegeben. Fair enough.",
+  },
+  {
+    en: "The mask comes off. Satisfied?",
+    ru: "Маска снята. Доволен?",
+    de: "Die Maske fällt. Zufrieden?",
+  },
+  {
+    en: "Centuries of secrecy, undone by one name. Well done, investigator.",
+    ru: "Века тайны — одним именем. Отличная работа, следователь.",
+    de: "Jahrhunderte der Geheimhaltung, aufgedeckt durch einen Namen. Gut gemacht, Ermittler.",
+  },
+  {
+    en: "You asked the right questions. That is rarer than you think.",
+    ru: "Ты задавал правильные вопросы. Это редкость, поверь.",
+    de: "Du hast die richtigen Fragen gestellt. Das ist seltener, als du denkst.",
+  },
 ];
 
 export const RANK_UP_MESSAGES = [
@@ -129,5 +184,20 @@ export const RANK_UP_MESSAGES = [
     en: "Threshold reached. Encrypted data from further eras is now within your reach.",
     ru: "Порог пройден. Зашифрованные данные следующих эпох теперь в вашем распоряжении.",
     de: "Schwelle erreicht. Verschlüsselte Daten aus weiteren Epochen sind nun in deiner Reichweite.",
+  },
+  {
+    en: "New rank, new ghosts. Don't get comfortable.",
+    ru: "Новое звание, новые призраки. Не расслабляйся.",
+    de: "Neuer Rang, neue Geister. Mach es dir nicht zu bequem.",
+  },
+  {
+    en: "Your file thickens. The archives notice skilled interrogators.",
+    ru: "Ваше дело пухнет. Архивы замечают умелых дознавателей.",
+    de: "Deine Akte wird dicker. Die Archive bemerken fähige Verhörspezialisten.",
+  },
+  {
+    en: "Clearance upgraded. The deeper layers of history are now yours to question.",
+    ru: "Уровень допуска повышен. Более глубокие слои истории теперь открыты для допроса.",
+    de: "Freigabe erweitert. Die tieferen Schichten der Geschichte sind nun deiner Befragung zugänglich.",
   },
 ];

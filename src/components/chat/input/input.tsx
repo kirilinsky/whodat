@@ -24,7 +24,7 @@ export default function Input({
   const [isPending, startTransition] = useTransition();
 
   const isDisabled = attemptsCount <= 0 || isPending || success;
-  const maxLength = 32;
+  const maxLength = 33;
 
   const getPlaceholder = () => {
     if (success) return t("chat_input.identified", locale);

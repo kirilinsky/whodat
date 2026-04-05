@@ -28,7 +28,7 @@
             "ai_title": "01. KÜNSTLICHE INTELLIGENZ",
             "ai_content": "Alle Dialoge werden vom neuronalen Netzwerk GPT-4o-mini betrieben. Die KI kann halluzinieren, historisch ungenaue Daten liefern oder sich im Rahmen ihrer Persona provokativ verhalten.",
             "ops_title": "02. OPERATIONELLE LIMITS",
-            "ops_content": "Benutzern werden 7 Verhörversuche pro Sitzung gewährt. Eingaben sind streng auf 32 Zeichen begrenzt, um die Systemstabilität zu gewährleisten.",
+            "ops_content": "Benutzern werden 7 Verhörversuche pro Sitzung gewährt. Eingaben sind streng auf 33 Zeichen begrenzt, um die Systemstabilität zu gewährleisten.",
             "data_title": "03. DATENSPEICHERUNG",
             "data_content": "Wir verwenden Clerk zur Authentifizierung. Dein Verhörverlauf und XP-Fortschritt werden in unserer Datenbank in Supabase (PSQL) gespeichert.",
             "warranty_title": "04. KEINE GEWÄHRLEISTUNG",

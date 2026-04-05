@@ -28,7 +28,7 @@
             "ai_title": "01. ARTIFICIAL INTELLIGENCE",
             "ai_content": "All dialogues are powered by the GPT-4o-mini neural network. The AI may hallucinate, provide historically inaccurate data, or behave provocatively as part of its persona.",
             "ops_title": "02. OPERATIONAL LIMITS",
-            "ops_content": "Users are granted 7 interrogation attempts per session. Inputs are strictly limited to 32 characters to maintain system stability.",
+            "ops_content": "Users are granted 7 interrogation attempts per session. Inputs are strictly limited to 33 characters to maintain system stability.",
             "data_title": "03. DATA RETENTION",
             "data_content": "We use Clerk for authentication. Your interrogation history and XP progress are stored in our database in Supabase (PSQL).",
             "warranty_title": "04. NO WARRANTY",
