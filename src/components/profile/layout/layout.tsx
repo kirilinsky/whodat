@@ -10,7 +10,6 @@ import Statistics from "../statistics/statistics";
 import CategoryStatistics from "../categories/categories";
 import Progression from "../progression/progression";
 import { useLocale } from "@/hooks/use-locale";
-import { ActionBar } from "react-ai-chat-actions";
 
 interface ProfileLayoutProps {
   user: UserType;
@@ -57,12 +56,6 @@ export default function ProfileLayout({
           })}
         >
           <div className={stack({ gap: "6" })}>
-            <ActionBar
-              messageId="12"
-              onAction={console.log}
-              actions={["bookmark", "heart"]}
-              transparent
-            />
             <Statistics locale={locale} stats={stats} />
             <CategoryStatistics locale={locale} categories={categoryStats} />
             <Progression locale={locale} xp={user.xp} rank={user.rank} />
