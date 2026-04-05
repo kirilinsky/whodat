@@ -9,7 +9,6 @@ import {
   RankLevel,
 } from "@/app/constants/user.constants";
 import { getRankLabel } from "@/services/get-rank-label";
-import { Shield, Zap, Target, Star } from "lucide-react";
 import { useLocale } from "@/hooks/use-locale";
 import { t } from "@/services/get-translation";
 
@@ -182,21 +181,6 @@ export default function AboutPage() {
           </span>
           <span className={css({ color: "white", fontSize: "xs" })}>
             {t("about.tech_stack.levels", locale)}
-          </span>
-        </div>
-        <div>
-          <span
-            className={css({
-              display: "block",
-              color: "dip.red",
-              fontSize: "10px",
-              mb: "1",
-            })}
-          >
-            {t("about.tech_stack.archive", locale)}
-          </span>
-          <span className={css({ color: "white", fontSize: "xs" })}>
-            {t("about.tech_stack.every_24h", locale)}
           </span>
         </div>
       </div>

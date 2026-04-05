@@ -164,6 +164,39 @@ export const FINALE_MESSAGES = [
   },
 ];
 
+export const DEFEAT_MESSAGES = [
+  {
+    en: "Session terminated. The subject remains unidentified. Better luck next time, rookie.",
+    ru: "Сеанс завершён. Личность субъекта не установлена. В следующий раз повезёт, новобранец.",
+    de: "Sitzung beendet. Das Subjekt bleibt unidentifiziert. Viel Glück beim nächsten Mal, Neuling.",
+  },
+  {
+    en: "Seven chances. Zero answers. The archives remain sealed.",
+    ru: "Семь шансов. Ноль ответов. Архивы остаются закрытыми.",
+    de: "Sieben Chancen. Null Antworten. Die Archive bleiben versiegelt.",
+  },
+  {
+    en: "Access denied. Clearance insufficient. Go study some history.",
+    ru: "Доступ закрыт. Уровень допуска недостаточен. Иди учи историю.",
+    de: "Zugriff verweigert. Freigabe unzureichend. Geh und lern etwas Geschichte.",
+  },
+  {
+    en: "The ghost slipped away. Again. Maybe next time ask better questions.",
+    ru: "Призрак ускользнул. Снова. Может, в следующий раз задавай вопросы получше.",
+    de: "Der Geist ist entkommen. Mal wieder. Stell beim nächsten Mal bessere Fragen.",
+  },
+  {
+    en: "File closed. Subject: still classified. Agent: needs more training.",
+    ru: "Дело закрыто. Субъект: по-прежнему засекречен. Агент: нуждается в дополнительной подготовке.",
+    de: "Akte geschlossen. Subjekt: weiterhin geheim. Agent: benötigt mehr Training.",
+  },
+  {
+    en: "Seven attempts burned. Nothing to show. History is not forgiving.",
+    ru: "Семь попыток — в пустоту. Результат нулевой. История не прощает.",
+    de: "Sieben Versuche verbrannt. Nichts vorzuweisen. Die Geschichte ist nicht gnädig.",
+  },
+];
+
 export const RANK_UP_MESSAGES = [
   {
     en: "Promotion confirmed. Your clearance level has been elevated. New sectors are now accessible.",

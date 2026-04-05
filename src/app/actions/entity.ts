@@ -26,6 +26,7 @@ export async function getEntitiesByCategory(
         rawImageUrl: entities.imageUrl,
         sessionActive: sessions.active,
         sessionSuccess: sessions.success,
+        sessionAttempts: sessions.attempts,
         earnedXp: sessions.xp,
       })
       .from(entities)
@@ -52,6 +53,7 @@ export async function getEntitiesByCategory(
         xp: row.earnedXp || 0,
         locked: !isRevealed,
         played: isStarted,
+        attempts: row.sessionAttempts as number,
       };
     });
   } catch (error) {
@@ -75,6 +77,7 @@ export async function getEnrichedEntityById(
       rawImageUrl: entities.imageUrl,
       sessionActive: sessions.active,
       sessionSuccess: sessions.success,
+      sessionAttempts: sessions.attempts,
       earnedXp: sessions.xp,
     })
     .from(entities)
@@ -89,6 +92,7 @@ export async function getEnrichedEntityById(
 
   const row = result[0];
   const isRevealed = row.sessionSuccess === true;
+  const isStarted = row.sessionActive === true;
 
   return {
     id: row.id,
@@ -100,6 +104,7 @@ export async function getEnrichedEntityById(
       : `/categories/${row.category}.webp`,
     xp: row.earnedXp || 0,
     locked: !isRevealed,
-    played: row.sessionActive === true,
+    played: isStarted,
+    attempts: row.sessionAttempts as number,
   };
 }

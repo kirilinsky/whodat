@@ -7,7 +7,10 @@ import { TypingText } from "../text-item/text-item";
 import { UserAvatar, useUser } from "@clerk/nextjs";
 import { SessionMessageType } from "@/types/message.types";
 import { useEffect, useRef } from "react";
-import { SUCCESS_MESSAGES } from "@/app/constants/chat.constants";
+import {
+  SUCCESS_MESSAGES,
+  DEFEAT_BANNER_MESSAGES,
+} from "@/app/constants/chat.constants";
 import Link from "next/link";
 import { EntityCategoryType } from "@/app/constants/entity.constants";
 import { t } from "@/services/get-translation";
@@ -17,12 +20,16 @@ export default function ChatField({
   category,
   messages,
   success,
+  isDefeat,
   locale,
+  isTyping,
 }: {
   success: boolean | null;
+  isDefeat?: boolean;
   messages: SessionMessageType[];
   locale: Locale;
   category?: EntityCategoryType;
+  isTyping?: boolean;
 }) {
   const { user } = useUser();
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -33,7 +40,7 @@ export default function ChatField({
 
   useEffect(() => {
     scrollToBottom("smooth");
-  }, [messages, success]);
+  }, [messages, success, isDefeat, isTyping]);
 
   return (
     <div
@@ -133,6 +140,80 @@ export default function ChatField({
         );
       })}
 
+      {isTyping && (
+        <div
+          className={flex({
+            direction: "column",
+            align: "flex-start",
+            w: "full",
+          })}
+        >
+          <div
+            className={flex({
+              align: "center",
+              gap: "3",
+              mb: "2",
+            })}
+          >
+            <div
+              className={css({
+                w: "8",
+                h: "8",
+                borderRadius: "full",
+                border: "1px solid",
+                borderColor: "dip.red/40",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                bg: "dip.red/10",
+                color: "dip.red",
+                fontSize: "xs",
+              })}
+            >
+              👤
+            </div>
+            <span
+              className={css({
+                fontSize: "10px",
+                fontFamily: "mono",
+                letterSpacing: "widest",
+                color: "dip.red",
+                textTransform: "uppercase",
+              })}
+            >
+              {t("chat_field.subject_label", locale)}
+            </span>
+          </div>
+          <div
+            className={css({
+              p: "5",
+              bg: "rgba(20, 10, 10, 0.8)",
+              border: "1px solid",
+              borderColor: "dip.red/20",
+              borderRadius: "sm",
+              boxShadow: "0 0 20px rgba(255, 0, 0, 0.05)",
+            })}
+          >
+            <div className={flex({ gap: "1", align: "center", h: "5" })}>
+              {[0, 1, 2].map((i) => (
+                <span
+                  key={i}
+                  className={css({
+                    display: "block",
+                    w: "1.5",
+                    h: "1.5",
+                    borderRadius: "full",
+                    bg: "dip.red/60",
+                    animation: "pulse 1.2s infinite",
+                    animationDelay: `${i * 0.2}s`,
+                  })}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {success && (
         <motion.div
           initial={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -193,6 +274,66 @@ export default function ChatField({
               width: "full",
               _hover: {
                 color: "dip.red",
+                transform: "translateX(-4px)",
+              },
+            })}
+          >
+            <span className={css({ fontSize: "lg" })}>←</span>
+            <span>{t("chat_field.back_to_list", locale)}</span>
+          </Link>
+        </motion.div>
+      )}
+      {isDefeat && (
+        <motion.div
+          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+          className={css({
+            alignSelf: "center",
+            w: "full",
+            maxW: "md",
+            mt: "4",
+            p: "4",
+            bg: "white/3",
+            border: "1px double",
+            borderColor: "white/20",
+            position: "relative",
+            textAlign: "center",
+            boxShadow: "0 0 20px rgba(0,0,0,0.4)",
+          })}
+        >
+          <div
+            className={css({
+              color: "white/50",
+              fontFamily: "mono",
+              fontSize: "sm",
+              fontWeight: "bold",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+            })}
+          >
+            {
+              DEFEAT_BANNER_MESSAGES[
+                locale as keyof typeof DEFEAT_BANNER_MESSAGES
+              ]
+            }
+          </div>
+          <Link
+            href={`/dashboard?cat=${category}`}
+            className={flex({
+              mt: "6",
+              align: "center",
+              justifyContent: "center",
+              gap: "2",
+              color: "white/30",
+              fontFamily: "mono",
+              fontSize: "xs",
+              textTransform: "uppercase",
+              letterSpacing: "widest",
+              transition: "all 0.2s ease",
+              width: "full",
+              _hover: {
+                color: "white/70",
                 transform: "translateX(-4px)",
               },
             })}

@@ -11,6 +11,8 @@ import ChatField from "../chat-field/chat-field";
 import { SessionMessageType } from "@/types/message.types";
 import MobileInfo from "../mobile-info/mobile-info";
 import { useLocale } from "@/hooks/use-locale";
+import { useOptimistic, useTransition, useState } from "react";
+import { sendMessage } from "@/app/actions/chat";
 
 export default function ChatLayout({
   entity,
@@ -22,6 +24,31 @@ export default function ChatLayout({
   initialMessages: SessionMessageType[];
 }) {
   const { locale } = useLocale();
+  const [isPending, startTransition] = useTransition();
+  const [isDefeated, setIsDefeated] = useState(!session.active && !session.success);
+  const [optimisticMessages, addOptimistic] = useOptimistic(
+    initialMessages,
+    (state: SessionMessageType[], userMessage: SessionMessageType) => [
+      ...state,
+      userMessage,
+    ]
+  );
+
+  const handleSend = (content: string) => {
+    startTransition(async () => {
+      addOptimistic({
+        id: Date.now(),
+        sessionId: session.id,
+        bot: false,
+        content,
+        createdAt: new Date(),
+      });
+      const result = await sendMessage(session.id, content);
+      if (result && "outcome" in result && result.outcome === "defeat") {
+        setIsDefeated(true);
+      }
+    });
+  };
 
   return (
     <div
@@ -76,7 +103,9 @@ export default function ChatLayout({
           <ChatField
             category={entity?.category}
             success={session.success}
-            messages={initialMessages}
+            isDefeat={isDefeated}
+            messages={optimisticMessages}
+            isTyping={isPending}
             locale={locale}
           />
         </div>
@@ -95,7 +124,8 @@ export default function ChatLayout({
           <Input
             success={session.success}
             attemptsCount={session.attempts}
-            sessionId={session.id}
+            isPending={isPending}
+            onSubmit={handleSend}
             locale={locale}
           />
         </div>

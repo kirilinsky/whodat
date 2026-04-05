@@ -14,10 +14,8 @@
         "tech_stack": {
             "engine": "KERN_SYSTEM",
             "database": "DATENBANK",
-            "progression": "FORTSCHRITT",
-            "archive": "NEUES ARCHIV",
-            "levels": "8 ZUGRIFFSSTUFEN",
-            "every_24h": "ALLE 24 STUNDEN"
+            "progression": "FORTSCHRITT", 
+            "levels": "8 ZUGRIFFSSTUFEN"
         }
     },
     "terms": {
@@ -78,7 +76,8 @@
         "label": "STATUS",
         "revealed": "ENTHÜLLT",
         "in_progress": "IN BEARBEITUNG",
-        "unknown": "UNBEKANNT"
+        "unknown": "UNBEKANNT",
+        "failed": "GESCHEITERT"
     },
     "categories": {
         "required_rank": "RANG ERFORDERLICH",

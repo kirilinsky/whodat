@@ -12,7 +12,7 @@ export default function GridItem({
   locale: Locale;
   entity: EnrichedEntityType;
 }) {
-  const { locked, name, id, imageUrl, category, xp, played } = entity;
+  const { locked, name, id, imageUrl, category, xp, played, attempts } = entity;
 
   return (
     <a href={`/chat/${id}`} className={css({ display: "block", w: "full" })}>
@@ -64,11 +64,34 @@ export default function GridItem({
               pointerEvents: "none",
             })}
           />
+          {locked && (
+            <div
+              className={css({
+                position: "absolute",
+                bottom: "2",
+                right: "1",
+                px: "2",
+                py: "2",
+                bg: "black/80",
+                border: "1px solid",
+                borderRadius: "3px",
+                borderColor: "dip.red/40",
+                fontFamily: "mono",
+                fontSize: "9px",
+                color: "dip.red",
+                textTransform: "uppercase",
+                letterSpacing: "widest",
+              })}
+            >
+              {attempts ?? 7}
+            </div>
+          )}
         </div>
         <div className={stack({ gap: "3" })}>
           <EntityStatus
             locale={locale}
             locked={locked}
+            attempts={attempts}
             xp={xp}
             played={played}
           />

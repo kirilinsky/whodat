@@ -26,4 +26,5 @@ export type EnrichedEntityType = {
   xp: number;
   locked: boolean;
   played: boolean;
+  attempts: number;
 };

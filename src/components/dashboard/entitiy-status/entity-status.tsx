@@ -8,13 +8,36 @@ interface EntityStatusProps {
   locked: boolean;
   played: boolean;
   xp: number;
+  attempts: number;
   locale: Locale;
 }
 
-const EntityStatus = ({ locked, played, xp, locale }: EntityStatusProps) => {
+const EntityStatus = ({
+  locked,
+  played,
+  xp,
+  locale,
+  attempts,
+}: EntityStatusProps) => {
   const inProgress = locked && played;
 
   const label = t("entity_status.label", locale);
+  if (attempts === 0) {
+    return (
+      <span
+        className={css({
+          fontSize: "xs",
+          textTransform: "uppercase",
+          color: "dip.red",
+          display: "block",
+          mb: "1",
+          fontFamily: "mono",
+        })}
+      >
+        {label}: {t("entity_status.failed", locale)}
+      </span>
+    );
+  }
 
   if (!locked) {
     return (
@@ -38,7 +61,7 @@ const EntityStatus = ({ locked, played, xp, locale }: EntityStatusProps) => {
       className={css({
         fontSize: "xs",
         textTransform: "uppercase",
-        color: inProgress ? "dip.blue" : "dip.red",
+        color: inProgress ? "dip.blue" : "dip.white",
         display: "block",
         mb: "1",
         fontFamily: "mono",

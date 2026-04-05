@@ -14,10 +14,8 @@
         "tech_stack": {
             "engine": "CORE_ENGINE",
             "database": "DATABASE",
-            "progression": "PROGRESSION",
-            "archive": "NEW ARCHIVE",
-            "levels": "8 ACCESS LEVELS",
-            "every_24h": "EVERY 24 HOURS"
+            "progression": "PROGRESSION", 
+            "levels": "8 ACCESS LEVELS"
         }
     },
     "terms": {
@@ -78,7 +76,8 @@
         "label": "STATUS",
         "revealed": "REVEALED",
         "in_progress": "IN_PROGRESS",
-        "unknown": "UNKNOWN"
+        "unknown": "UNKNOWN",
+        "failed": "FAILED"
     },
     "categories": {
         "required_rank": "REQUIRED RANK",

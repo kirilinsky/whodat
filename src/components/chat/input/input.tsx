@@ -1,27 +1,29 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useRef, useState } from "react";
 import { css } from "@/styled-system/css";
 import { flex } from "@/styled-system/patterns";
-import { sendMessage } from "@/app/actions/chat";
 import { t } from "@/services/get-translation";
 import { Locale } from "@/services/get-server-locale";
 
 interface InputProps {
-  sessionId: number;
+  sessionId?: number;
   attemptsCount: number;
   success: boolean;
+  isPending: boolean;
   locale: Locale;
+  onSubmit: (content: string) => void;
 }
 
 export default function Input({
-  sessionId,
   attemptsCount,
   success,
+  isPending,
   locale,
+  onSubmit,
 }: InputProps) {
   const [value, setValue] = useState("");
-  const [isPending, startTransition] = useTransition();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const isDisabled = attemptsCount <= 0 || isPending || success;
   const maxLength = 33;
@@ -34,21 +36,10 @@ export default function Input({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     if (value.trim() && !isDisabled) {
-      const messageContent = value.trim();
+      onSubmit(value.trim());
       setValue("");
-
-      startTransition(async () => {
-        try {
-          const result = await sendMessage(sessionId, messageContent);
-          if (result?.error) {
-            console.error(result.error);
-          }
-        } catch (error) {
-          console.error("Failed to send message:", error);
-        }
-      });
+      inputRef.current?.focus();
     }
   };
 
@@ -90,6 +81,7 @@ export default function Input({
             {">"}
           </span>
           <input
+            ref={inputRef}
             type="text"
             value={value}
             onChange={(e) => setValue(e.target.value)}
