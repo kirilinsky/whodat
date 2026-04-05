@@ -13,19 +13,24 @@ export async function getProfileData() {
     throw new Error("Unauthorized");
   }
 
-  let [dbUser, sessionStats] = await Promise.all([
+  let [dbUser, sessionStats, totalMessages] = await Promise.all([
     db.query.users.findFirst({
       where: eq(users.clerkId, clerkId),
     }),
     db
       .select({
-        totalMessages: count(sessionMessages.id),
         completed: count(sql`CASE WHEN ${sessions.active} = false THEN 1 END`),
         active: count(sql`CASE WHEN ${sessions.active} = true THEN 1 END`),
       })
       .from(sessions)
       .where(eq(sessions.userId, clerkId))
       .then((res) => res[0]),
+    db
+      .select({ value: count(sessionMessages.id) })
+      .from(sessionMessages)
+      .innerJoin(sessions, eq(sessionMessages.sessionId, sessions.id))
+      .where(eq(sessions.userId, clerkId))
+      .then((res) => res[0]?.value ?? 0),
   ]);
   const categoryStats = await db
     .select({
@@ -62,7 +67,7 @@ export async function getProfileData() {
   return {
     user: dbUser,
     stats: {
-      totalMessages: Number(sessionStats?.totalMessages || 0),
+      totalMessages: Number(totalMessages || 0),
       completed: sessionStats?.completed || 0,
       active: sessionStats?.active || 0,
     },

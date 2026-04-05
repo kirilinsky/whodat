@@ -1,8 +1,8 @@
 "use server";
 
 import { db } from "@/db";
-import { sessionMessages } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { sessionMessages, sessions } from "@/db/schema";
+import { and, eq } from "drizzle-orm";
 import { auth } from "@clerk/nextjs/server";
 import { SessionMessageType } from "@/types/message.types";
 
@@ -11,6 +11,12 @@ export async function getChatMessages(sessionId: number) {
   if (!userId) return [];
 
   try {
+    const session = await db.query.sessions.findFirst({
+      where: and(eq(sessions.id, sessionId), eq(sessions.userId, userId)),
+    });
+
+    if (!session) return [];
+
     const messages = await db
       .select({
         id: sessionMessages.id,
