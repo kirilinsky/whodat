@@ -39,13 +39,14 @@ export type RankLevel = keyof typeof RankLabels;
 
 export type UserRankName = (typeof RankLabels)[RankLevel]["en"];
 
+// Gaps: 40 → 80 → 130 → 190 → 260 → 340 → 440 (accelerating curve)
 export const RANK_THRESHOLDS: Record<RankLevel, number> = {
   0: 0,
-  1: 70,
-  2: 150,
-  3: 220,
-  4: 350,
-  5: 480,
-  6: 590,
-  7: 800,
+  1: 40,
+  2: 120,
+  3: 250,
+  4: 440,
+  5: 700,
+  6: 1040,
+  7: 1480,
 };
