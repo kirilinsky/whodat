@@ -70,7 +70,7 @@ export default function Statistics({
           </span>
           <span className={numberStyle}>{stats.totalMessages || 0}</span>
           <div className={css({ w: "full", h: "1", bg: "white/5", mt: "2" })}>
-            <div className={css({ w: "60%", h: "full", bg: "dip.red" })} />
+            <div className={css({ h: "full", bg: "dip.red" })} />
           </div>
         </div>
 
@@ -86,9 +86,7 @@ export default function Statistics({
             {stats.completed}
           </span>
           <div className={css({ w: "full", h: "1", bg: "white/5", mt: "2" })}>
-            <div
-              className={css({ w: "100%", h: "full", bg: "dip.green/40" })}
-            />
+            <div className={css({ h: "full", bg: "dip.green/40" })} />
           </div>
         </div>
 
@@ -107,7 +105,7 @@ export default function Statistics({
             <motion.div
               animate={{ opacity: [0.3, 1, 0.3] }}
               transition={{ repeat: Infinity, duration: 2 }}
-              className={css({ w: "30%", h: "full", bg: "dip.gray" })}
+              className={css({ h: "full", bg: "dip.gray" })}
             />
           </div>
         </div>
